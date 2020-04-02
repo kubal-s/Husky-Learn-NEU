@@ -58,7 +58,7 @@ UserSchema.methods.toAuthJSON = function(){
 };
 
 // Creating profile to get user by username
-UserSchema.methods.toProfileJSONFor = function(){
+UserSchema.methods.toProfileJSONFor = function(user){
   return {
     username: this.username,
     bio: this.bio,

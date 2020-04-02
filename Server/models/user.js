@@ -68,7 +68,7 @@ UserSchema.methods.toProfileJSONFor = function(user){
     username: this.username,
     bio: this.bio,
     image: this.image || 'https://cdn0.iconfinder.com/data/icons/avatar-2/500/man-2-512.png',
-    following:  false  // following feature implementation later
+    following: user ? user.isFollowing(this._id) : false
   };
 };
 

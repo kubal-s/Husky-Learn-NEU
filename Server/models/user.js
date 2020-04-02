@@ -24,7 +24,8 @@ const UserSchema = new mongoose.Schema({
   bio: String,
   image: String,
   hash: String,
-  salt: String
+  salt: String,
+  following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 }, 
 
 {timestamps: true});

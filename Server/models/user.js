@@ -101,4 +101,9 @@ UserSchema.methods.follow = function(id){
 
   return this.save();
 };
+//unfollow a user 
+UserSchema.methods.unfollow = function(id){
+  this.following.remove(id);
+  return this.save();
+};
 mongoose.model('User', UserSchema);

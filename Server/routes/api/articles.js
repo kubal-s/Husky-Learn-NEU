@@ -34,6 +34,18 @@ router.param('article', function(req, res, next, slug) {
     }).catch(next);
 });
 
+router.get('/:article', auth.optional, function(req, res, next) {
+  Promise.all([
+    req.payload ? User.findById(req.payload.id) : null,
+    req.article.populate('author').execPopulate()
+  ]).then(function(results){
+    var user = results[0];
+
+    return res.json({article: req.article.toJSONFor(user)});
+  }).catch(next);
+});
+
+
 router.put('/:article', auth.required, function(req, res, next) {
   User.findById(req.payload.id).then(function(user){
     if(req.article.author._id.toString() === req.payload.id.toString()){
@@ -62,10 +74,41 @@ router.delete('/:article', auth.required, function(req, res, next) {
   User.findById(req.payload.id).then(function(){
     if(req.article.author._id.toString() === req.payload.id.toString()){
       return req.article.remove().then(function(){
-        return res.sendStatus(204);
+        return res.sendStatus(204);        
       });
     } else {
       return res.sendStatus(403);
     }
   });
+});
+
+
+//Favorite an article
+router.post('/:article/favorite', auth.required, function(req, res, next) {
+  var articleId = req.article._id;
+
+  User.findById(req.payload.id).then(function(user){
+    if (!user) { return res.sendStatus(401); }
+
+    return user.favorite(articleId).then(function(){
+      return req.article.updateFavoriteCount().then(function(article){
+        return res.json({article: article.toJSONFor(user)});
+      });
+    });
+  }).catch(next);
+});
+
+// UnFavorite an article
+router.delete('/:article/favorite', auth.required, function(req, res, next) {
+  var articleId = req.article._id;
+
+  User.findById(req.payload.id).then(function (user){
+    if (!user) { return res.sendStatus(401); }
+
+    return user.unfavorite(articleId).then(function(){
+      return req.article.updateFavoriteCount().then(function(article){
+        return res.json({article: article.toJSONFor(user)});
+      });
+    });
+  }).catch(next);
 });

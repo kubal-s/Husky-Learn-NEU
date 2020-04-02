@@ -11,19 +11,23 @@ const UserSchema = new mongoose.Schema({
     unique: true, 
     required: [true, "can't be blank"], 
     match: [/^[a-zA-Z0-9]+$/, 'is invalid'],
-     index: true},
+    index: true},
   email: {
     type: String, 
     lowercase: true, 
     unique: true, 
     required: [true, "can't be blank"],
-     match: [/\S+@\S+\.\S+/, 'is invalid'],
-      index: true},
+    match: [/\S+@\S+\.\S+/, 'is invalid'],
+    index: true},
+  favorites: [{ type: mongoose.Schema.Types.ObjectId,
+             ref: 'Article' }],
   bio: String,
   image: String,
   hash: String,
   salt: String
-}, {timestamps: true});
+}, 
+
+{timestamps: true});
 
 UserSchema.plugin(uniqueValidator, {message: ' is already taken.'});
 
@@ -66,4 +70,26 @@ UserSchema.methods.toProfileJSONFor = function(user){
     following:  false  // following feature implementation later
   };
 };
+
+//Favorite an Article
+UserSchema.methods.favorite = function(id){
+  if(this.favorites.indexOf(id) === -1){
+    this.favorites.push(id);
+  }
+
+  return this.save();
+};
+//UnFavorite and Article
+UserSchema.methods.unfavorite = function(id){
+  this.favorites.remove( id );
+  return this.save();
+};
+
+//Check if article is favorite
+UserSchema.methods.isFavorite = function(id){
+  return this.favorites.some(function(favoriteId){
+    return favoriteId.toString() === id.toString();
+  });
+};
+
 mongoose.model('User', UserSchema);

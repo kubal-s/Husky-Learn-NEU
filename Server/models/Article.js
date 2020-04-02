@@ -49,7 +49,7 @@ ArticleSchema.methods.toJSONFor = function(user){
 };
 
 ArticleSchema.methods.updateFavoriteCount = function() {
-  var article = this;
+  let article = this;
 
   return User.count({favorites: {$in: [article._id]}}).then(function(count){
     article.favoritesCount = count;

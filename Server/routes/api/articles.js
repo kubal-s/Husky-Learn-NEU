@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const Article = mongoose.model('Article');
 const User = mongoose.model('User');
 const auth = require('../auth');
+const Comment = mongoose.model('Comment');
 
 module.exports = router;
 
@@ -108,6 +109,25 @@ router.delete('/:article/favorite', auth.required, function(req, res, next) {
     return user.unfavorite(articleId).then(function(){
       return req.article.updateFavoriteCount().then(function(article){
         return res.json({article: article.toJSONFor(user)});
+      });
+    });
+  }).catch(next);
+});
+
+//comment over an article
+router.post('/:article/comments', auth.required, function(req, res, next) {
+  User.findById(req.payload.id).then(function(user){
+    if(!user){ return res.sendStatus(401); }
+
+    var comment = new Comment(req.body.comment);
+    comment.article = req.article;
+    comment.author = user;
+
+    return comment.save().then(function(){
+      req.article.comments.push(comment);
+
+      return req.article.save().then(function(article) {
+        res.json({comment: comment.toJSONFor(user)});
       });
     });
   }).catch(next);

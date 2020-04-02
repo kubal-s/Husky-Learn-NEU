@@ -106,4 +106,10 @@ UserSchema.methods.unfollow = function(id){
   this.following.remove(id);
   return this.save();
 };
+//check if user is following another user 
+UserSchema.methods.isFollowing = function(id){
+  return this.following.some(function(followId){
+    return followId.toString() === id.toString();
+  });
+};
 mongoose.model('User', UserSchema);

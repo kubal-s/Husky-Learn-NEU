@@ -24,7 +24,8 @@ const UserSchema = new mongoose.Schema({
   hash: String,
   salt: String
 }, {timestamps: true});
-UserSchema.plugin(uniqueValidator, {message: 'Email is already taken.'});
+
+UserSchema.plugin(uniqueValidator, {message: ' is already taken.'});
 
 UserSchema.methods.validPassword = function(password) {
   let hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
@@ -56,4 +57,13 @@ UserSchema.methods.toAuthJSON = function(){
   };
 };
 
+// Creating profile to get user by username
+UserSchema.methods.toProfileJSONFor = function(){
+  return {
+    username: this.username,
+    bio: this.bio,
+    image: this.image || 'https://cdn0.iconfinder.com/data/icons/avatar-2/500/man-2-512.png',
+    following:  false  // following feature implementation later
+  };
+};
 mongoose.model('User', UserSchema);

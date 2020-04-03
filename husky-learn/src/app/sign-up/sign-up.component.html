@@ -3,7 +3,7 @@
     <mat-card-header>
         <div mat-card-avatar><mat-icon>account_circle</mat-icon></div>
         <mat-card-title>Sign up</mat-card-title>
-        <mat-card-subtitle>Have an account?</mat-card-subtitle>
+        <mat-card-subtitle [routerLink]="['/signin']"  routerLinkActive="active">Have an account?</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <!-- <form class="example-form" [formGroup]="todoForm" (ngSubmit)="onSubmit()"> -->

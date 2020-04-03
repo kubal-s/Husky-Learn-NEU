@@ -119,7 +119,7 @@ router.post('/:article/comments', auth.required, function (req, res, next) {
   User.findById(req.payload.id).then(function (user) {
     if (!user) { return res.sendStatus(401); }
 
-    var comment = new Comment(req.body.comment);
+    let comment = new Comment(req.body.comment);
     comment.article = req.article;
     comment.author = user;
 
@@ -181,9 +181,9 @@ router.delete('/:article/comments/:comment', auth.required, function (req, res, 
 
 // Creating endpoint to list all articles
 router.get('/', auth.optional, function (req, res, next) {
-  var query = {};
-  var limit = 20; // number of articles to be returned, default 20
-  var offset = 0; // number of articles to skip for query, default 0
+  let query = {};
+  let limit = 20; // number of articles to be returned, default 20
+  let offset = 0; // number of articles to skip for query, default 0
 
   if (typeof req.query.limit !== 'undefined') {
     limit = req.query.limit;
@@ -198,25 +198,44 @@ router.get('/', auth.optional, function (req, res, next) {
     query.tagList = { "$in": [req.query.tag] };
   }
 
-  return Promise.all([
-    Article.find(query)
-      .limit(Number(limit))
-      .skip(Number(offset))
-      .sort({ createdAt: 'desc' })
-      .populate('author')
-      .exec(),
-    Article.count(query).exec(),
-    req.payload ? User.findById(req.payload.id) : null,
+  // Filter articles by author and favoriter
+  Promise.all([
+    req.query.author ? User.findOne({ username: req.query.author }) : null,
+    req.query.favorited ? User.findOne({ username: req.query.favorited }) : null
   ]).then(function (results) {
-    var articles = results[0];
-    var articlesCount = results[1];
-    var user = results[2];
+    let author = results[0];
+    let favoriter = results[1];
 
-    return res.json({
-      articles: articles.map(function (article) {
-        return article.toJSONFor(user);
-      }),
-      articlesCount: articlesCount
+    if (author) {
+      query.author = author._id;
+    }
+
+    if (favoriter) {
+      query._id = { $in: favoriter.favorites };
+    } else if (req.query.favorited) {
+      query._id = { $in: [] };
+    }
+
+    return Promise.all([
+      Article.find(query)
+        .limit(Number(limit))
+        .skip(Number(offset))
+        .sort({ createdAt: 'desc' })
+        .populate('author')
+        .exec(),
+      Article.count(query).exec(),
+      req.payload ? User.findById(req.payload.id) : null,
+    ]).then(function (results) {
+      let articles = results[0];
+      let articlesCount = results[1];
+      let user = results[2];
+
+      return res.json({
+        articles: articles.map(function (article) {
+          return article.toJSONFor(user);
+        }),
+        articlesCount: articlesCount
+      });
     });
   }).catch(next);
 });

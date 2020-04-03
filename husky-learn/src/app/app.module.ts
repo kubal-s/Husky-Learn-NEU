@@ -12,6 +12,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon'
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,13 +21,15 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HomeComponent } from './home/home.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { FooterComponent } from './footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     HomeComponent,
     SignUpComponent,
-    SignInComponent
+    SignInComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ import { SignInComponent } from './sign-in/sign-in.component';
     MatCardModule,
     MatIconModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

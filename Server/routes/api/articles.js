@@ -193,6 +193,11 @@ router.get('/', auth.optional, function (req, res, next) {
     offset = req.query.offset;
   }
 
+  // Filter articles by tags
+  if (typeof req.query.tag !== 'undefined') {
+    query.tagList = { "$in": [req.query.tag] };
+  }
+
   return Promise.all([
     Article.find(query)
       .limit(Number(limit))

@@ -25,7 +25,7 @@ export class SignUpComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    if(this.authService.isLoggedIn){
+    if(this.authService.isLoggedIn()==true){
       this.router.navigate(['/home']);
     }
     this.signupForm = new FormGroup({

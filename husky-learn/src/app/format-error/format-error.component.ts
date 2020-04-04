@@ -12,7 +12,6 @@ export class FormatErrorComponent implements OnInit {
 
   ngOnInit(): void {
     this.formattedErrors = [];
-    console.log(this.errorList)
     if (this.errorList.errors) {
       for (let field in this.errorList.errors) {
         this.formattedErrors.push(`${field} ${this.errorList.errors[field]}`);

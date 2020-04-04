@@ -45,6 +45,7 @@ export class AuthService {
   }
 
   setAuthToken(data :any){
+    console.log(data);
     localStorage.setItem('access_token', data.user.token);
   }
 

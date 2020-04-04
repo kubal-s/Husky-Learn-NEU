@@ -28,7 +28,7 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn$ = this.authService.isLoggedIn;
-    console.log(this.isLoggedIn$)
+    //console.log(this.isLoggedIn$)
     // if(this.authService.isLoggedIn()==true){
     //   this.links = this.LoggedInNavbarlinks;
     // }

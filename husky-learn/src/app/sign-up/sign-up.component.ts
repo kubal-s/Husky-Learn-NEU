@@ -25,7 +25,7 @@ export class SignUpComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    if(this.authService.isLoggedIn()==true){
+    if(this.authService.isLogged()==true){
       this.router.navigate(['/home']);
     }
     this.signupForm = new FormGroup({
@@ -49,7 +49,6 @@ export class SignUpComponent implements OnInit {
       data => {
         this.authService.signIn(this.signupForm.value).subscribe(
           data => {
-            console.log(data)
             this.authService.setAuthToken(data);
             this.router.navigate(['/home']);
           },

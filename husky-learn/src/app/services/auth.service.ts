@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { apiconfig } from '../config/apiconfig';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, map, retry } from 'rxjs/operators';
 import { User } from '../model/User';
 
@@ -10,6 +10,9 @@ import { User } from '../model/User';
   providedIn: 'root'
 })
 export class AuthService {
+
+  private loggedIn = new BehaviorSubject<boolean>(false); 
+
   endpoint: string = apiconfig.base_url;
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   httpOptions = {
@@ -39,13 +42,13 @@ export class AuthService {
     return this.http.post<any>(api, JSON.stringify({user : userDetails}),this.httpOptions).
     pipe(
     map((res: Response) => {
+      this.loggedIn.next(true);
       return res || {}
     }),
     catchError(this.errorHandl));
   }
 
   setAuthToken(data :any){
-    console.log(data);
     localStorage.setItem('access_token', data.user.token);
   }
 
@@ -57,12 +60,16 @@ export class AuthService {
     return throwError(error.error);
   }
 
-  isLoggedIn(): boolean {
+  isLogged(): boolean {
     let authToken = localStorage.getItem('access_token');
     return (authToken !== null) ? true : false;
   }
+  get isLoggedIn() {
+    return this.loggedIn.asObservable(); // {2}
+  }
   logout() {
     let removeToken = localStorage.removeItem('access_token');
+    this.loggedIn.next(false);
     if (removeToken == null) {
       this.router.navigate(['signin']);
     }

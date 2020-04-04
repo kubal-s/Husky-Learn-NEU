@@ -26,6 +26,7 @@ import { FooterComponent } from './footer/footer.component';
 import { FormatErrorComponent } from './format-error/format-error.component';
 import { NewArticleComponent } from './new-article/new-article.component';
 import { SettingsComponent } from './settings/settings.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { SettingsComponent } from './settings/settings.component';
     FooterComponent,
     FormatErrorComponent,
     NewArticleComponent,
-    SettingsComponent
+    SettingsComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

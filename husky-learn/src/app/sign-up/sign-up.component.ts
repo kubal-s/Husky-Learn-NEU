@@ -41,17 +41,13 @@ export class SignUpComponent implements OnInit {
   }
   onSubmit(){
     this.error = false;
-    // this.errors = new Errors();
     this.authService.signUp(this.signupForm.value).subscribe(
-      data => {
-        // console.log(data);
+      data => {;
         this.authService.signIn(this.signupForm.value);
       },
       err => {
-        // console.log(err)
         this.errorList = err;
         this.error = true;
-        // this.errorMsg = error.emailTaken;
       });
   }
 }

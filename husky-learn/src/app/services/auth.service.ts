@@ -31,14 +31,25 @@ export class AuthService {
       }),
       catchError(this.errorHandl));
   }
+
+
+
  signIn(userDetails: User) {
    let api = `${this.endpoint}/users/login`;
-  return this.http.post<any>(api, JSON.stringify({user : userDetails}),this.httpOptions)
-    .subscribe((res: any) => {
-      localStorage.setItem('access_token', res.token);
-      this.router.navigate(['home']);
-    },
-    catchError(this.errorHandl))
+  return this.http.post<any>(api, JSON.stringify({user : userDetails}),this.httpOptions).
+  pipe(
+    map((res: Response) => {
+      return res || {}
+    }),
+    catchError(this.errorHandl));
+}
+
+setAuthToken(data :any){
+  localStorage.setItem('access_token', data.user.token);
+}
+
+getAuthToken(){
+  return localStorage.getItem('access_token');
 }
     // Error handling
     errorHandl(error:any) {

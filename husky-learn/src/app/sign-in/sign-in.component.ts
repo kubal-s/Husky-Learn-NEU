@@ -11,6 +11,8 @@ export class SignInComponent implements OnInit {
 
   hide = true;
   signinForm: FormGroup;
+  error = false;
+  errorList;
   email = new FormControl('', [Validators.required, Validators.email]);
 
   constructor(private authService: AuthService) {
@@ -35,7 +37,14 @@ export class SignInComponent implements OnInit {
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
   onSubmit(){
-    this.authService.signIn(this.signinForm.value);
-    console.log("logged")
+    this.error = false;
+    this.authService.signIn(this.signinForm.value).subscribe(
+      data => {
+        this.authService.setAuthToken(data);
+      },
+      err => {
+        this.errorList = err;
+        this.error = true;
+      });
   }
 }

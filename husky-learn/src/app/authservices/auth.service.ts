@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, map, retry } from 'rxjs/operators';
 import { User } from '../model/User';
+import { ApiService } from '../sharedservices/http-request-custom'
 
 @Injectable({
   providedIn: 'root'
@@ -22,31 +23,47 @@ export class AuthService {
   }
   currentUser = {};
 
-  constructor(private http: HttpClient, public router: Router) { }
-
-
-  signUp(userDetails): Observable<any>{
-    let api = `${this.endpoint}/users`;
-    return this.http.post(api , JSON.stringify({user : userDetails}), this.httpOptions).
-    pipe(
+  constructor(private http: HttpClient, public router: Router,private apiService:ApiService) { }
+signUp(userDetails):Observable<any>{
+  return this.apiService.post('/users' , {user : userDetails})
+    .pipe(
       map((res: Response) => {
         return res || {}
       }),
       catchError(this.errorHandl));
-  }
+}
 
+  // signUp(userDetails): Observable<any>{
+  //   let api = `${this.endpoint}/users`;
+  //   return this.http.post(api , JSON.stringify({user : userDetails}), this.httpOptions).
+  //   pipe(
+  //     map((res: Response) => {
+  //       return res || {}
+  //     }),
+  //     catchError(this.errorHandl));
+  // }
 
+  signIn(userDetails: User) {
 
- signIn(userDetails: User) {
-   let api = `${this.endpoint}/users/login`;
-    return this.http.post<any>(api, JSON.stringify({user : userDetails}),this.httpOptions).
-    pipe(
-    map((res: Response) => {
-      this.loggedIn.next(true);
-      return res || {}
-    }),
-    catchError(this.errorHandl));
-  }
+    return this.apiService.post('/users/login' , {user : userDetails})
+    .pipe(
+      map((res: Response) => {
+        this.loggedIn.next(true);
+        return res || {}
+      }),
+      catchError(this.errorHandl));
+   }
+
+//  signIn(userDetails: User) {
+//    let api = `${this.endpoint}/users/login`;
+//     return this.http.post<any>(api, JSON.stringify({user : userDetails}),this.httpOptions).
+//     pipe(
+//     map((res: Response) => {
+//       this.loggedIn.next(true);
+//       return res || {}
+//     }),
+//     catchError(this.errorHandl));
+//   }
 
   setAuthToken(data :any){
     localStorage.setItem('access_token', data.user.token);
@@ -57,7 +74,7 @@ export class AuthService {
   }
   // Error handling
   errorHandl(error:any) {
-    return throwError(error.error);
+    return throwError(error);
   }
 
   isLogged(): boolean {

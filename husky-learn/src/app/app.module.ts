@@ -27,8 +27,9 @@ import { FormatErrorComponent } from './format-error/format-error.component';
 import { NewArticleComponent } from './new-article/new-article.component';
 import { SettingsComponent } from './settings/settings.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { AuthInterceptor } from './authservices/authconfig.interceptor';
+// import { AuthInterceptor } from './authservices/authconfig.interceptor';
 import { AuthGuard } from './authservices/auth.guard';
+import { ApiService } from './sharedservices/http-request-custom';
 
 
 @NgModule({
@@ -60,12 +61,13 @@ import { AuthGuard } from './authservices/auth.guard';
     HttpClientModule
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    },
-    AuthGuard
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: AuthInterceptor,
+    //   multi: true,
+    // },
+    AuthGuard,
+    ApiService
   ],
   bootstrap: [AppComponent]
 })

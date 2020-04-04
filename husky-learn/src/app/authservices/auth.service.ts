@@ -67,9 +67,13 @@ export class AuthService {
   get isLoggedIn() {
     return this.loggedIn.asObservable(); // {2}
   }
-  logout() {
+  setLogout(){
     let removeToken = localStorage.removeItem('access_token');
     this.loggedIn.next(false);
+  }
+
+  logout() {
+    let removeToken = this.setLogout();
     if (removeToken == null) {
       this.router.navigate(['signin']);
     }

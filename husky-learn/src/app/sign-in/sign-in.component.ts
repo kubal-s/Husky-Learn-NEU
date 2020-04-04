@@ -24,7 +24,7 @@ export class SignInComponent implements OnInit {
     // if(this.authService.isLogged()==true){
     //   this.router.navigate(['/home']);
     // }
-    this.authService.logout();
+    this.authService.setLogout();
     this.signinForm = new FormGroup({
       email:  this.email,
       username: new FormControl(''),

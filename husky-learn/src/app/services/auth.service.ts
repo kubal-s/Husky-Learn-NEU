@@ -36,36 +36,34 @@ export class AuthService {
 
  signIn(userDetails: User) {
    let api = `${this.endpoint}/users/login`;
-  return this.http.post<any>(api, JSON.stringify({user : userDetails}),this.httpOptions).
-  pipe(
+    return this.http.post<any>(api, JSON.stringify({user : userDetails}),this.httpOptions).
+    pipe(
     map((res: Response) => {
       return res || {}
     }),
     catchError(this.errorHandl));
-}
+  }
 
-setAuthToken(data :any){
-  localStorage.setItem('access_token', data.user.token);
-}
+  setAuthToken(data :any){
+    localStorage.setItem('access_token', data.user.token);
+  }
 
-getAuthToken(){
-  return localStorage.getItem('access_token');
-}
-    // Error handling
-    errorHandl(error:any) {
-      return throwError(error.error);
-      // console.log(error)
-      // Observable.throw(error);
-      // return error;
-      // let errorMessage = '';
-      // if(error.error instanceof ErrorEvent) {
-      //   // Get client-side error
-      //   errorMessage = error.error.message;
-      // } else {
-      //   // Get server-side error
-      //   errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-      // }
-      // console.log(errorMessage);
-      // return throwError(errorMessage);
-   }
+  getAuthToken(){
+    return localStorage.getItem('access_token');
+  }
+  // Error handling
+  errorHandl(error:any) {
+    return throwError(error.error);
+  }
+
+  isLoggedIn(): boolean {
+    let authToken = localStorage.getItem('access_token');
+    return (authToken !== null) ? true : false;
+  }
+  logout() {
+    let removeToken = localStorage.removeItem('access_token');
+    if (removeToken == null) {
+      this.router.navigate(['signin']);
+    }
+  }
 }

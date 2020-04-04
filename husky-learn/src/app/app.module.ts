@@ -25,6 +25,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormatErrorComponent } from './format-error/format-error.component';
 import { NewArticleComponent } from './new-article/new-article.component';
+import { SettingsComponent } from './settings/settings.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { NewArticleComponent } from './new-article/new-article.component';
     SignInComponent,
     FooterComponent,
     FormatErrorComponent,
-    NewArticleComponent
+    NewArticleComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

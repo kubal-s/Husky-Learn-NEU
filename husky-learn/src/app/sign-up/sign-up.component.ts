@@ -48,6 +48,7 @@ export class SignUpComponent implements OnInit {
     this.authService.signUp(this.signupForm.value).subscribe(
       data => {;
         this.authService.signIn(this.signupForm.value);
+        this.router.navigate(['/home']);
         this.signupForm.reset();
       },
       err => {

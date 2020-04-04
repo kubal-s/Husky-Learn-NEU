@@ -45,6 +45,7 @@ export class SignInComponent implements OnInit {
     this.authService.signIn(this.signinForm.value).subscribe(
       data => {
         this.authService.setAuthToken(data);
+        this.router.navigate(['/home']);
       },
       err => {
         this.errorList = err;

@@ -60,10 +60,5 @@ export class AuthService {
     let authToken = localStorage.getItem('access_token');
     return (authToken !== null) ? true : false;
   }
-  logout() {
-    let removeToken = localStorage.removeItem('access_token');
-    if (removeToken == null) {
-      this.router.navigate(['signin']);
-    }
-  }
+
 }

@@ -6,6 +6,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { NewArticleComponent } from './new-article/new-article.component';
 import { SettingsComponent } from './settings/settings.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AuthGuard } from "./services/auth.guard";
 
 
 const routes: Routes = [
@@ -14,7 +15,7 @@ const routes: Routes = [
   { path: "signup", component:SignUpComponent},
   { path: "signin",component:SignInComponent},
   { path: "myarticle",component:NewArticleComponent},
-  { path: "settings",component: SettingsComponent},
+  { path: "settings",component: SettingsComponent,canActivate: [AuthGuard]},
   { path:'**',component:PageNotFoundComponent}
 ];
 

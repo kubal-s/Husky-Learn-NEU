@@ -77,10 +77,10 @@ signUp(userDetails):Observable<any>{
     return throwError(error);
   }
 
-  isLogged(): boolean {
-    let authToken = localStorage.getItem('access_token');
-    return (authToken !== null) ? true : false;
-  }
+  // isLogged(): boolean {
+  //   let authToken = localStorage.getItem('access_token');
+  //   return (authToken !== null) ? true : false;
+  // }
   get isLoggedIn() {
     return this.loggedIn.asObservable(); // {2}
   }

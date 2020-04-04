@@ -24,6 +24,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormatErrorComponent } from './format-error/format-error.component';
+import { NewArticleComponent } from './new-article/new-article.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { FormatErrorComponent } from './format-error/format-error.component';
     SignUpComponent,
     SignInComponent,
     FooterComponent,
-    FormatErrorComponent
+    FormatErrorComponent,
+    NewArticleComponent
   ],
   imports: [
     BrowserModule,

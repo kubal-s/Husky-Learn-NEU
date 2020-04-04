@@ -16,12 +16,15 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HomeComponent } from './home/home.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { FooterComponent } from './footer/footer.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +46,8 @@ import { FooterComponent } from './footer/footer.component';
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -24,7 +24,6 @@ export class AuthService {
 
   signUp(userDetails): Observable<any>{
     let api = `${this.endpoint}/users`;
-    console.log(userDetails)
     return this.http.post(api , JSON.stringify({user : userDetails}), this.httpOptions).
     pipe(
       map((res: Response) => {
@@ -32,21 +31,30 @@ export class AuthService {
       }),
       catchError(this.errorHandl));
   }
-  private errorHandl(error: any) {
-    return Observable.throw(error.json());
- }
+ signIn(userDetails: User) {
+   let api = `${this.endpoint}/users/login`;
+  return this.http.post<any>(api, JSON.stringify({user : userDetails}),this.httpOptions)
+    .subscribe((res: any) => {
+      localStorage.setItem('access_token', res.token);
+      this.router.navigate(['home']);
+    },
+    catchError(this.errorHandl))
+}
     // Error handling
-  //   errorHandl(error:any) {
-  //     Observable.throw(error.json());
-  //     // let errorMessage = '';
-  //     // if(error.error instanceof ErrorEvent) {
-  //     //   // Get client-side error
-  //     //   errorMessage = error.error.message;
-  //     // } else {
-  //     //   // Get server-side error
-  //     //   errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-  //     // }
-  //     // console.log(errorMessage);
-  //     // return throwError(errorMessage);
-  //  }
+    errorHandl(error:any) {
+      return throwError(error.error);
+      // console.log(error)
+      // Observable.throw(error);
+      // return error;
+      // let errorMessage = '';
+      // if(error.error instanceof ErrorEvent) {
+      //   // Get client-side error
+      //   errorMessage = error.error.message;
+      // } else {
+      //   // Get server-side error
+      //   errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      // }
+      // console.log(errorMessage);
+      // return throwError(errorMessage);
+   }
 }

@@ -23,6 +23,7 @@ import { HomeComponent } from './home/home.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { FooterComponent } from './footer/footer.component';
+import { FormatErrorComponent } from './format-error/format-error.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { FooterComponent } from './footer/footer.component';
     HomeComponent,
     SignUpComponent,
     SignInComponent,
-    FooterComponent
+    FooterComponent,
+    FormatErrorComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { AuthService } from "../services/auth.service";
 
 @Component({
   selector: 'app-sign-in',
@@ -12,7 +13,7 @@ export class SignInComponent implements OnInit {
   signinForm: FormGroup;
   email = new FormControl('', [Validators.required, Validators.email]);
 
-  constructor() {
+  constructor(private authService: AuthService) {
     
    }
 
@@ -34,6 +35,7 @@ export class SignInComponent implements OnInit {
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
   onSubmit(){
+    this.authService.signIn(this.signinForm.value);
     console.log("logged")
   }
 }

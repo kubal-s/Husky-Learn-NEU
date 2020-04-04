@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators,FormGroup } from '@angular/forms';
 import { AuthService } from "../services/auth.service";
 // import { Errors } from '../model/Error';
-import { error } from '../config/errorList';
 import { Errors } from '../model/Error';
 
 @Component({
@@ -14,7 +13,8 @@ export class SignUpComponent implements OnInit {
   hide = true;
   signupForm: FormGroup;
   error = false;
-  errorMsg = "";
+  errorList ;
+  // errorMsg :Array<String> =[];
   // errors: Errors = new Errors();
   email = new FormControl('', [Validators.required, Validators.email]);
   // password = new FormControl('',[Validators.required, Validators.minLength(6)])
@@ -44,11 +44,14 @@ export class SignUpComponent implements OnInit {
     // this.errors = new Errors();
     this.authService.signUp(this.signupForm.value).subscribe(
       data => {
-        console.log(data);
+        // console.log(data);
+        this.authService.signIn(this.signupForm.value);
       },
       err => {
+        // console.log(err)
+        this.errorList = err;
         this.error = true;
-        this.errorMsg = error.emailTaken;
+        // this.errorMsg = error.emailTaken;
       });
   }
 }

@@ -6,7 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  Navbarlinks = [
+    { path: 'yourfeed', label: 'Your Feed' },
+    { path: 'globalfeed', label: 'Global Feed' }];
   constructor() { }
 
   ngOnInit(): void {

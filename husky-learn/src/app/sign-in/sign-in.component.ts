@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthService } from "../authservices/auth.service";
 import { Router } from '@angular/router';
+import { JwtService } from "../sharedservices/jwtToken";
 
 @Component({
   selector: 'app-sign-in',
@@ -16,7 +17,7 @@ export class SignInComponent implements OnInit {
   errorList;
   email = new FormControl('', [Validators.required, Validators.email]);
 
-  constructor(private authService: AuthService,private router: Router) {
+  constructor(private authService: AuthService,private router: Router,private jwtService:JwtService) {
     
    }
 
@@ -45,7 +46,7 @@ export class SignInComponent implements OnInit {
     this.error = false;
     this.authService.signIn(this.signinForm.value).subscribe(
       data => {
-        this.authService.setAuthToken(data);
+        this.jwtService.saveToken(data);
         this.router.navigate(['/home']);
       },
       err => {

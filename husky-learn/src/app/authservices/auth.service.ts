@@ -65,13 +65,13 @@ signUp(userDetails):Observable<any>{
 //     catchError(this.errorHandl));
 //   }
 
-  setAuthToken(data :any){
-    localStorage.setItem('access_token', data.user.token);
-  }
+  // setAuthToken(data :any){
+  //   localStorage.setItem('access_token', data.user.token);
+  // }
 
-  getAuthToken(){
-    return localStorage.getItem('access_token');
-  }
+  // getAuthToken(){
+  //   return localStorage.getItem('access_token');
+  // }
   // Error handling
   errorHandl(error:any) {
     return throwError(error);

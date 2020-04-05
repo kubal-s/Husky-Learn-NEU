@@ -4,6 +4,7 @@ import { AuthService } from "../authservices/auth.service";
 // import { Errors } from '../model/Error';
 import { Errors } from '../model/Error';
 import { Router } from '@angular/router';
+import { JwtService } from "../sharedservices/jwtToken";
 
 @Component({
   selector: 'app-sign-up',
@@ -20,7 +21,7 @@ export class SignUpComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
   // password = new FormControl('',[Validators.required, Validators.minLength(6)])
 
-  constructor(private authService: AuthService,private router: Router) {
+  constructor(private authService: AuthService,private router: Router,private jwtService:JwtService) {
     
    }
 
@@ -50,7 +51,7 @@ export class SignUpComponent implements OnInit {
       data => {
         this.authService.signIn(this.signupForm.value).subscribe(
           data => {
-            this.authService.setAuthToken(data);
+            this.jwtService.saveToken(data);
             this.router.navigate(['/home']);
           },
           err => {

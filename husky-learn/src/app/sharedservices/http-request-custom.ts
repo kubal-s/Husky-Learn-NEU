@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 // import { Observable } from 'rxjs/Rx';
 
 import { apiconfig } from '../config/apiconfig';
-
+import { JwtService } from "./jwtToken";
 import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -12,7 +12,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class ApiService {
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private jwtService :JwtService
   ) {}
 
   private setHeaders(): Headers {
@@ -20,7 +21,9 @@ export class ApiService {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     };
-
+    if(this.jwtService.getToken()){
+      headersConfig['Authorization'] = `Token ${this.jwtService.getToken()}`;
+    }
     return new Headers(headersConfig);
   }
 

@@ -14,10 +14,10 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
     this.profileService.getUser().subscribe(
       data => {
-        console.log(data)
+        //console.log(data)
       },
       err => {
-        console.log(err)
+        //console.log(err)
       });
   }
   logOut(){

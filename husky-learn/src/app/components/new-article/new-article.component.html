@@ -5,6 +5,7 @@
         <mat-card-subtitle>Lets get creative</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
+        <p><app-format-error [errorList]="errorList" *ngIf="error"></app-format-error></p>
         <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
             <p>
                 <mat-form-field class="legacy">
@@ -27,7 +28,7 @@
                   </mat-form-field>
               </p>
               <p>
-                <button mat-stroked-button>Submit Article</button>
+                <button mat-stroked-button [disabled]="!articleForm.valid">Submit Article</button>
               </p>
               <!-- <p><app-format-error [errorList]="errorList" *ngIf="error"></app-format-error></p> -->
         </form>

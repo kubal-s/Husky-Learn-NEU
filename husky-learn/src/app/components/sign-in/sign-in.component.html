@@ -28,7 +28,7 @@
                   </mat-form-field>
               </p>
               <p>
-                <button mat-stroked-button>Sign in!</button>
+                <button mat-stroked-button [disabled]="!signinForm.valid">Sign in!</button>
               </p>
               <p><app-format-error [errorList]="errorList" *ngIf="error"></app-format-error></p>
         </form>

@@ -9,7 +9,8 @@ import { ArticleService } from '../../services/userservices/article.service'
 })
 export class NewArticleComponent implements OnInit {
   articleForm: any;
-
+  error = false;
+  errorList;
   constructor(private  articleService: ArticleService) { }
 
   ngOnInit(): void {
@@ -23,10 +24,11 @@ export class NewArticleComponent implements OnInit {
     console.log(this.articleForm.value)
     this.articleService.save(this.articleForm.value).subscribe(
       data => {
-          console.log("success")
+          console.log(data)
       },
       err => {
-        console.log("error")
+        this.errorList = err;
+        this.error = true;
       });
   }
 

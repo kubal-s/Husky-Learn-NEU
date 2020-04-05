@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent ,},
   { path: "signup", component:SignUpComponent},
   { path: "signin",component:SignInComponent},
-  { path: "myarticle",component:NewArticleComponent},
+  { path: "myarticle",component:NewArticleComponent,canActivate: [AuthGuard]},
   { path: "settings",component: SettingsComponent,canActivate: [AuthGuard]},
   { path:'**',component:PageNotFoundComponent}
 ];

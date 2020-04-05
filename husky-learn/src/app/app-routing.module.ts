@@ -7,6 +7,7 @@ import { NewArticleComponent } from './components/new-article/new-article.compon
 import { SettingsComponent } from './components/settings/settings.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AuthGuard } from "./services/authservices/auth.guard";
+import { EditArticleComponent } from './components/edit-article/edit-article.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: "signin",component:SignInComponent},
   { path: "myarticle",component:NewArticleComponent,canActivate: [AuthGuard]},
   { path: "settings",component: SettingsComponent,canActivate: [AuthGuard]},
+  { path: "editor",component:EditArticleComponent},
   { path:'**',component:PageNotFoundComponent}
 ];
 

@@ -16,6 +16,7 @@ export class JwtService {
   saveToken(data: any) {
      // console.log(data)
      window.localStorage['access_token'] = data.user.token;
+     return;
   }
 
   destroyToken() {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ArticleService } from '../userservices/article.service'
 
 @Component({
   selector: 'app-new-article',
@@ -9,7 +10,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class NewArticleComponent implements OnInit {
   articleForm: any;
 
-  constructor() { }
+  constructor(private  articleService: ArticleService) { }
 
   ngOnInit(): void {
     this.articleForm = new FormGroup({
@@ -20,6 +21,13 @@ export class NewArticleComponent implements OnInit {
   }
   onSubmit(){
     console.log(this.articleForm.value)
+    this.articleService.save(this.articleForm.value).subscribe(
+      data => {
+          console.log("success")
+      },
+      err => {
+        console.log("error")
+      });
   }
 
 }

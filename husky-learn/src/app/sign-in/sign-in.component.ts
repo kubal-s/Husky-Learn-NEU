@@ -46,7 +46,7 @@ export class SignInComponent implements OnInit {
     this.error = false;
     this.authService.signIn(this.signinForm.value).subscribe(
       data => {
-        this.jwtService.saveToken(data);
+        // this.jwtService.saveToken(data);
         this.router.navigate(['/home']);
       },
       err => {

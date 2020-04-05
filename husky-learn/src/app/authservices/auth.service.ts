@@ -5,7 +5,9 @@ import { Router } from '@angular/router';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, map, retry } from 'rxjs/operators';
 import { User } from '../model/User';
-import { ApiService } from '../sharedservices/http-request-custom'
+import { ApiService } from '../sharedservices/http-request-custom';
+
+import { JwtService } from "../sharedservices/jwtToken";
 
 @Injectable({
   providedIn: 'root'
@@ -14,16 +16,17 @@ export class AuthService {
 
   private loggedIn = new BehaviorSubject<boolean>(false); 
 
-  endpoint: string = apiconfig.base_url;
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  }
-  currentUser = {};
+  // endpoint: string = apiconfig.base_url;
+  // headers = new HttpHeaders().set('Content-Type', 'application/json');
+  // httpOptions = {
+  //   headers: new HttpHeaders({
+  //     'Content-Type': 'application/json'
+  //   })
+  // }
+  // currentUser = {};
 
-  constructor(private http: HttpClient, public router: Router,private apiService:ApiService) { }
+  constructor( public router: Router,private apiService:ApiService,private jwtService:JwtService) { 
+  }
 signUp(userDetails):Observable<any>{
   return this.apiService.post('/users' , {user : userDetails})
     .pipe(
@@ -49,6 +52,8 @@ signUp(userDetails):Observable<any>{
     .pipe(
       map((res: Response) => {
         this.loggedIn.next(true);
+        console.log(res)
+         this.jwtService.saveToken(res);
         return res || {}
       }),
       catchError(this.errorHandl));

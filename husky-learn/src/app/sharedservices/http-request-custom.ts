@@ -16,33 +16,35 @@ export class ApiService {
     private jwtService :JwtService
   ) {}
 
-  private setHeaders(): Headers {
-    let headersConfig = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    };
-    if(this.jwtService.getToken()){
-      headersConfig['Authorization'] = `Token ${this.jwtService.getToken()}`;
+  private setHeaders() {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      })
     }
-    return new Headers(headersConfig);
+    if(this.jwtService.getToken()){
+      httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': `Token ${this.jwtService.getToken()}`
+        })
+      }
+    }
+    return httpOptions;
   }
 
 
 
-  endpoint: string = apiconfig.base_url;
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  }
 
+  endpoint:string = apiconfig.base_url;
   private formatErrors(error: any) {
      return Observable.throw(error.json());
   }
 
   post(path: string, body: Object = {}): Observable<any> { 
-    return this.http.post(`${this.endpoint}${path}`, JSON.stringify(body), this.httpOptions)
+    return this.http.post(`${this.endpoint}${path}`, JSON.stringify(body), this.setHeaders())
     .pipe(
         map((res: Response) => {
           return res || {}

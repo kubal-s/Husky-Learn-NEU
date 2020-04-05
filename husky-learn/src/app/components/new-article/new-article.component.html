@@ -28,8 +28,16 @@
                   </mat-form-field>
               </p>
               <p>
+                <mat-form-field class="legacy">
+                      <mat-label>Tags</mat-label>
+                      <input matInput formControlName="tags" placeholder="Enter comma separated tags...Ex. a,abc">
+                      <mat-hint></mat-hint>
+                    </mat-form-field>
+                </p>
+              <p>
                 <button mat-stroked-button [disabled]="!articleForm.valid">Submit Article</button>
               </p>
+
               <!-- <p><app-format-error [errorList]="errorList" *ngIf="error"></app-format-error></p> -->
         </form>
       </mat-card-content>

@@ -17,11 +17,14 @@ export class NewArticleComponent implements OnInit {
     this.articleForm = new FormGroup({
       title:  new FormControl(''),
       description: new FormControl(''),
-      body: new FormControl('')
+      body: new FormControl(''),
+      tags:new FormControl('')
+
     })
   }
   onSubmit(){
-    console.log(this.articleForm.value)
+    let tagList = this.articleForm.value.tags.split(',');
+    this.articleForm.value.tagList = tagList;
     this.articleService.save(this.articleForm.value).subscribe(
       data => {
           console.log(data)

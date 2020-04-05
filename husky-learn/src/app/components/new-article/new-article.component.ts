@@ -43,7 +43,7 @@ export class NewArticleComponent implements OnInit {
   }
   onSubmit(){
     let tagList;
-    if(this.articleForm.value.tagList!=null){
+    if(this.articleForm.value.tags!=null){
       tagList = this.articleForm.value.tags.split(',');
     }
     this.articleForm.value.tagList = tagList;

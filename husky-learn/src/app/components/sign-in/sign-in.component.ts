@@ -22,10 +22,6 @@ export class SignInComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    // if(this.authService.isLogged()==true){
-    //   this.router.navigate(['/home']);
-    // }
-    // this.authService.setLogout();
     this.signinForm = new FormGroup({
       email:  this.email,
       username: new FormControl(''),
@@ -46,7 +42,6 @@ export class SignInComponent implements OnInit {
     this.error = false;
     this.authService.signIn(this.signinForm.value).subscribe(
       data => {
-        // this.jwtService.saveToken(data);
         this.router.navigate(['/home']);
       },
       err => {

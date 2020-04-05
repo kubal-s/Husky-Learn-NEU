@@ -15,16 +15,6 @@ import { JwtService } from "../../sharedservices/jwtToken";
 export class AuthService {
 
   private loggedIn = new BehaviorSubject<boolean>(false); 
-
-  // endpoint: string = apiconfig.base_url;
-  // headers = new HttpHeaders().set('Content-Type', 'application/json');
-  // httpOptions = {
-  //   headers: new HttpHeaders({
-  //     'Content-Type': 'application/json'
-  //   })
-  // }
-  // currentUser = {};
-
   constructor( public router: Router,private apiService:ApiService,private jwtService:JwtService) { 
   }
 signUp(userDetails):Observable<any>{
@@ -35,59 +25,26 @@ signUp(userDetails):Observable<any>{
       }),
       catchError(this.errorHandl));
 }
-
-  // signUp(userDetails): Observable<any>{
-  //   let api = `${this.endpoint}/users`;
-  //   return this.http.post(api , JSON.stringify({user : userDetails}), this.httpOptions).
-  //   pipe(
-  //     map((res: Response) => {
-  //       return res || {}
-  //     }),
-  //     catchError(this.errorHandl));
-  // }
-
   signIn(userDetails: User) {
 
     return this.apiService.post('/users/login' , {user : userDetails})
     .pipe(
       map((res: Response) => {
         this.loggedIn.next(true);
-        console.log(res)
          this.jwtService.saveToken(res);
         return res || {}
       }),
       catchError(this.errorHandl));
    }
-
-//  signIn(userDetails: User) {
-//    let api = `${this.endpoint}/users/login`;
-//     return this.http.post<any>(api, JSON.stringify({user : userDetails}),this.httpOptions).
-//     pipe(
-//     map((res: Response) => {
-//       this.loggedIn.next(true);
-//       return res || {}
-//     }),
-//     catchError(this.errorHandl));
-//   }
-
-  // setAuthToken(data :any){
-  //   localStorage.setItem('access_token', data.user.token);
-  // }
-
-  // getAuthToken(){
-  //   return localStorage.getItem('access_token');
-  // }
   // Error handling
   errorHandl(error:any) {
     return throwError(error);
   }
-
-  // isLogged(): boolean {
-  //   let authToken = localStorage.getItem('access_token');
-  //   return (authToken !== null) ? true : false;
-  // }
   get isLoggedIn() {
-    return this.loggedIn.asObservable(); // {2}
+    if(localStorage.getItem('access_token')){
+      this.loggedIn.next(true);
+    }
+    return this.loggedIn.asObservable(); 
   }
   setLogout(){
     let removeToken = localStorage.removeItem('access_token');

@@ -21,20 +21,13 @@ export class NavBarComponent implements OnInit {
       { path: 'myarticle', label: 'New Article' },
       { path: 'settings', label: 'Settings' }];
       links;
-  // activeLink = this.links[0];
+
   constructor(private authService: AuthService) {
     this.links = this.Navbarlinks;
    }
 
   ngOnInit(): void {
     this.isLoggedIn$ = this.authService.isLoggedIn;
-    //console.log(this.isLoggedIn$)
-    // if(this.authService.isLoggedIn()==true){
-    //   this.links = this.LoggedInNavbarlinks;
-    // }
-    // else{
-    //   this.links = this.Navbarlinks;
-    // }
   }
 
 }

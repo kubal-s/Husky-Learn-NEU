@@ -16,20 +16,12 @@ export class SignUpComponent implements OnInit {
   signupForm: FormGroup;
   error = false;
   errorList ;
-  // errorMsg :Array<String> =[];
-  // errors: Errors = new Errors();
   email = new FormControl('', [Validators.required, Validators.email]);
-  // password = new FormControl('',[Validators.required, Validators.minLength(6)])
-
   constructor(private authService: AuthService,private router: Router,private jwtService:JwtService) {
     
    }
 
   ngOnInit(): void {
-    // if(this.authService.isLogged()==true){
-    //   this.router.navigate(['/home']);
-    // }
-    // this.authService.logout();
     this.signupForm = new FormGroup({
       email:  this.email,
       username: new FormControl(''),
@@ -51,7 +43,6 @@ export class SignUpComponent implements OnInit {
       data => {
         this.authService.signIn(this.signupForm.value).subscribe(
           data => {
-            // this.jwtService.saveToken(data);
             this.router.navigate(['/home']);
           },
           err => {

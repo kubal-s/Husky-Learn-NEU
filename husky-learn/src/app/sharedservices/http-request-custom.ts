@@ -61,6 +61,16 @@ export class ApiService {
       catchError(this.errorHandl)
     )
  }
+//this api needs testing
+ put(path: string, body: Object = {}): Observable<any> { 
+  return this.http.post(`${this.endpoint}${path}`, JSON.stringify(body), this.setHeaders())
+  .pipe(
+      map((res: Response) => {
+        return res || {}
+      }),
+      catchError(this.errorHandl));
+}
+
   errorHandl(error:any) {
     return throwError(error.error);
   }

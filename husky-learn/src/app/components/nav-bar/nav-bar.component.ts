@@ -18,7 +18,7 @@ export class NavBarComponent implements OnInit {
 
     LoggedInNavbarlinks = [
       { path: 'home', label: 'Home' },
-      { path: 'myarticle', label: 'New Article' },
+      { path: 'newarticle', label: 'New Article' },
       { path: 'settings', label: 'Settings' }];
       links;
 

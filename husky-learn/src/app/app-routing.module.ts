@@ -15,9 +15,10 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent ,},
   { path: "signup", component:SignUpComponent},
   { path: "signin",component:SignInComponent},
-  { path: "myarticle",component:NewArticleComponent,canActivate: [AuthGuard]},
+  { path: "newarticle",component:NewArticleComponent,canActivate: [AuthGuard]},
+  { path: "newarticle/:slug",component:NewArticleComponent,canActivate: [AuthGuard]},
   { path: "settings",component: SettingsComponent,canActivate: [AuthGuard]},
-  { path: "editor",component:EditArticleComponent},
+  { path: "editor",component:EditArticleComponent,canActivate: [AuthGuard]},
   { path:'**',component:PageNotFoundComponent}
 ];
 

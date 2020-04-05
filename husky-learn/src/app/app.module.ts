@@ -13,7 +13,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon'
 import {MatToolbarModule} from '@angular/material/toolbar';
-
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule , HTTP_INTERCEPTORS} from '@angular/common/http';
@@ -60,7 +61,9 @@ import { EditArticleComponent } from './components/edit-article/edit-article.com
     FormsModule,
     ReactiveFormsModule,
     MatToolbarModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDividerModule,
+    MatListModule
   ],
   providers: [
     // {

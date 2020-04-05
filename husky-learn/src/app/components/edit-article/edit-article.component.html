@@ -1,1 +1,9 @@
-<p>edit-article works!</p>
+
+<mat-card>
+    <mat-list>
+        <mat-list-item></mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item><button mat-stroked-button [routerLink]="['/newarticle', slug]" [state]='currentArticle'>Edit</button><button mat-stroked-button>Delete</button></mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+</mat-card>

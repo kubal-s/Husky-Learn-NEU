@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { ApiService } from '../sharedservices/http-request-custom';
+import { ApiService } from '../../sharedservices/http-request-custom';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 

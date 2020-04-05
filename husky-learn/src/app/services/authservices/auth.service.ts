@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { apiconfig } from '../config/apiconfig';
+import { apiconfig } from '../../config/apiconfig';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, map, retry } from 'rxjs/operators';
-import { User } from '../model/User';
-import { ApiService } from '../sharedservices/http-request-custom';
+import { User } from '../../model/User';
+import { ApiService } from '../../sharedservices/http-request-custom';
 
-import { JwtService } from "../sharedservices/jwtToken";
+import { JwtService } from "../../sharedservices/jwtToken";
 
 @Injectable({
   providedIn: 'root'

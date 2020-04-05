@@ -18,17 +18,17 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule , HTTP_INTERCEPTORS} from '@angular/common/http';
 
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { HomeComponent } from './home/home.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { FooterComponent } from './footer/footer.component';
-import { FormatErrorComponent } from './format-error/format-error.component';
-import { NewArticleComponent } from './new-article/new-article.component';
-import { SettingsComponent } from './settings/settings.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { HomeComponent } from './components/home/home.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { FormatErrorComponent } from './components/format-error/format-error.component';
+import { NewArticleComponent } from './components/new-article/new-article.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 // import { AuthInterceptor } from './authservices/authconfig.interceptor';
-import { AuthGuard } from './authservices/auth.guard';
+import { AuthGuard } from './services/authservices/auth.guard';
 import { ApiService } from './sharedservices/http-request-custom';
 
 

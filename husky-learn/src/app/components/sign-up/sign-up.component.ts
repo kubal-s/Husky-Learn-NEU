@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators,FormGroup } from '@angular/forms';
-import { AuthService } from "../authservices/auth.service";
+import { AuthService } from "../../services/authservices/auth.service";
 // import { Errors } from '../model/Error';
-import { Errors } from '../model/Error';
+import { Errors } from '../../model/Error';
 import { Router } from '@angular/router';
-import { JwtService } from "../sharedservices/jwtToken";
+import { JwtService } from "../../sharedservices/jwtToken";
 
 @Component({
   selector: 'app-sign-up',

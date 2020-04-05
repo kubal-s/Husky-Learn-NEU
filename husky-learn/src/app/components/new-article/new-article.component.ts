@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ArticleService } from '../userservices/article.service'
+import { ArticleService } from '../../services/userservices/article.service'
 
 @Component({
   selector: 'app-new-article',

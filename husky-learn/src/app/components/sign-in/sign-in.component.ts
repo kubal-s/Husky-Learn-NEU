@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
-import { AuthService } from "../authservices/auth.service";
+import { AuthService } from "../../services/authservices/auth.service";
 import { Router } from '@angular/router';
-import { JwtService } from "../sharedservices/jwtToken";
+import { JwtService } from "../../sharedservices/jwtToken";
 
 @Component({
   selector: 'app-sign-in',

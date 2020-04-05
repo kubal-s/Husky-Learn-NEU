@@ -51,6 +51,16 @@ export class ApiService {
         }),
         catchError(this.errorHandl));
   }
+
+  get(path: string): Observable<any> {
+    return this.http.get(`${this.endpoint}${path}`, this.setHeaders())
+    .pipe(
+      map((res: Response) => {
+        return res || {}
+      }),
+      catchError(this.errorHandl)
+    )
+ }
   errorHandl(error:any) {
     return throwError(error.error);
   }

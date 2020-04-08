@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/authservices/auth.service';
 import { ProfileService } from '../../services/userservices/profile.service';
+import { User } from 'src/app/model/User';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-settings',
@@ -8,6 +10,7 @@ import { ProfileService } from '../../services/userservices/profile.service';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
+
 
   constructor(private authService:AuthService,private profileService:ProfileService) { }
 

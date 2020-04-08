@@ -1,2 +1,37 @@
-<p>settings works!</p>
+<mat-card>
+    <mat-card-header>
+        <div mat-card-avatar><mat-icon>settings_applications</mat-icon></div>
+        <mat-card-title>Settings</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+    <mat-form-field class="legacy">
+        <mat-label>Image URL</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <br>
+    <mat-form-field appearance="legacy">
+      <mat-label>Username</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="legacy">
+      <mat-label>Add Bio</mat-label>
+      <textarea matInput></textarea>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="legacy">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="Ex. xx@example.com" required>
+       
+    
+      </mat-form-field>
+      <br>
+    <mat-form-field appearance="legacy">
+      <mat-label>Password</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <button mat-stroked-button >Update Profile</button>  
+    <br>
 <button mat-stroked-button (click)='logOut()'>Log out</button>
+</mat-card-content>
+</mat-card>

@@ -10,3 +10,11 @@ exports.save = (user) => {
     const newUser = new User(user);
     return newUser.save();
 };
+/**
+ * Gets the logged in user object. using id
+ *
+ * @param id
+*/
+exports.get = (id) => {
+    return User.findById(id);
+};

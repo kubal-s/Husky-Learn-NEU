@@ -7,6 +7,8 @@ const auth = require('./auth');
 module.exports = (app) => {
     app.route('/users')
         .post(userController.save);
+    app.route('/users/login')
+        .post(userController.login);
     app.use(function (err, req, res, next) {
         if (err.name === 'ValidationError') {
             return res.status(422).json({

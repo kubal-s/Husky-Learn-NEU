@@ -53,4 +53,15 @@ exports.login = (req, res ,next) => {
       }
     })(req, res, next);
   };
-  
+  /**
+ * get logged in user sets the response.
+ *
+ * @param request
+ * @param response
+*/
+//get logged in user
+exports.get = (req, res ,next) => {
+    userService.get(req.payload.id).then(function(user){
+       return res.json({user: user.toAuthJSON()});
+    }).catch(next);
+  };

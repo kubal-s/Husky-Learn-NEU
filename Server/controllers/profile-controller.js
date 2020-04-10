@@ -42,7 +42,21 @@ exports.follow = (req, res ,next) => {
         }).catch(next);
     }
 };
+exports.unfollow = (req, res ,next) => {
+    retriveUser(req,callback);
 
+    function callback(){
+        var profileId = req.profile._id;
+  
+        profileService.get(req.payload.id).then(function(user){
+            if (!user) { return res.sendStatus(401); }
+  
+            return user.unfollow(profileId).then(function(){
+              return res.json({profile: req.profile.toProfileJSONFor(user)});
+            });
+        }).catch(next);
+    }
+};
 //Retrieve user usign username  
 function retriveUser(req,next){
     profileService.find(req.params.username).then(function(user){

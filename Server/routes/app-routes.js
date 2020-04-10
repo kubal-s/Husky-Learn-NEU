@@ -16,7 +16,8 @@ module.exports = (app) => {
     app.route('/profile/:username')
         .get(auth.optional,profileController.getProfile);
     app.route('/profiles/:username/follow')
-        .post(auth.required,profileController.follow);
+        .post(auth.required,profileController.follow)
+        .delete(auth.required,profileController.unfollow);
 
 
 

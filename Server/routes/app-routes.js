@@ -15,6 +15,11 @@ module.exports = (app) => {
         .put(auth.required,userController.update);
     app.route('/profile/:username')
         .get(auth.optional,profileController.getProfile);
+    app.route('/profiles/:username/follow')
+        .post(auth.required,profileController.follow);
+
+
+
     app.use(function (err, req, res, next) {
         if (err.name === 'ValidationError') {
             return res.status(422).json({

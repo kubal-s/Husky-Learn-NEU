@@ -26,7 +26,22 @@ exports.getProfile = (req, res ,next) => {
           } 
     }
 };
+//follow a user
+exports.follow = (req, res ,next) => {
+    retriveUser(req,callback);
 
+    function callback(){
+        var profileId = req.profile._id;
+  
+        profileService.get(req.payload.id).then(function(user){
+          if (!user) { return res.sendStatus(401); }
+      
+          return user.follow(profileId).then(function(){
+            return res.json({profile: req.profile.toProfileJSONFor(user)});
+          });
+        }).catch(next);
+    }
+};
 
 //Retrieve user usign username  
 function retriveUser(req,next){

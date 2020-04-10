@@ -8,52 +8,56 @@ const Comment = mongoose.model('Comment');
 
 module.exports = router;
 
-// router.post('/', auth.required, function (req, res, next) {
-//   User.findById(req.payload.id).then(function (user) {
-//     if (!user) { return res.sendStatus(401); }
+router.post('/', auth.required, function (req, res, next) {
+  User.findById(req.payload.id).then(function (user) {
+    if (!user) { return res.sendStatus(401); }
 
-//     let article = new Article(req.body.article);
+    let article = new Article(req.body.article);
 
-//     article.author = user;
+    article.author = user;
 
-//     return article.save().then(function () {
-//       console.log(article.author);
-//       return res.json({ article: article.toJSONFor(user) });
-//     });
-//   }).catch(next);
-// });
+    return article.save().then(function () {
+      console.log(article.author);
+      return res.json({ article: article.toJSONFor(user) });
+    });
+  }).catch(next);
+});
 
-// router.param('article', function (req, res, next, slug) {
-//   Article.findOne({ slug: slug })
-//     .populate('author')
-//     .then(function (article) {
-//       if (!article) { return res.sendStatus(404); }
+router.param('article', function (req, res, next, slug) {
+  Article.findOne({ slug: slug })
+    .populate('author')
+    .then(function (article) {
+      if (!article) { return res.sendStatus(404); }
 
-//       req.article = article;
+      req.article = article;
 
-//       return next();
-//     }).catch(next);
-// });
+      return next();
+    }).catch(next);
+});
 
-// router.get('/:article', auth.optional, function (req, res, next) {
-//   Promise.all([
-//     req.payload ? User.findById(req.payload.id) : null,
-//     req.article.populate('author').execPopulate()
-//   ]).then(function (results) {
-//     let user = results[0];
+router.get('/:article', auth.optional, function (req, res, next) {
+  Promise.all([
+    req.payload ? User.findById(req.payload.id) : null,
+    req.article.populate('author').execPopulate()
+  ]).then(function (results) {
+    let user = results[0];
 
-//     return res.json({ article: req.article.toJSONFor(user) });
-//   }).catch(next);
-// });
+    return res.json({ article: req.article.toJSONFor(user) });
+  }).catch(next);
+});
 
 
 router.put('/:article', auth.required, function (req, res, next) {
+  console.log("---------")
+  console.log(req)
+ console.log("-------------")
   User.findById(req.payload.id).then(function (user) {
+    console.log(req.article);
+    console.log(req.body)
     if (req.article.author._id.toString() === req.payload.id.toString()) {
       if (typeof req.body.article.title !== 'undefined') {
         req.article.title = req.body.article.title;
       }
-
       if (typeof req.body.article.description !== 'undefined') {
         req.article.description = req.body.article.description;
       }

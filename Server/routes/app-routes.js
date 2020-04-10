@@ -23,6 +23,7 @@ module.exports = (app) => {
         .post(auth.required,articleController.save);
     app.route('/articles/:id')
         .get(auth.optional,articleController.get)
+        .put(auth.required,articleController.update);
 
 
 

@@ -2,6 +2,7 @@
 
 const userController = require('../controllers/user-controller');
 const profileController = require('../controllers/profile-controller');
+const articleController = require('../controllers/article-controller');
 const auth = require('./auth');
 
 //API's for routing toa specified request
@@ -18,6 +19,8 @@ module.exports = (app) => {
     app.route('/profiles/:username/follow')
         .post(auth.required,profileController.follow)
         .delete(auth.required,profileController.unfollow);
+    app.route('/articles')
+        .post(auth.required,articleController.save)
 
 
 

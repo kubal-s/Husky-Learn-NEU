@@ -26,7 +26,12 @@ exports.getProfile = (req, res ,next) => {
           } 
     }
 };
-//follow a user
+/**
+ * follow user sets the response.
+ *
+ * @param request
+ * @param response
+*/
 exports.follow = (req, res ,next) => {
     retriveUser(req,callback);
 
@@ -42,6 +47,12 @@ exports.follow = (req, res ,next) => {
         }).catch(next);
     }
 };
+/**
+ * unfollow user sets the response.
+ *
+ * @param request
+ * @param response
+*/
 exports.unfollow = (req, res ,next) => {
     retriveUser(req,callback);
 

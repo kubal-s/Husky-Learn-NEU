@@ -32,6 +32,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { AuthGuard } from './services/authservices/auth.guard';
 import { ApiService } from './sharedservices/http-request-custom';
 import { EditArticleComponent } from './components/edit-article/edit-article.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { EditArticleComponent } from './components/edit-article/edit-article.com
     NewArticleComponent,
     SettingsComponent,
     PageNotFoundComponent,
-    EditArticleComponent
+    EditArticleComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

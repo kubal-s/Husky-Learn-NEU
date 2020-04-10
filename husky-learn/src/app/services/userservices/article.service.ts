@@ -20,14 +20,14 @@ export class ArticleService {
         }),
         catchError(this.errorHandl));
   }
-  // update(slug,articleDetails):Observable<any>{
-  //   return this.apiService.put('/articles/'+slug , {article : articleDetails})
-  //     .pipe(
-  //       map((res: Response) => {
-  //         return res || {}
-  //       }),
-  //       catchError(this.errorHandl));
-  // }
+  update(slug,articleDetails):Observable<any>{
+    return this.apiService.put('/articles/'+slug , {article : articleDetails})
+      .pipe(
+        map((res: Response) => {
+          return res || {}
+        }),
+        catchError(this.errorHandl));
+  }
   errorHandl(error:any) {
     return throwError(error);
   }

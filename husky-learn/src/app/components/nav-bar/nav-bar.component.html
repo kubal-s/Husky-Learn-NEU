@@ -6,6 +6,13 @@
        [active]="rla.isActive">
       {{link.label}}
     </a>
+    <a mat-tab-link
+    [routerLink]="['/profile']"
+    routerLinkActive #rla="routerLinkActive"
+    [active]="rla.isActive">
+    
+   <!-- {{currentUser.username}} -->
+ </a>
   </nav>
 
   <nav mat-tab-nav-bar mat-align-tabs="end" *ngIf="!(isLoggedIn$ | async)">
@@ -17,6 +24,7 @@
       {{link.label}}
     </a>
   </nav>
+  
   <mat-toolbar>
     <h1>Husky Learn</h1>
   </mat-toolbar>

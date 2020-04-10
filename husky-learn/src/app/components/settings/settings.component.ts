@@ -4,7 +4,7 @@ import { ProfileService } from '../../services/userservices/profile.service';
 import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
 import { User } from 'src/app/model/User';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/services/userservices/user.service';
+
 
 @Component({
   selector: 'app-settings',
@@ -16,28 +16,35 @@ export class SettingsComponent implements OnInit {
   settingsForm: FormGroup;
   errors: Object = {};
   isSubmitting = false;
-
+username="";
+email="";
   constructor( private router: Router,
-    private userService: UserService,
+  
     private fb: FormBuilder,
-    private authService:AuthService) { 
+    private profileService: ProfileService,
+    private authService: AuthService) { 
       this.settingsForm = this.fb.group({
         image: '',
-        username: '',
+        username: this.username,
         bio: '',
-        email: '',
+        email: this.email,
         password: ''
       });
       // Optional: subscribe to changes on the form
       // this.settingsForm.valueChanges.subscribe(values => this.updateUser(values));
     }
     
-  ngOnInit(): void {
-    // Make a fresh copy of the current user's object to place in editable form fields
-    Object.assign(this.user, this.userService.getCurrentUser());
-    // Fill the form
-    this.settingsForm.patchValue(this.user);
-  }
+    ngOnInit(): void {
+      this.profileService.getUser().subscribe(
+      data => {
+      this.username=data.user.username;
+      this.email=data.user.email;
+      
+      },
+      err => {
+      //console.log(err)
+      });
+      }
 
   logout() {
     this.authService.logout();
@@ -45,8 +52,5 @@ export class SettingsComponent implements OnInit {
 
 
 
-  updateUser(values: Object) {
-    Object.assign(this.user, values);
-  }
 
 }

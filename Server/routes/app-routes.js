@@ -1,6 +1,7 @@
 'use strict';
 
 const userController = require('../controllers/user-controller');
+const profileController = require('../controllers/profile-controller');
 const auth = require('./auth');
 
 //API's for routing toa specified request
@@ -12,6 +13,8 @@ module.exports = (app) => {
     app.route('/user')
         .get(auth.required,userController.get)
         .put(auth.required,userController.update);
+    app.route('/profile/:username')
+        .get(auth.optional,profileController.getProfile);
     app.use(function (err, req, res, next) {
         if (err.name === 'ValidationError') {
             return res.status(422).json({

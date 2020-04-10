@@ -10,7 +10,8 @@ module.exports = (app) => {
     app.route('/users/login')
         .post(userController.login);
     app.route('/user')
-        .get(auth.required,userController.get);
+        .get(auth.required,userController.get)
+        .put(auth.required,userController.update);
     app.use(function (err, req, res, next) {
         if (err.name === 'ValidationError') {
             return res.status(422).json({

@@ -49,14 +49,14 @@ export class NewArticleComponent implements OnInit {
     this.articleForm.value.tagList = tagList;
     if(this.slug!= null){
       //put here api to update article
-      // this.articleService.update(this.slug,this.articleForm.value).subscribe(
-      //   data => {
-      //       this.router.navigate(['/editor'],{state : data});
-      //   },
-      //   err => {
-      //     this.errorList = err;
-      //     this.error = true;
-      //   });
+      this.articleService.update(this.slug,this.articleForm.value).subscribe(
+        data => {
+            this.router.navigate(['/editor'],{state : data});
+        },
+        err => {
+          this.errorList = err;
+          this.error = true;
+        });
     }
     else{
       this.articleService.save(this.articleForm.value).subscribe(

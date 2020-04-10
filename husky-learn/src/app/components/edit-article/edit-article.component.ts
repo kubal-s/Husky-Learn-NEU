@@ -28,23 +28,23 @@ export class EditArticleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //   if(this.currentArticle = !null){
-    //     this.articleForm = new FormGroup({
-    //       title:  new FormControl(this.currentArticle.title),
-    //       description: new FormControl(this.currentArticle.description),
-    //       body: new FormControl(this.currentArticle.body),
-    //       tags:new FormControl(this.currentArticle.tagList)
+      if(this.currentArticle = !null){
+        this.articleForm = new FormGroup({
+          title:  new FormControl(this.currentArticle.title),
+          description: new FormControl(this.currentArticle.description),
+          body: new FormControl(this.currentArticle.body),
+          tags:new FormControl(this.currentArticle.tagList)
 
-    //     });
-    //   }
-    //   else{
-    //     this.articleForm = new FormGroup({
-    //       title:  new FormControl(""),
-    //       description: new FormControl(""),
-    //       body: new FormControl(""),
-    //       tags:new FormControl("")
-    //   })
-    // }
+        });
+      }
+      else{
+        this.articleForm = new FormGroup({
+          title:  new FormControl(""),
+          description: new FormControl(""),
+          body: new FormControl(""),
+          tags:new FormControl("")
+      })
+    }
   }
 
 }

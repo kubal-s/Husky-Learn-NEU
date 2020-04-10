@@ -34,10 +34,6 @@ export class ApiService {
     }
     return httpOptions;
   }
-
-
-
-
   endpoint:string = apiconfig.base_url;
   private formatErrors(error: any) {
      return Observable.throw(error.json());

@@ -45,7 +45,6 @@ username="";
     this.profileService.getUser().subscribe(
       data => {
       this.username=data.user.username;
-      
       },
       err => {
       //console.log(err)

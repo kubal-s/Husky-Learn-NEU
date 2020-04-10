@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from './services/userservices/user.service';
+import { Component} from '@angular/core';
+
 
 @Component({
   selector: 'app-root',
@@ -11,6 +11,4 @@ export class AppComponent{
 
   ) {}
   title = 'husky-learn';
-
-  
 }

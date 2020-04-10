@@ -1,23 +1,23 @@
-<mat-card class="example-card">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>Shiba Inu</mat-card-title>
-    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-  </mat-card-header>
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+<mat-card 
+class="rightpanel-card mat-elevation-z2">
   <mat-card-content>
-    <nav mat-tab-nav-bar mat-align-tabs="start">
-      <a mat-tab-link
-         *ngFor="let link of Navbarlinks"
-         [routerLink]="link.path"
-         routerLinkActive #rla="routerLinkActive"
-         [active]="rla.isActive">
-        {{link.label}}
-      </a>
-    </nav>
+      <h4 class="rightdivtext">
+          Author
+      </h4>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
-  </mat-card-actions>
+  <mat-card-content>
+      <div class="authorimagecontainer">
+          <img class="authorimage" mat-card-avatar src="../../../assets/ankit-sharma.jpg">
+          <h5>Ankit Sharma</h5>
+      </div>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+      <h4 class="rightdivtext">
+          Follow Me
+      </h4>
+  </mat-card-content>
+  <mat-card-content>
+     
+  </mat-card-content>
 </mat-card>

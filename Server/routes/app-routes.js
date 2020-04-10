@@ -20,7 +20,9 @@ module.exports = (app) => {
         .post(auth.required,profileController.follow)
         .delete(auth.required,profileController.unfollow);
     app.route('/articles')
-        .post(auth.required,articleController.save)
+        .post(auth.required,articleController.save);
+    app.route('/articles/:id')
+        .get(auth.optional,articleController.get)
 
 
 

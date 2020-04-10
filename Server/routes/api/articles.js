@@ -8,20 +8,20 @@ const Comment = mongoose.model('Comment');
 
 module.exports = router;
 
-router.post('/', auth.required, function (req, res, next) {
-  User.findById(req.payload.id).then(function (user) {
-    if (!user) { return res.sendStatus(401); }
+// router.post('/', auth.required, function (req, res, next) {
+//   User.findById(req.payload.id).then(function (user) {
+//     if (!user) { return res.sendStatus(401); }
 
-    let article = new Article(req.body.article);
+//     let article = new Article(req.body.article);
 
-    article.author = user;
+//     article.author = user;
 
-    return article.save().then(function () {
-      console.log(article.author);
-      return res.json({ article: article.toJSONFor(user) });
-    });
-  }).catch(next);
-});
+//     return article.save().then(function () {
+//       console.log(article.author);
+//       return res.json({ article: article.toJSONFor(user) });
+//     });
+//   }).catch(next);
+// });
 
 router.param('article', function (req, res, next, slug) {
   Article.findOne({ slug: slug })

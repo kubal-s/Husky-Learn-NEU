@@ -10,3 +10,11 @@ exports.save = (article) => {
     const newArticle = new Article(article);
     return newArticle.save();
 };
+/**
+ * Gets the article using slug
+ *
+ * @param username
+*/
+exports.find = (slug) => {
+    return Article.findOne({slug: slug});
+};

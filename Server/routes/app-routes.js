@@ -29,7 +29,8 @@ module.exports = (app) => {
         .post(auth.required,articleController.favorite)
         .delete(auth.required,articleController.unfavorite);
     app.route('/articles/:slug/comments')
-        .post(auth.required,articleController.comment);
+        .post(auth.required,articleController.comment)
+        .get(auth.optional,articleController.allComment);
 
 
 

@@ -10,8 +10,9 @@ const Comment = mongoose.model('Comment');
 /**
  * save an article sets the response.
  *
- * @param request
- * @param response
+ * @param req
+ * @param res
+ * @param next
 */
 exports.save = (req, res ,next) => {
     userService.get(req.payload.id).then(function(user){
@@ -30,8 +31,9 @@ exports.save = (req, res ,next) => {
 /**
  * get an article sets the response.
  *
- * @param request
- * @param response
+ * @param req
+ * @param res
+ * @param next
 */
 exports.get = (req, res ,next) => {
     retriveArticle(req,callback);
@@ -50,8 +52,9 @@ exports.get = (req, res ,next) => {
 /**
  * update an article sets the response.
  *
- * @param request
- * @param response
+ * @param req
+ * @param res
+ * @param next
 */
 exports.update = (req, res ,next) => {
     retriveArticle(req,callback);
@@ -84,8 +87,9 @@ exports.update = (req, res ,next) => {
 /**
  * delete an article sets the response.
  *
- * @param request
- * @param response
+ * @param req
+ * @param res
+ * @param next
 */
 exports.delete = (req, res ,next) => {
   retriveArticle(req,callback);
@@ -106,8 +110,9 @@ exports.delete = (req, res ,next) => {
 /**
  * favorite an article sets the response.
  *
- * @param request
- * @param response
+ * @param req
+ * @param res
+ * @param next
 */
 exports.favorite = (req, res ,next) => {
   retriveArticle(req,callback);
@@ -131,8 +136,9 @@ exports.favorite = (req, res ,next) => {
 /**
  * unfavorite an article sets the response.
  *
- * @param request
- * @param response
+ * @param req
+ * @param res
+ * @param next
 */
 exports.unfavorite = (req, res ,next) => {
   retriveArticle(req,callback);
@@ -156,8 +162,9 @@ exports.unfavorite = (req, res ,next) => {
 /**
  * comment over an article sets the response.
  *
- * @param request
- * @param response
+ * @param req
+ * @param res
+ * @param next
 */
 exports.comment = (req, res ,next) => {
   retriveArticle(req,callback);
@@ -182,6 +189,41 @@ exports.comment = (req, res ,next) => {
     }).catch(next);
   } 
 }
+
+/**
+ * get all comments over an article.
+ *
+ * @param req
+ * @param res
+ * @param next
+*/
+exports.allComment = (req, res ,next) => {
+  retriveArticle(req,callback);
+
+  function callback(){
+    Promise.resolve(req.payload ? userService.get(req.payload.id) : null)
+    .then(function (user) {
+      return req.article.populate({
+        path: 'comments',
+        populate: {
+          path: 'author'
+        },
+        options: {
+          sort: {
+            createdAt: 'desc'
+          }
+        }
+      }).execPopulate().then(function (article) {
+        return res.json({
+          comments: req.article.comments.map(function (comment) {
+            return comment.toJSONFor(user);
+          })
+        });
+      });
+    }).catch(next);
+  } 
+}
+
 //Retrieve article given slug 
 function retriveArticle(req,next){
     articleService.find(req.params.slug)

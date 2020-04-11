@@ -114,23 +114,23 @@ module.exports = router;
 // });
 
 //comment over an article
-router.post('/:article/comments', auth.required, function (req, res, next) {
-  User.findById(req.payload.id).then(function (user) {
-    if (!user) { return res.sendStatus(401); }
+// router.post('/:article/comments', auth.required, function (req, res, next) {
+//   User.findById(req.payload.id).then(function (user) {
+//     if (!user) { return res.sendStatus(401); }
 
-    let comment = new Comment(req.body.comment);
-    comment.article = req.article;
-    comment.author = user;
+//     let comment = new Comment(req.body.comment);
+//     comment.article = req.article;
+//     comment.author = user;
 
-    return comment.save().then(function () {
-      req.article.comments.push(comment);
+//     return comment.save().then(function () {
+//       req.article.comments.push(comment);
 
-      return req.article.save().then(function (article) {
-        res.json({ comment: comment.toJSONFor(user) });
-      });
-    });
-  }).catch(next);
-});
+//       return req.article.save().then(function (article) {
+//         res.json({ comment: comment.toJSONFor(user) });
+//       });
+//     });
+//   }).catch(next);
+// });
 
 //get all comments over an article
 router.get('/:article/comments', auth.optional, function (req, res, next) {

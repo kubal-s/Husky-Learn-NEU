@@ -18,3 +18,13 @@ exports.save = (article) => {
 exports.find = (slug) => {
     return Article.findOne({slug: slug});
 };
+/**
+ * Deletes an existing article.
+ *
+ * @param articleId
+ * its the same as article ID
+*/
+exports.delete = (articleId) => {
+    const promise = Article.findByIdAndRemove(articleId).exec();
+    return promise;
+};

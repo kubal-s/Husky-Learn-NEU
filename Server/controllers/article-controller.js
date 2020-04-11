@@ -79,6 +79,28 @@ exports.update = (req, res ,next) => {
     }
 
 };
+/**
+ * delete an article sets the response.
+ *
+ * @param request
+ * @param response
+*/
+exports.delete = (req, res ,next) => {
+  retriveArticle(req,callback);
+
+  function callback(){
+    userService.get(req.payload.id).then(function () {
+      if (req.article.author._id.toString() === req.payload.id.toString()) {
+        return articleService.delete(req.article._id).then(function () {
+          return res.sendStatus(204);
+        });
+      } else {
+        return res.sendStatus(403);
+      }
+    });
+
+  } 
+}
 //Retrieve article given slug or article id
 function retriveArticle(req,next){
     articleService.find(req.params.id)

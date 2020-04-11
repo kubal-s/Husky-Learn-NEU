@@ -6,6 +6,7 @@
       </mat-card-header>
       <mat-card-content>
         <p><app-format-error [errorList]="errorList" *ngIf="error"></app-format-error></p>
+        <p class="success">{{this.successMsg}}</p>
         <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
             <p>
                 <mat-form-field class="legacy">

@@ -15,15 +15,19 @@ export class NewArticleComponent implements OnInit {
   currentArticle: any;
   slug = null;
   constructor(private route: ActivatedRoute,private  articleService: ArticleService, private router: Router) {
+
     this.slug = null;
    }
 
   ngOnInit(): void {
+
+
     this.route.paramMap.subscribe(params => {
-      console.log(params.get('slug'))
       this.slug = params.get('slug')
+      this.currentArticle = history.state;
+
       });
-      if(this.currentArticle = !null){
+      if(this.currentArticle != null){
         this.articleForm = new FormGroup({
           title:  new FormControl(this.currentArticle.title),
           description: new FormControl(this.currentArticle.description),
@@ -37,7 +41,7 @@ export class NewArticleComponent implements OnInit {
           title:  new FormControl(""),
           description: new FormControl(""),
           body: new FormControl(""),
-          tags:new FormControl("")
+          tags:new FormControl(null)
       })
     }
   }
@@ -49,6 +53,7 @@ export class NewArticleComponent implements OnInit {
     this.articleForm.value.tagList = tagList;
     if(this.slug!= null){
       //put here api to update article
+      console.log("In update")
       this.articleService.update(this.slug,this.articleForm.value).subscribe(
         data => {
             this.router.navigate(['/editor'],{state : data});

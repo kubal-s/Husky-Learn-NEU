@@ -20,7 +20,6 @@ export class EditArticleComponent implements OnInit {
     this.currentArticle = null;
     if(this.router.getCurrentNavigation().extras.hasOwnProperty('state')&&this.router.getCurrentNavigation().extras.state.hasOwnProperty('article')){
       this.currentArticle = this.router.getCurrentNavigation().extras.state.article;
-      console.log(this.currentArticle)
       this.slug = this.currentArticle.slug;
     }
     
@@ -28,7 +27,7 @@ export class EditArticleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      if(this.currentArticle = !null){
+      if(this.currentArticle != null){
         this.articleForm = new FormGroup({
           title:  new FormControl(this.currentArticle.title),
           description: new FormControl(this.currentArticle.description),

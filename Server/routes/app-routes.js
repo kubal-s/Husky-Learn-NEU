@@ -21,10 +21,12 @@ module.exports = (app) => {
         .delete(auth.required,profileController.unfollow);
     app.route('/articles')
         .post(auth.required,articleController.save);
-    app.route('/articles/:id')
+    app.route('/articles/:slug')
         .get(auth.optional,articleController.get)
         .put(auth.required,articleController.update)
         .delete(auth.required,articleController.delete);
+    app.route('/articles/:slug/favorite')
+        .post(auth.required,articleController.favorite);
 
 
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ArticleService } from '../../services/userservices/article.service'
 import { Router, ActivatedRoute } from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-new-article',
@@ -11,6 +12,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class NewArticleComponent implements OnInit {
   articleForm: any;
   error = false;
+  success = false;
+  successMsg = "";
   errorList;
   currentArticle: any;
   slug = null;
@@ -48,15 +51,16 @@ export class NewArticleComponent implements OnInit {
   onSubmit(){
     let tagList;
     if(this.articleForm.value.tags!=null){
+      this.articleForm.value.tags = this.articleForm.value.tags+"";
       tagList = this.articleForm.value.tags.split(',');
     }
     this.articleForm.value.tagList = tagList;
     if(this.slug!= null){
-      //put here api to update article
-      console.log("In update")
       this.articleService.update(this.slug,this.articleForm.value).subscribe(
         data => {
-            this.router.navigate(['/editor'],{state : data});
+            this.successMsg = "Successfully Updated!"
+            this.success = true;
+            //this.router.navigate(['/editor'],{state : data});
         },
         err => {
           this.errorList = err;
@@ -66,6 +70,8 @@ export class NewArticleComponent implements OnInit {
     else{
       this.articleService.save(this.articleForm.value).subscribe(
         data => {
+            this.successMsg = "Article successfully created!"
+            this.success = true;
             this.router.navigate(['/editor'],{state : data});
         },
         err => {

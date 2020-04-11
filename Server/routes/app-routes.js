@@ -28,6 +28,8 @@ module.exports = (app) => {
     app.route('/articles/:slug/favorite')
         .post(auth.required,articleController.favorite)
         .delete(auth.required,articleController.unfavorite);
+    app.route('/articles/:slug/comments')
+        .post(auth.required,articleController.comment);
 
 
 

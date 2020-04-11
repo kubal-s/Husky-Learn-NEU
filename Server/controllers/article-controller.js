@@ -2,9 +2,11 @@
 
 const  userService= require('./../services/user-services');
 const  articleService= require('./../services/article-services');
+const commentService = require('./../services/comment-services');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const Article = mongoose.model('Article');
+const Comment = mongoose.model('Comment');
 /**
  * save an article sets the response.
  *
@@ -150,6 +152,36 @@ exports.unfavorite = (req, res ,next) => {
   } 
 }
 
+
+/**
+ * comment over an article sets the response.
+ *
+ * @param request
+ * @param response
+*/
+exports.comment = (req, res ,next) => {
+  retriveArticle(req,callback);
+
+  function callback(){
+    let articleId = req.article._id;
+
+    userService.get(req.payload.id).then(function (user) {
+      if (!user) { return res.sendStatus(401); }
+  
+      let comment = new Comment(req.body.comment);
+      comment.article = req.article;
+      comment.author = user;
+  
+      commentService.save(comment).then(function () {
+        req.article.comments.push(comment);
+  
+        articleService.save(req.article).then(function (article) {
+          res.json({ comment: comment.toJSONFor(user) });
+        });
+      });
+    }).catch(next);
+  } 
+}
 //Retrieve article given slug 
 function retriveArticle(req,next){
     articleService.find(req.params.slug)

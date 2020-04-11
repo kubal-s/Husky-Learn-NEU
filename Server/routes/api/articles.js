@@ -84,34 +84,34 @@ module.exports = router;
 
 
 //Favorite an article
-router.post('/:article/favorite', auth.required, function (req, res, next) {
-  let articleId = req.article._id;
+// router.post('/:article/favorite', auth.required, function (req, res, next) {
+//   let articleId = req.article._id;
 
-  User.findById(req.payload.id).then(function (user) {
-    if (!user) { return res.sendStatus(401); }
+//   User.findById(req.payload.id).then(function (user) {
+//     if (!user) { return res.sendStatus(401); }
 
-    return user.favorite(articleId).then(function () {
-      return req.article.updateFavoriteCount().then(function (article) {
-        return res.json({ article: article.toJSONFor(user) });
-      });
-    });
-  }).catch(next);
-});
+//     return user.favorite(articleId).then(function () {
+//       return req.article.updateFavoriteCount().then(function (article) {
+//         return res.json({ article: article.toJSONFor(user) });
+//       });
+//     });
+//   }).catch(next);
+// });
 
 // UnFavorite an article
-router.delete('/:article/favorite', auth.required, function (req, res, next) {
-  let articleId = req.article._id;
+// router.delete('/:article/favorite', auth.required, function (req, res, next) {
+//   let articleId = req.article._id;
 
-  User.findById(req.payload.id).then(function (user) {
-    if (!user) { return res.sendStatus(401); }
+//   User.findById(req.payload.id).then(function (user) {
+//     if (!user) { return res.sendStatus(401); }
 
-    return user.unfavorite(articleId).then(function () {
-      return req.article.updateFavoriteCount().then(function (article) {
-        return res.json({ article: article.toJSONFor(user) });
-      });
-    });
-  }).catch(next);
-});
+//     return user.unfavorite(articleId).then(function () {
+//       return req.article.updateFavoriteCount().then(function (article) {
+//         return res.json({ article: article.toJSONFor(user) });
+//       });
+//     });
+//   }).catch(next);
+// });
 
 //comment over an article
 router.post('/:article/comments', auth.required, function (req, res, next) {

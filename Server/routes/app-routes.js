@@ -26,7 +26,8 @@ module.exports = (app) => {
         .put(auth.required,articleController.update)
         .delete(auth.required,articleController.delete);
     app.route('/articles/:slug/favorite')
-        .post(auth.required,articleController.favorite);
+        .post(auth.required,articleController.favorite)
+        .delete(auth.required,articleController.unfavorite);
 
 
 

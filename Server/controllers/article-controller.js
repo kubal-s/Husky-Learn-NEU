@@ -126,7 +126,29 @@ exports.favorite = (req, res ,next) => {
   } 
 }
 
+/**
+ * unfavorite an article sets the response.
+ *
+ * @param request
+ * @param response
+*/
+exports.unfavorite = (req, res ,next) => {
+  retriveArticle(req,callback);
 
+  function callback(){
+    let articleId = req.article._id;
+
+    userService.get(req.payload.id).then(function (user) {
+      if (!user) { return res.sendStatus(401); }
+  
+      return user.unfavorite(articleId).then(function () {
+        return req.article.updateFavoriteCount().then(function (article) {
+          return res.json({ article: article.toJSONFor(user) });
+        });
+      });
+    }).catch(next);
+  } 
+}
 
 //Retrieve article given slug 
 function retriveArticle(req,next){

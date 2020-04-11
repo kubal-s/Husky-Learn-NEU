@@ -224,6 +224,35 @@ exports.allComment = (req, res ,next) => {
   } 
 }
 
+
+/**
+ * delete comment over an article sets the response.
+ *
+ * @param req
+ * @param res
+ * @param next
+*/
+exports.deleteComment = (req, res ,next) => {
+  retriveArticle(req,callback1);
+
+  function callback1(){
+    retriveComment(req,callback2);
+  } 
+  function callback2(){
+    if (req.comment.author.toString() === req.payload.id.toString()) {
+      
+      req.article.comments.remove(req.comment._id);
+      req.article.save()
+        .then(Comment.find({ _id: req.comment._id }).remove().exec())
+        .then(function () {
+          res.sendStatus(204);
+        });
+    } else {
+      res.sendStatus(403);
+    }
+  }
+}
+
 //Retrieve article given slug 
 function retriveArticle(req,next){
     articleService.find(req.params.slug)
@@ -234,4 +263,14 @@ function retriveArticle(req,next){
 
       return next();
     }).catch(next);
+}
+//Retrieve comment given comment Id 
+function retriveComment(req,next){
+  commentService.get(req.params.id).then(function (comment) {
+    if (!comment) { return res.sendStatus(404); }
+
+    req.comment = comment;
+
+    return next();
+  }).catch(next);
 }

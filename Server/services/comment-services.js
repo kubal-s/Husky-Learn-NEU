@@ -10,3 +10,12 @@ exports.save = (comment) => {
     const newComment = new Comment(comment);
     return newComment.save();
 };
+
+/**
+ * Gets the comment using id
+ *
+ * @param id
+*/
+exports.get = (id) => {
+    return Comment.findById(id);
+};

@@ -133,37 +133,37 @@ module.exports = router;
 // });
 
 //get all comments over an article
-router.get('/:article/comments', auth.optional, function (req, res, next) {
-  Promise.resolve(req.payload ? User.findById(req.payload.id) : null).then(function (user) {
-    return req.article.populate({
-      path: 'comments',
-      populate: {
-        path: 'author'
-      },
-      options: {
-        sort: {
-          createdAt: 'desc'
-        }
-      }
-    }).execPopulate().then(function (article) {
-      return res.json({
-        comments: req.article.comments.map(function (comment) {
-          return comment.toJSONFor(user);
-        })
-      });
-    });
-  }).catch(next);
-});
+// router.get('/:article/comments', auth.optional, function (req, res, next) {
+//   Promise.resolve(req.payload ? User.findById(req.payload.id) : null).then(function (user) {
+//     return req.article.populate({
+//       path: 'comments',
+//       populate: {
+//         path: 'author'
+//       },
+//       options: {
+//         sort: {
+//           createdAt: 'desc'
+//         }
+//       }
+//     }).execPopulate().then(function (article) {
+//       return res.json({
+//         comments: req.article.comments.map(function (comment) {
+//           return comment.toJSONFor(user);
+//         })
+//       });
+//     });
+//   }).catch(next);
+// });
 
-router.param('comment', function (req, res, next, id) {
-  Comment.findById(id).then(function (comment) {
-    if (!comment) { return res.sendStatus(404); }
+// router.param('comment', function (req, res, next, id) {
+//   Comment.findById(id).then(function (comment) {
+//     if (!comment) { return res.sendStatus(404); }
 
-    req.comment = comment;
+//     req.comment = comment;
 
-    return next();
-  }).catch(next);
-});
+//     return next();
+//   }).catch(next);
+// });
 
 router.delete('/:article/comments/:comment', auth.required, function (req, res, next) {
   if (req.comment.author.toString() === req.payload.id.toString()) {

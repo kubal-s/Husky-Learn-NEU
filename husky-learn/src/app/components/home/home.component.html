@@ -1,9 +1,18 @@
-<nav mat-tab-nav-bar mat-align-tabs="start">
-    <a mat-tab-link
-       *ngFor="let link of Navbarlinks"
-       [routerLink]="link.path"
-       routerLinkActive #rla="routerLinkActive"
-       [active]="rla.isActive">
-      {{link.label}}
-    </a>
-  </nav>
+
+
+ <mat-card *ngFor = "let article of listOfArticles ">
+   <mat-card>
+     <mat-card-content>
+      <div><img mat-card-avatar [src]="article.author.image"></div>
+      <mat-card-subtitle>{{article.author.username}}</mat-card-subtitle>
+      <mat-card-subtitle>{{article.createdAt| date:'longDate'}}</mat-card-subtitle>
+     </mat-card-content>
+    <mat-card-header>
+      <mat-card-title>{{article.title}}</mat-card-title>
+      <mat-card-subtitle>{{article.description}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+    </mat-card-content>
+   </mat-card>
+
+</mat-card>

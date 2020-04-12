@@ -9,7 +9,7 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class ArticleService {
 
-  constructor(private apiService:ApiService) { 
+  constructor(private apiService:ApiService) {
 
   }
   save(articleDetails):Observable<any>{
@@ -28,6 +28,16 @@ export class ArticleService {
         }),
         catchError(this.errorHandl));
   }
+  getAllArticles():Observable<any>{
+    console.log("Test");
+    return this.apiService.get('/articles')
+    .pipe(
+    map((res: Response) => {
+      console.log(res);
+    return res || {}
+    }),
+    catchError(this.errorHandl));
+    }
   errorHandl(error:any) {
     return throwError(error);
   }

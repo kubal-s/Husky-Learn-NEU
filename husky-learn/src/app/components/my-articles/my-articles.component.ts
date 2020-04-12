@@ -16,6 +16,7 @@ this.username="";
   }
 
   ngOnInit(): void {
+    
     this.route.paramMap.subscribe(params => {
       this.username = params.get('username')
       if(this.username)
@@ -30,6 +31,7 @@ this.username="";
         });
       }
       });
+
 
   }
 }

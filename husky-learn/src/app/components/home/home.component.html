@@ -18,7 +18,7 @@
         <mat-icon>favorite</mat-icon>
       </button> -->
       <button mat-button type="submit"  (click) = "showAdd = !showAdd" >add comment</button>
-      <app-add-comment *ngIf="showAdd"></app-add-comment>
+      <app-add-comment *ngIf="showAdd" [slug]="article.slug"></app-add-comment>
     </mat-card-content>
    </mat-card>
 </mat-card>

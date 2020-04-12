@@ -56,6 +56,15 @@ export class ArticleService {
     //     }),
     //     catchError(this.errorHandl));
     //     }
+
+    postComment(slug, comment):Observable<any>{
+      return this.apiService.post('/articles/' + slug + '/comments' , { comment: { body: comment } })
+        .pipe(
+          map((res: Response) => {
+            return res || {}
+          }),
+          catchError(this.errorHandl));
+    }
   errorHandl(error:any) {
     return throwError(error);
   }

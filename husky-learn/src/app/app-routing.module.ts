@@ -10,6 +10,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { AuthGuard } from "./services/authservices/auth.guard";
 import { EditArticleComponent } from './components/edit-article/edit-article.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { MyArticlesComponent } from './components/my-articles/my-articles.component';
+import { FavouriteArticlesComponent } from './components/favourite-articles/favourite-articles.component';
 
 
 const routes: Routes = [
@@ -23,6 +25,8 @@ const routes: Routes = [
   { path: "editor",component:EditArticleComponent,canActivate: [AuthGuard]},
   {path:  "profile", component:ProfileComponent, canActivate: [AuthGuard]},
   {path:"globalfeed", component:GlobalFeedComponent},
+  {path: "myarticles/:username", component:MyArticlesComponent, canActivate:[AuthGuard]},
+  {path: "favouritearticles/:username",  component:FavouriteArticlesComponent, canActivate:[AuthGuard]},
   { path:'**',component:PageNotFoundComponent}
 ];
 

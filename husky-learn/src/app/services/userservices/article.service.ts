@@ -65,6 +65,14 @@ export class ArticleService {
           }),
           catchError(this.errorHandl));
     }
+    getAllArticlesByUsername(username):Observable<any>{
+      return this.apiService.get('/articles?author=' +username)
+      .pipe(
+      map((res: Response) => {
+      return res || {}
+      }),
+      catchError(this.errorHandl));
+      }
   errorHandl(error:any) {
     return throwError(error);
   }

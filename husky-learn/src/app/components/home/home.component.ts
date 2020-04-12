@@ -22,12 +22,12 @@ export class HomeComponent implements OnInit {
     this.favorite = false;
     this.articleService.getAllArticles().subscribe(
       data => {
-      console.log(data);
+  
       this.listOfArticles = data.articles;
-      console.log(this.listOfArticles)
+  
       },
       err => {
-      console.log(err)
+  
       });
   }
 

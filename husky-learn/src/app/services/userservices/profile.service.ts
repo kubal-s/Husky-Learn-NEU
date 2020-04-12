@@ -16,8 +16,17 @@ export class ProfileService {
     map((res: Response) => {
     return res || {}
     }),
+    
     catchError(this.errorHandl));
     }
+    updateUser(user):Observable<any>{
+      return this.apiService.put('/user', {user: user})
+      .pipe(
+      map((res: Response) => {
+      return res || {}
+      }),
+      catchError(this.errorHandl));
+      }
     errorHandl(error:any) {
     return throwError(error);
     }

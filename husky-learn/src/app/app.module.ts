@@ -33,6 +33,7 @@ import { AuthGuard } from './services/authservices/auth.guard';
 import { ApiService } from './sharedservices/http-request-custom';
 import { EditArticleComponent } from './components/edit-article/edit-article.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { GlobalFeedComponent } from './components/global-feed/global-feed.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     SettingsComponent,
     PageNotFoundComponent,
     EditArticleComponent,
-    ProfileComponent
+    ProfileComponent,
+    GlobalFeedComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+import { GlobalFeedComponent } from './components/global-feed/global-feed.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
@@ -12,7 +13,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 
 
 const routes: Routes = [
- 
+
   { path: 'home', component: HomeComponent ,},
   { path: "signup", component:SignUpComponent},
   { path: "signin",component:SignInComponent},
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: "settings",component: SettingsComponent,canActivate: [AuthGuard]},
   { path: "editor",component:EditArticleComponent,canActivate: [AuthGuard]},
   {path:  "profile", component:ProfileComponent, canActivate: [AuthGuard]},
+  {path:"globalfeed", component:GlobalFeedComponent},
   { path:'**',component:PageNotFoundComponent}
 ];
 

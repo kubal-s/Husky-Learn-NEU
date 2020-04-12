@@ -29,15 +29,33 @@ export class ArticleService {
         catchError(this.errorHandl));
   }
   getAllArticles():Observable<any>{
-    console.log("Test");
     return this.apiService.get('/articles')
     .pipe(
     map((res: Response) => {
-      console.log(res);
     return res || {}
     }),
     catchError(this.errorHandl));
     }
+    // favoriteArticle(slug):Observable<any>{
+    //   console.log("Test")
+    //   return this.apiService.post('/articles/' + slug + '/favorite')
+    //   .pipe(
+    //   map((res: Response) => {
+    //     console.log(res);
+    //   return res || {}
+    //   }),
+    //   catchError(this.errorHandl));
+    //   }
+    // unfavoriteArticle(slug):Observable<any>{
+    //     console.log("Test2")
+    //     return this.apiService.delete('/articles/' + slug + '/favorite')
+    //     .pipe(
+    //     map((res: Response) => {
+    //       console.log(res);
+    //     return res || {}
+    //     }),
+    //     catchError(this.errorHandl));
+    //     }
   errorHandl(error:any) {
     return throwError(error);
   }

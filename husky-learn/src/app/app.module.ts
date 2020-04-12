@@ -35,6 +35,8 @@ import { EditArticleComponent } from './components/edit-article/edit-article.com
 import { ProfileComponent } from './components/profile/profile.component';
 import { GlobalFeedComponent } from './components/global-feed/global-feed.component';
 import { AddCommentComponent } from './components/add-comment/add-comment.component';
+import { MyArticlesComponent } from './components/my-articles/my-articles.component';
+import { FavouriteArticlesComponent } from './components/favourite-articles/favourite-articles.component';
 
 
 @NgModule({
@@ -52,7 +54,9 @@ import { AddCommentComponent } from './components/add-comment/add-comment.compon
     EditArticleComponent,
     ProfileComponent,
     GlobalFeedComponent,
-    AddCommentComponent
+    AddCommentComponent,
+    MyArticlesComponent,
+    FavouriteArticlesComponent
   ],
   imports: [
     BrowserModule,

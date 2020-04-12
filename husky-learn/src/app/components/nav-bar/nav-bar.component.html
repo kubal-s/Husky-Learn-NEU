@@ -6,13 +6,6 @@
        [active]="rla.isActive">
       {{link.label}}
     </a>
-    <a mat-tab-link
-    [routerLink]="['/profile']"
-    routerLinkActive #rla="routerLinkActive"
-    [active]="rla.isActive">
-    
-   {{this.username}}
- </a>
   </nav>
 
   <nav mat-tab-nav-bar mat-align-tabs="end" *ngIf="!(isLoggedIn$ | async)">

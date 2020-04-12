@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {ProfileService} from '../../services/userservices/profile.service'
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -7,11 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
   Navbarlinks = [
-    { path: 'yourfeed', label: 'My Articles' },
-    { path: 'globalfeed', label: 'Favourited Articles' }];
-  constructor() { }
+    { path: 'myarticles', label: 'My Articles' },
+    { path: 'favouritearticles', label: 'Favourited Articles' }];
+username;
+
+    constructor(private profileService : ProfileService) { }
 
   ngOnInit(): void {
-  }
+
+    this.profileService.getUser().subscribe(
+      data => { 
+      this.username=data.user.username;
+    
+      },
+      err => {
+      //console.log(err)
+      });
+      }
 
 }

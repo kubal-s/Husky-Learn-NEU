@@ -8,14 +8,25 @@ class="rightpanel-card mat-elevation-z2">
   <mat-card-content>
       <div class="authorimagecontainer">
           <img class="authorimage" mat-card-avatar src="../../../assets/ankit-sharma.jpg">
-          <h5>Ankit Sharma</h5>
+          <h5></h5>
       </div>
   </mat-card-content>
   <mat-divider></mat-divider>
   <mat-card-content>
-      <h4 class="rightdivtext">
-          Follow Me
-      </h4>
+    <nav mat-tab-nav-bar mat-align-tabs="end">
+        <a mat-tab-link
+        [routerLink]="['/myarticles', username]"
+           routerLinkActive #rla="routerLinkActive"
+           [active]="rla.isActive">
+             My Articles
+            </a>
+            <a mat-tab-link
+        [routerLink]="['/favouritearticles', username]"
+           routerLinkActive #rla="routerLinkActive"
+           [active]="rla.isActive">
+             Favourite Articles
+            </a>
+      </nav>
   </mat-card-content>
   <mat-card-content>
      

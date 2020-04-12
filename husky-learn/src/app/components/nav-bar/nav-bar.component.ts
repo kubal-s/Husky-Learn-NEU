@@ -24,6 +24,7 @@ export class NavBarComponent implements OnInit {
       { path: 'home', label: 'Home' },
       { path: 'newarticle', label: 'New Article' },
       { path: 'settings', label: 'Settings' },
+      { path: 'profile', label: 'Profile' }
       ];
       links;
       user: User = {} as User;

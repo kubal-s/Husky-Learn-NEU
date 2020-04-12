@@ -19,3 +19,7 @@ exports.save = (comment) => {
 exports.get = (id) => {
     return Comment.findById(id);
 };
+exports.delete = (commentId) => {
+    const promise = Comment.find({ _id: commentId }).remove().exec();
+    return promise;
+  };

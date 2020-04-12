@@ -165,18 +165,18 @@ module.exports = router;
 //   }).catch(next);
 // });
 
-router.delete('/:article/comments/:comment', auth.required, function (req, res, next) {
-  if (req.comment.author.toString() === req.payload.id.toString()) {
-    req.article.comments.remove(req.comment._id);
-    req.article.save()
-      .then(Comment.find({ _id: req.comment._id }).remove().exec())
-      .then(function () {
-        res.sendStatus(204);
-      });
-  } else {
-    res.sendStatus(403);
-  }
-});
+// router.delete('/:article/comments/:comment', auth.required, function (req, res, next) {
+//   if (req.comment.author.toString() === req.payload.id.toString()) {
+//     req.article.comments.remove(req.comment._id);
+//     req.article.save()
+//       .then(Comment.find({ _id: req.comment._id }).remove().exec())
+//       .then(function () {
+//         res.sendStatus(204);
+//       });
+//   } else {
+//     res.sendStatus(403);
+//   }
+// });
 
 // Creating endpoint to list all articles
 router.get('/', auth.optional, function (req, res, next) {
@@ -239,38 +239,38 @@ router.get('/', auth.optional, function (req, res, next) {
   }).catch(next);
 });
 
-router.get('/feed', auth.required, function (req, res, next) {
-  var limit = 20;
-  var offset = 0;
+// router.get('/feed', auth.required, function (req, res, next) {
+//   var limit = 20;
+//   var offset = 0;
 
-  if (typeof req.query.limit !== 'undefined') {
-    limit = req.query.limit;
-  }
+//   if (typeof req.query.limit !== 'undefined') {
+//     limit = req.query.limit;
+//   }
 
-  if (typeof req.query.offset !== 'undefined') {
-    offset = req.query.offset;
-  }
+//   if (typeof req.query.offset !== 'undefined') {
+//     offset = req.query.offset;
+//   }
 
-  User.findById(req.payload.id).then(function (user) {
-    if (!user) { return res.sendStatus(401); }
+//   User.findById(req.payload.id).then(function (user) {
+//     if (!user) { return res.sendStatus(401); }
 
-    Promise.all([
-      Article.find({ author: { $in: user.following == true ? user.following : null } })
-        .limit(Number(limit))
-        .skip(Number(offset))
-        .populate('author')
-        .exec(),
-      Article.count({ author: { $in: user.following == true ? user.following : null } })
-    ]).then(function (results) {
-      var articles = results[0];
-      var articlesCount = results[1];
+//     Promise.all([
+//       Article.find({ author: { $in: user.following == true ? user.following : null } })
+//         .limit(Number(limit))
+//         .skip(Number(offset))
+//         .populate('author')
+//         .exec(),
+//       Article.count({ author: { $in: user.following == true ? user.following : null } })
+//     ]).then(function (results) {
+//       var articles = results[0];
+//       var articlesCount = results[1];
 
-      return res.json({
-        articles: articles.map(function (article) {
-          return article.toJSONFor(user);
-        }),
-        articlesCount: articlesCount
-      });
-    }).catch(next);
-  });
-});
+//       return res.json({
+//         articles: articles.map(function (article) {
+//           return article.toJSONFor(user);
+//         }),
+//         articlesCount: articlesCount
+//       });
+//     }).catch(next);
+//   });
+// });

@@ -25,6 +25,7 @@ exports.find = (slug) => {
  * its the same as article ID
 */
 exports.delete = (articleId) => {
-    const promise = Article.findByIdAndRemove(articleId).exec();
+    const promise = Article.remove(articleId).exec();
     return promise;
 };
+

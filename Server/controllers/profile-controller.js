@@ -9,7 +9,7 @@ const User = mongoose.model('User');
  * @param request
  * @param response
 */
-//get userprofile 
+//get userprofile  
 exports.getProfile = (req, res ,next) => {
 
     retriveUser(req,callback)

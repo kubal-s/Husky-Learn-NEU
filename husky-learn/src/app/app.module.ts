@@ -34,6 +34,7 @@ import { ApiService } from './sharedservices/http-request-custom';
 import { EditArticleComponent } from './components/edit-article/edit-article.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { GlobalFeedComponent } from './components/global-feed/global-feed.component';
+import { AddCommentComponent } from './components/add-comment/add-comment.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { GlobalFeedComponent } from './components/global-feed/global-feed.compon
     PageNotFoundComponent,
     EditArticleComponent,
     ProfileComponent,
-    GlobalFeedComponent
+    GlobalFeedComponent,
+    AddCommentComponent
   ],
   imports: [
     BrowserModule,

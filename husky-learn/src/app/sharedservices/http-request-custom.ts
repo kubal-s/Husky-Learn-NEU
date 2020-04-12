@@ -39,7 +39,7 @@ export class ApiService {
      return Observable.throw(error.json());
   }
 
-  post(path: string, body: Object = {}): Observable<any> { 
+  post(path: string, body: Object = {}): Observable<any> {
     return this.http.post(`${this.endpoint}${path}`, JSON.stringify(body), this.setHeaders())
     .pipe(
         map((res: Response) => {
@@ -58,7 +58,7 @@ export class ApiService {
     )
  }
 //this api needs testing
- put(path: string, body: Object = {}): Observable<any> { 
+ put(path: string, body: Object = {}): Observable<any> {
   return this.http.put(`${this.endpoint}${path}`, JSON.stringify(body), this.setHeaders())
   .pipe(
       map((res: Response) => {
@@ -68,6 +68,7 @@ export class ApiService {
 }
 //this api needs testing
 delete(path: string): Observable<any> {
+  console.log("delete");
   return this.http.delete(`${this.endpoint}${path}`, this.setHeaders())
   .pipe(
     map((res: Response) => {

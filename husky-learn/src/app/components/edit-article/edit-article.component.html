@@ -1,10 +1,32 @@
+<mat-card *ngIf="slug">
+  <button mat-stroked-button [routerLink]="['/newarticle', slug]" [state]='currentArticle'>Edit</button>
+  <button mat-stroked-button (click)="deleteArticle()">Delete</button>
+  <mat-card-content class="article-card">
+    <mat-card-header>
+      <mat-card-title>{{currentArticle.title}}</mat-card-title>
+      <mat-card-subtitle>{{currentArticle.description}}</mat-card-subtitle>
+    </mat-card-header>
+    <div><img mat-card-avatar [src]="currentArticle.author.image"></div>
+    <mat-card-subtitle>{{currentArticle.author.username}}</mat-card-subtitle>
+    <mat-card-subtitle>{{currentArticle.createdAt| date:'longDate'}}</mat-card-subtitle>
+  </mat-card-content>
+  <mat-card>
+    <mat-card-content class="add-comment">
+      <app-add-comment (updateCommentList)="updateCommentList()" [slug]="slug"></app-add-comment>
+    </mat-card-content>
+  </mat-card>
 
-<mat-card>
-    <mat-list>
-        <mat-list-item></mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item><button mat-stroked-button [routerLink]="['/newarticle', slug]" [state]='currentArticle'>Edit</button>
-          <button mat-stroked-button>Delete</button></mat-list-item>
-        <mat-divider></mat-divider>
-      </mat-list>
+
+
+
+  <mat-card *ngFor="let comment of commentList ">
+    <mat-card-content>
+      <mat-card-header>
+        <mat-card-title>{{comment.body}}</mat-card-title>
+      </mat-card-header>
+      <div><img mat-card-avatar [src]="comment.author.image" class="comment-author"></div>
+      <mat-card-subtitle>{{comment.author.username}}</mat-card-subtitle>
+      <mat-card-subtitle>{{comment.createdAt| date:'longDate'}}</mat-card-subtitle>
+    </mat-card-content>
+  </mat-card>
 </mat-card>

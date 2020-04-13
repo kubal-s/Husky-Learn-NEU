@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   listOfArticles: Array<Article>;
-  favorite;
+  // favorite;
   showAdd;
   // Navbarlinks = [
   //   // { path: 'yourfeed', label: 'Your Feed' },
@@ -19,7 +19,34 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.favorite = false;
+    // this.favorite = false;
+    this.listAllArticles();
+  }
+
+  toggleFavorite(slug, isfavorite){
+    if(!isfavorite){
+      this.articleService.favoriteArticle(slug).subscribe(
+        data => {
+        // this.favorite = true;
+        this.listAllArticles();
+        },
+        err => {
+          this.router.navigate(['/signin']);
+        });
+    }
+    else if(isfavorite){
+      this.articleService.unfavoriteArticle(slug).subscribe(
+        data => {
+        // this.favorite = true;
+        this.listAllArticles();
+        },
+        err => {
+          this.router.navigate(['/signin']);
+        });
+    }
+
+  }
+  listAllArticles(){
     this.articleService.getAllArticles().subscribe(
       data => {
   
@@ -30,35 +57,5 @@ export class HomeComponent implements OnInit {
   
       });
   }
-
-  // toggleFavorite(slug, isfavorite){
-  //   console.log(isfavorite);
-  //   if(isfavorite){
-  //     console.log("okay");
-  //     this.articleService.favoriteArticle(slug).subscribe(
-  //       data => {
-  //       console.log(data);
-  //       this.favorite = true;
-  //       },
-  //       err => {
-  //         this.router.navigate(['/signin']);
-  //       console.log(err)
-  //       });
-  //   }
-  //   else if(!isfavorite){
-  //     console.log("not okay");
-  //     this.articleService.unfavoriteArticle(slug).subscribe(
-  //       data => {
-  //       console.log(data);
-  //       this.favorite = true;
-  //       },
-  //       err => {
-  //         this.router.navigate(['/signin']);
-  //       console.log(err)
-  //       });
-  //   }
-
-  // }
-
 
 }

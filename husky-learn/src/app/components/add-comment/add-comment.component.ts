@@ -21,7 +21,6 @@ export class AddCommentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.slug);
     this.addCommentForm = new FormGroup({
       comment: new FormControl('')
     })

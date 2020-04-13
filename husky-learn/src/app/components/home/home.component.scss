@@ -1,0 +1,22 @@
+.outer-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+mat-card-header{
+    display: flex;
+    justify-content: space-between;
+}
+.author{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.inner-card{
+    width:900px;
+}
+.like-comment{
+    display: flex;
+    justify-content: space-between;
+}

@@ -36,26 +36,24 @@ export class ArticleService {
         }),
         catchError(this.errorHandl));
   }
-  // favoriteArticle(slug):Observable<any>{
-  //   console.log("Test")
-  //   return this.apiService.post('/articles/' + slug + '/favorite')
-  //   .pipe(
-  //   map((res: Response) => {
-  //     console.log(res);
-  //   return res || {}
-  //   }),
-  //   catchError(this.errorHandl));
-  //   }
-  // unfavoriteArticle(slug):Observable<any>{
-  //     console.log("Test2")
-  //     return this.apiService.delete('/articles/' + slug + '/favorite')
-  //     .pipe(
-  //     map((res: Response) => {
-  //       console.log(res);
-  //     return res || {}
-  //     }),
-  //     catchError(this.errorHandl));
-  //     }
+  favoriteArticle(slug):Observable<any>{
+    console.log("Test")
+    return this.apiService.post('/articles/' + slug + '/favorite')
+    .pipe(
+    map((res: Response) => {
+    return res || {}
+    }),
+    catchError(this.errorHandl));
+    }
+  unfavoriteArticle(slug):Observable<any>{
+      return this.apiService.delete('/articles/' + slug + '/favorite')
+      .pipe(
+      map((res: Response) => {
+        console.log(res);
+      return res || {}
+      }),
+      catchError(this.errorHandl));
+      }
 
   postComment(slug, comment): Observable<any> {
     return this.apiService.post('/articles/' + slug + '/comments', { comment: { body: comment } })

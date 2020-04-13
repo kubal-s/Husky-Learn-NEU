@@ -68,7 +68,6 @@ export class ApiService {
 }
 //this api needs testing
 delete(path: string): Observable<any> {
-  console.log("delete");
   return this.http.delete(`${this.endpoint}${path}`, this.setHeaders())
   .pipe(
     map((res: Response) => {

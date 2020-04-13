@@ -1,30 +1,38 @@
 <mat-card *ngIf="slug">
-  <button mat-stroked-button [routerLink]="['/newarticle', slug]" [state]='currentArticle'>Edit</button>
-  <button mat-stroked-button (click)="deleteArticle()">Delete</button>
   <mat-card-content class="article-card">
+
+  <mat-card-content class="main-article">
     <mat-card-header>
+      <mat-card-subtitle class="editor-btns">
+        <button mat-button [routerLink]="['/newarticle', slug]" [state]='currentArticle'><mat-icon>edit</mat-icon></button>
+        <button mat-button (click)="deleteArticle()"><mat-icon>delete_forever</mat-icon></button>
+      </mat-card-subtitle>
       <mat-card-title>{{currentArticle.title}}</mat-card-title>
+      
       <mat-card-subtitle>{{currentArticle.description}}</mat-card-subtitle>
+
     </mat-card-header>
-    <div><img mat-card-avatar [src]="currentArticle.author.image"></div>
-    <mat-card-subtitle>{{currentArticle.author.username}}</mat-card-subtitle>
-    <mat-card-subtitle>{{currentArticle.createdAt| date:'longDate'}}</mat-card-subtitle>
-  </mat-card-content>
-  <mat-card>
-    <mat-card-content class="add-comment">
-      <app-add-comment (updateCommentList)="updateCommentList()" [slug]="slug"></app-add-comment>
+    <mat-card-content class="author">
+      <mat-card-subtitle><img mat-card-avatar [src]="currentArticle.author.image"></mat-card-subtitle>
+      <mat-card-subtitle>{{currentArticle.author.username}}</mat-card-subtitle>
+      <mat-card-subtitle>{{currentArticle.createdAt| date:'longDate'}}</mat-card-subtitle>  
     </mat-card-content>
-  </mat-card>
+  </mat-card-content>
+  <mat-card-content class="add-comment">
+    <app-add-comment (updateCommentList)="updateCommentList()" [slug]="slug"></app-add-comment>
+  </mat-card-content>  
+  </mat-card-content>
 
 
 
 
-  <mat-card *ngFor="let comment of commentList ">
-    <mat-card-content>
+
+  <mat-card *ngFor="let comment of commentList " class="one-comment"> 
       <mat-card-header>
-        <mat-card-title>{{comment.body}}</mat-card-title>
+        <mat-card-subtitle>{{comment.body}}</mat-card-subtitle>
       </mat-card-header>
-      <div><img mat-card-avatar [src]="comment.author.image" class="comment-author"></div>
+      <mat-card-content>
+      <mat-card-subtitle><img mat-card-avatar [src]="comment.author.image" class="comment-author"></mat-card-subtitle>
       <mat-card-subtitle>{{comment.author.username}}</mat-card-subtitle>
       <mat-card-subtitle>{{comment.createdAt| date:'longDate'}}</mat-card-subtitle>
     </mat-card-content>

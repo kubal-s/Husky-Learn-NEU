@@ -24,3 +24,27 @@ mat-card .article-card{
     mat-card .add-comment{
     text-align: center;
     }
+    .add-comment{
+        width: 500px;
+    }
+    .one-comment{
+        width :900px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .editor-btns{
+        display: flex;
+        justify-content: flex-end;
+    }
+    .main-article{
+        display: flex;
+        justify-content: space-between !important;
+        flex-direction: row !important;
+    }
+    .author{
+        padding-left: 20px;
+        border-left: 1px lightgrey solid;
+    }
+    app-add-comment{
+        display: flex;
+    }

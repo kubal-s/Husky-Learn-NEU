@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
       data => {
   
       this.listOfArticles = data.articles;
-  
+      
       },
       err => {
   

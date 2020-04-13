@@ -1,6 +1,6 @@
 <mat-card *ngIf="slug">
   <button mat-stroked-button [routerLink]="['/newarticle', slug]" [state]='currentArticle'>Edit</button>
-  <!-- <button mat-stroked-button (click)="deleteArticle()">Delete</button> -->
+  <button mat-stroked-button (click)="deleteArticle()">Delete</button>
   <mat-card-content class="article-card">
     <mat-card-header>
       <mat-card-title>{{currentArticle.title}}</mat-card-title>

@@ -49,4 +49,14 @@ export class EditArticleComponent implements OnInit {
         //console.log(err)
       });
   }
+
+  deleteArticle() {
+    this.articleService.deleteArticle(this.slug).subscribe(
+      data => {
+        this.router.navigate(['/newarticle']);
+      },
+      err => {
+        //console.log(err)
+      });
+  }
 }

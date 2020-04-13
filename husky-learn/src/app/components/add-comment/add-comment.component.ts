@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ArticleService } from '../../services/userservices/article.service'
+import { ArticleService } from '../../services/userservices/article.service'
 @Component({
   selector: 'app-add-comment',
   templateUrl: './add-comment.component.html',
@@ -14,10 +14,11 @@ export class AddCommentComponent implements OnInit {
   errorList;
 
   @Input() slug;
-  constructor(private articleService : ArticleService) {
+  @Output() updateCommentList = new EventEmitter<any>();
+  constructor(private articleService: ArticleService) {
     this.success = false;
     this.error = false;
-   }
+  }
 
   ngOnInit(): void {
     console.log(this.slug);
@@ -26,11 +27,12 @@ export class AddCommentComponent implements OnInit {
     })
   }
 
-  onSubmit(){
+  onSubmit() {
     this.articleService.postComment(this.slug, this.addCommentForm.value.comment).subscribe(
       data => {
         this.success = true;
         this.error = false;
+        this.updateCommentList.emit();
         this.successMessage = "Comment posted successfully"
       },
       err => {

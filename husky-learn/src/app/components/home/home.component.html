@@ -17,8 +17,8 @@
       <button mat-icon-button *ngIf = "!article.favorited" (click)='toggleFavorite(article.slug, article.favorited)'>
         <mat-icon>favorite</mat-icon>
       </button> -->
-      <button mat-button type="submit"  (click) = "showAdd = !showAdd" >add comment</button>
-      <app-add-comment *ngIf="showAdd" [slug]="article.slug"></app-add-comment>
+      <button mat-button type="submit"  (click) = "article.showAdd = !article.showAdd" >add comment</button>
+      <app-add-comment *ngIf="article.showAdd" [slug]="article.slug"></app-add-comment>
     </mat-card-content>
    </mat-card>
 </mat-card>

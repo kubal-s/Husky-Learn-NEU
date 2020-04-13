@@ -1,20 +1,26 @@
-mat-card {
+mat-card .article-card{
     max-width: 800px;
     margin: 2em auto;
     text-align: center;
-  }
-  mat-card-subtitle{
-      outline: none;
-  }
-  mat-card-content ,mat-card-header{
+    }
+    .article-card mat-card-subtitle{
+    outline: none;
+    }
+    .article-card mat-card-content ,.article-card mat-card-header{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-  mat-form-field{
-      width: 90%;
-  }
-  form{
-      width: 100%;
-  }
+    }
+    .article-card mat-form-field{
+    width: 90%;
+    }
+    .article-card form{
+    width: 100%;
+    }
+    mat-card{
+    margin: 2em auto;
+    }
+    mat-card .add-comment{
+    text-align: center;
+    }

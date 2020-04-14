@@ -10,7 +10,7 @@ export class ProfileComponent implements OnInit {
     { path: 'myarticles', label: 'My Articles' },
     { path: 'favouritearticles', label: 'Favourited Articles' }];
 username;
-
+showMyArticles;
     constructor(private profileService : ProfileService) { }
 
   ngOnInit(): void {
@@ -18,11 +18,16 @@ username;
     this.profileService.getUser().subscribe(
       data => { 
       this.username=data.user.username;
-    
+        this.showMyArticles = true;
       },
       err => {
       //console.log(err)
       });
       }
-
+      decideArticleTab(num){
+        if(num==1)
+          this.showMyArticles = true;
+        else if(num==2)
+          this.showMyArticles = false;
+      }
 }

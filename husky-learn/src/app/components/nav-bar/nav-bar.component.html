@@ -1,4 +1,4 @@
-  <nav mat-tab-nav-bar mat-align-tabs="end" *ngIf="isLoggedIn$ | async">
+  <nav mat-tab-nav-bar mat-align-tabs="end" color="primary"  *ngIf="isLoggedIn$ | async">
     <a mat-tab-link
        *ngFor="let link of LoggedInNavbarlinks"
        [routerLink]="link.path"
@@ -8,7 +8,7 @@
     </a>
   </nav>
 
-  <nav mat-tab-nav-bar mat-align-tabs="end" *ngIf="!(isLoggedIn$ | async)">
+  <nav mat-tab-nav-bar mat-align-tabs="end" color="primary" *ngIf="!(isLoggedIn$ | async)">
     <a mat-tab-link
        *ngFor="let link of Navbarlinks"
        [routerLink]="link.path"
@@ -18,6 +18,6 @@
     </a>
   </nav>
   
-  <mat-toolbar>
+  <mat-toolbar color="primary">
     <h1>Husky Learn</h1>
   </mat-toolbar>

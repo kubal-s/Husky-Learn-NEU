@@ -37,7 +37,6 @@ export class ArticleService {
         catchError(this.errorHandl));
   }
   favoriteArticle(slug):Observable<any>{
-    console.log("Test")
     return this.apiService.post('/articles/' + slug + '/favorite')
     .pipe(
     map((res: Response) => {
@@ -49,7 +48,6 @@ export class ArticleService {
       return this.apiService.delete('/articles/' + slug + '/favorite')
       .pipe(
       map((res: Response) => {
-        console.log(res);
       return res || {}
       }),
       catchError(this.errorHandl));

@@ -12,23 +12,28 @@
       </div>
   </mat-card-content>
   <mat-divider></mat-divider>
+  <!-- <router-outlet></router-outlet> -->
   <mat-card-content>
+    <!-- <mat-toolbar>
+      <span>Application Title</span>
+      <span>Right Aligned Text</span>
+    </mat-toolbar> -->
+    <!-- <app-my-articles *ngIf="username" [username]="username"></app-my-articles> -->
     <nav mat-tab-nav-bar mat-align-tabs="end">
-        <a mat-tab-link
-        [routerLink]="['/myarticles', username]"
-           routerLinkActive #rla="routerLinkActive"
-           [active]="rla.isActive">
-             My Articles
+            <a mat-tab-link
+              (click)="decideArticleTab(1)"
+              routerLinkActive #rla="routerLinkActive"
+              [active]="rla.isActive">
+              My Articles
             </a>
             <a mat-tab-link
-        [routerLink]="['/favouritearticles', username]"
-           routerLinkActive #rla="routerLinkActive"
-           [active]="rla.isActive">
-             Favourite Articles
+              (click)="decideArticleTab(2)"
+              routerLinkActive #rla="routerLinkActive"
+              [active]="rla.isActive">
+              Favourite Articles
             </a>
       </nav>
+      <app-my-articles *ngIf="username && showMyArticles " [username]="username"></app-my-articles>
   </mat-card-content>
-  <mat-card-content>
      
-  </mat-card-content>
 </mat-card>

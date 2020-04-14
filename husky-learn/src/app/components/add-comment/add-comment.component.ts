@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ArticleService } from '../../services/userservices/article.service'
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-add-comment',
   templateUrl: './add-comment.component.html',
@@ -15,7 +16,7 @@ export class AddCommentComponent implements OnInit {
 
   @Input() slug;
   @Output() updateCommentList = new EventEmitter<any>();
-  constructor(private articleService: ArticleService) {
+  constructor(private articleService: ArticleService,private router: Router) {
     this.success = false;
     this.error = false;
   }
@@ -37,6 +38,7 @@ export class AddCommentComponent implements OnInit {
       err => {
         this.error = true;
         this.errorList = err;
+        this.router.navigate(['/signin']);
       });
   }
 

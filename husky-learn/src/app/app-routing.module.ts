@@ -15,7 +15,7 @@ import { FavouriteArticlesComponent } from './components/favourite-articles/favo
 
 
 const routes: Routes = [
-
+  { path: '', component: HomeComponent ,},
   { path: 'home', component: HomeComponent ,},
   { path: "signup", component:SignUpComponent},
   { path: "signin",component:SignInComponent},
@@ -25,8 +25,8 @@ const routes: Routes = [
   { path: "editor",component:EditArticleComponent,canActivate: [AuthGuard]},
   {path:  "profile", component:ProfileComponent, canActivate: [AuthGuard]},
   {path:"globalfeed", component:GlobalFeedComponent},
-  {path: "myarticles/:username", component:MyArticlesComponent, canActivate:[AuthGuard]},
-  {path: "favouritearticles/:username",  component:FavouriteArticlesComponent, canActivate:[AuthGuard]},
+  // {path: "myarticles/:username", component:MyArticlesComponent, canActivate:[AuthGuard]},
+  // {path: "favouritearticles/:username",  component:FavouriteArticlesComponent, canActivate:[AuthGuard]},
   { path:'**',component:PageNotFoundComponent}
 ];
 

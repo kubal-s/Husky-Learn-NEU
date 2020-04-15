@@ -85,6 +85,14 @@ export class ArticleService {
         }),
         catchError(this.errorHandl));
   }
+  deleteComment(slug,commentID):Observable<any>{
+    return this.apiService.delete('/articles/' + slug +'/comments/'+commentID)
+    .pipe(
+      map((res: Response) => {
+        return res || {}
+      }),
+      catchError(this.errorHandl));
+  }
   errorHandl(error: any) {
     return throwError(error);
   }

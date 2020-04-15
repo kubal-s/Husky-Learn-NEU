@@ -48,3 +48,13 @@ mat-card .article-card{
     app-add-comment{
         display: flex;
     }
+    .comment-author{
+        height: 20px;
+        width: 20px;
+    }
+    .one-comment mat-card-subtitle{
+        margin-bottom: 5px;
+    }
+    .one-comment mat-card-header{
+        display: flex;
+    }

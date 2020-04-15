@@ -43,6 +43,7 @@ export class EditArticleComponent implements OnInit {
   updateCommentList() {
     this.articleService.getAllComments(this.slug).subscribe(
       data => {
+        console.log(data);
         this.commentList = data.comments;
       },
       err => {
@@ -54,6 +55,15 @@ export class EditArticleComponent implements OnInit {
     this.articleService.deleteArticle(this.slug).subscribe(
       data => {
         this.router.navigate(['/newarticle']);
+      },
+      err => {
+        //console.log(err)
+      });
+  }
+  deleteComment(commentId){
+    this.articleService.deleteComment(this.slug,commentId).subscribe(
+      data => {
+        this.updateCommentList();
       },
       err => {
         //console.log(err)

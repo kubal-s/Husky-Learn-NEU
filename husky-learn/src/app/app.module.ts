@@ -15,6 +15,7 @@ import {MatIconModule} from '@angular/material/icon'
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
+import {MatChipsModule} from '@angular/material/chips';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule , HTTP_INTERCEPTORS} from '@angular/common/http';
@@ -37,6 +38,7 @@ import { GlobalFeedComponent } from './components/global-feed/global-feed.compon
 import { AddCommentComponent } from './components/add-comment/add-comment.component';
 import { MyArticlesComponent } from './components/my-articles/my-articles.component';
 import { FavouriteArticlesComponent } from './components/favourite-articles/favourite-articles.component';
+import { ViewArticleComponent } from './components/view-article/view-article.component';
 
 
 @NgModule({
@@ -56,7 +58,8 @@ import { FavouriteArticlesComponent } from './components/favourite-articles/favo
     GlobalFeedComponent,
     AddCommentComponent,
     MyArticlesComponent,
-    FavouriteArticlesComponent
+    FavouriteArticlesComponent,
+    ViewArticleComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +76,8 @@ import { FavouriteArticlesComponent } from './components/favourite-articles/favo
     MatToolbarModule,
     HttpClientModule,
     MatDividerModule,
-    MatListModule
+    MatListModule,
+    MatChipsModule
   ],
   providers: [
     // {

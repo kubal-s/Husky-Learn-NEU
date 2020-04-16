@@ -59,4 +59,13 @@ export class EditArticleComponent implements OnInit {
         //console.log(err)
       });
   }
+  deleteComment(commentId){
+    this.articleService.deleteComment(this.slug,commentId).subscribe(
+      data => {
+        this.updateCommentList();
+      },
+      err => {
+        //console.log(err)
+      });
+  }
 }

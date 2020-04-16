@@ -57,5 +57,8 @@ export class HomeComponent implements OnInit {
   
       });
   }
+  viewArticle(article){
+    this.router.navigate(['/article'],{state : {'article':article}});
+  }
 
 }

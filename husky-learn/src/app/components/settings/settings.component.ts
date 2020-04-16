@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/authservices/auth.service';
 import { ProfileService } from '../../services/userservices/profile.service';
 import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
-import { User } from 'src/app/model/User';
-import { Router } from '@angular/router';
+
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -12,39 +12,74 @@ import { Router } from '@angular/router';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-  user: User = {} as User;
-  settingsForm: FormGroup;
-  errors: Object = {};
-  isSubmitting = false;
-username="";
-email="";
-  constructor( private router: Router,
-  
-    private fb: FormBuilder,
-    private profileService: ProfileService,
-    private authService: AuthService) { 
-      this.settingsForm = this.fb.group({
-        image: '',
-        username: this.username,
-        bio: '',
-        email: this.email,
-        password: ''
-      });
-      // Optional: subscribe to changes on the form
-      // this.settingsForm.valueChanges.subscribe(values => this.updateUser(values));
-    }
+  settingsForm: any;
+  error=false;
+  errorList;
+  currentUser: any;
+  username=null;
+
+  constructor(private authService:AuthService, private route: ActivatedRoute,private  profileService: ProfileService, private router: Router) { 
+    this.username=null; 
+  }
+    
     
     ngOnInit(): void {
-      this.profileService.getUser().subscribe(
-      data => {
-      this.username=data.user.username;
-      this.email=data.user.email;
-      
-      },
-      err => {
-      //console.log(err)
-      });
+      this.route.paramMap.subscribe(params => {
+        this.username = params.get('username')
+        this.currentUser = history.state;
+  
+        });
+        if(this.currentUser != null){
+          this.settingsForm = new FormGroup({
+            image: new FormControl(this.currentUser.image),
+            username:  new FormControl(this.currentUser.username),
+            bio: new FormControl(this.currentUser.bio),
+            email: new FormControl(this.currentUser.email),
+            password:new FormControl(this.currentUser.password)
+  
+          });
+        }
+        else{
+          this.settingsForm = new FormGroup({
+            image: new FormControl(""),
+            username:  new FormControl(""),
+            bio: new FormControl(""),
+            email: new FormControl(""),
+            password:new FormControl("")
+  
+          
+        })
+        }
       }
+      onSubmit(){
+        
+        if(this.username!= null){
+          this.profileService.updateUser(this.username,this.settingsForm.value).subscribe(
+            data => {
+                
+                //this.router.navigate(['/editor'],{state : data});
+            },
+            err => {
+              this.errorList = err;
+              this.error = true;
+            });
+        }
+        else{
+          this.profileService.updateUser(this.username,this.settingsForm.value).subscribe(
+            data => {
+                
+                this.router.navigate(['/home'],{state : data});
+            },
+            err => {
+              this.errorList = err;
+              this.error = true;
+            });
+        }
+    
+      }
+    
+    
+    
 
   logout() {
     this.authService.logout();

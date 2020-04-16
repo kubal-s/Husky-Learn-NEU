@@ -10,6 +10,14 @@ import { Profile } from 'src/app/model/Profile';
 export class ProfileService {
 
   constructor(private apiService:ApiService) { }
+  save(userDetails): Observable<any> {
+    return this.apiService.post('/users', { user : userDetails })
+      .pipe(
+        map((res: Response) => {
+          return res || {}
+        }),
+        catchError(this.errorHandl));
+  }
   getUser():Observable<any>{
     return this.apiService.get('/user')
     .pipe(
@@ -19,8 +27,8 @@ export class ProfileService {
     
     catchError(this.errorHandl));
     }
-    updateUser(user):Observable<any>{
-      return this.apiService.put('/user', {user: user})
+    updateUser(user, userDetails):Observable<any>{
+      return this.apiService.put('/user', {user: userDetails})
       .pipe(
       map((res: Response) => {
       return res || {}

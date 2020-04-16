@@ -43,7 +43,6 @@ export class EditArticleComponent implements OnInit {
   updateCommentList() {
     this.articleService.getAllComments(this.slug).subscribe(
       data => {
-        console.log(data);
         this.commentList = data.comments;
       },
       err => {

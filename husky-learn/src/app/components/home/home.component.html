@@ -3,7 +3,9 @@
  <div *ngFor = "let article of listOfArticles " class="outer-card">
    <mat-card class="inner-card">
     <mat-card-header>
-      <mat-card-title>{{article.title}}</mat-card-title>
+      <mat-card-title>
+        <button class = "title-btn"mat-button color="primary" (click)="viewArticle(article)">{{article.title}}</button> 
+      </mat-card-title>
       <mat-card-subtitle>{{article.description}}</mat-card-subtitle>
       <mat-card-content class="author">
         <mat-card-subtitle><img mat-card-avatar [src]="article.author.image"></mat-card-subtitle>

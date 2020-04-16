@@ -12,6 +12,7 @@ import { EditArticleComponent } from './components/edit-article/edit-article.com
 import { ProfileComponent } from './components/profile/profile.component';
 import { MyArticlesComponent } from './components/my-articles/my-articles.component';
 import { FavouriteArticlesComponent } from './components/favourite-articles/favourite-articles.component';
+import { ViewArticleComponent } from './components/view-article/view-article.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: "editor",component:EditArticleComponent,canActivate: [AuthGuard]},
   {path:  "profile", component:ProfileComponent, canActivate: [AuthGuard]},
   {path:"globalfeed", component:GlobalFeedComponent},
+  {path:"article",component:ViewArticleComponent},
   // {path: "myarticles/:username", component:MyArticlesComponent, canActivate:[AuthGuard]},
   // {path: "favouritearticles/:username",  component:FavouriteArticlesComponent, canActivate:[AuthGuard]},
   { path:'**',component:PageNotFoundComponent}

@@ -37,6 +37,7 @@ import { GlobalFeedComponent } from './components/global-feed/global-feed.compon
 import { AddCommentComponent } from './components/add-comment/add-comment.component';
 import { MyArticlesComponent } from './components/my-articles/my-articles.component';
 import { FavouriteArticlesComponent } from './components/favourite-articles/favourite-articles.component';
+import { ViewArticleComponent } from './components/view-article/view-article.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { FavouriteArticlesComponent } from './components/favourite-articles/favo
     GlobalFeedComponent,
     AddCommentComponent,
     MyArticlesComponent,
-    FavouriteArticlesComponent
+    FavouriteArticlesComponent,
+    ViewArticleComponent
   ],
   imports: [
     BrowserModule,

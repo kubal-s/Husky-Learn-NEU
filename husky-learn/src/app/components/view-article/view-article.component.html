@@ -28,9 +28,9 @@
       <mat-card  class="one-comment"> 
         <mat-card-content *ngFor="let comment of commentList " class="comment-body">        
           <mat-card-subtitle>
-            {{comment.body}}
+            <strong>{{comment.body}}</strong>
             <mat-divider [vertical]="true"></mat-divider>
-            {{comment.author.username}}
+            <i>{{comment.author.username}}</i>
             <mat-divider [vertical]="true"></mat-divider>
             {{comment.createdAt| date:'longDate'}}
           </mat-card-subtitle>

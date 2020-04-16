@@ -10,3 +10,10 @@
     // background-image: url('../../../assets/book.jpg');
     background-size: cover;
   }
+  .comment-body{
+    display: flex;
+    justify-content: space-between;
+    margin: 0px;
+    align-items: center;
+    border-bottom: 1px solid lightgrey;
+  }

@@ -18,12 +18,20 @@ listOfArticles: Array<Article>;
   }
 
   ngOnInit(): void {
-    this.listAllArticles();
+    // this.listAllArticles();
+    this.articleService.getAllFavoriteArticles(this.username).subscribe(
+      data => {console.log(data);
+      // this.favorite = true;
+      // this.listAllArticles();
+      },
+      err => {
+        // this.router.navigate(['/signin']);
+      });
   }
 
   toggleFavorite(slug, isfavorite){
     if(!isfavorite){
-      this.articleService.favoriteArticle(slug).subscribe(
+      this.articleService.getAllFavoriteArticles(this.username).subscribe(
         data => {
         // this.favorite = true;
         this.listAllArticles();

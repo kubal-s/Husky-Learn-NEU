@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="profile != null">
   <mat-card-content>
       <h4 class="rightdivtext">
           {{username}}
@@ -6,7 +6,7 @@
   </mat-card-content>
   <mat-card-content>
       <div class="authorimagecontainer">
-        <div><img mat-card-avatar [src]=""></div>
+        <div><img mat-card-avatar [src]="profile.image"></div>
           <h5></h5>
       </div>
   </mat-card-content>
@@ -27,6 +27,7 @@
               Favourite Articles
             </a>
       </nav>
+      <app-favourite-articles *ngIf="username && !showMyArticles" [username]="username"></app-favourite-articles>
       <app-my-articles *ngIf="username && showMyArticles " [username]="username"></app-my-articles>
   </mat-card-content>
      

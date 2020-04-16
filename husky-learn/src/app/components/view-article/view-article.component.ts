@@ -9,6 +9,7 @@ import {ArticleService} from '../../services/userservices/article.service';
 })
 export class ViewArticleComponent implements OnInit {
   currentArticle;
+  commentList;
   constructor(private router: Router,private articleService:ArticleService) { 
     this.currentArticle = null;
   }
@@ -16,6 +17,7 @@ export class ViewArticleComponent implements OnInit {
   ngOnInit(): void {
     if(history.state.hasOwnProperty('article')){
       this.currentArticle = history.state.article;
+      this.updateCommentList();
       console.log(this.currentArticle)
     }
     
@@ -51,5 +53,23 @@ export class ViewArticleComponent implements OnInit {
           this.router.navigate(['/signin']);
         });
     }
+  }
+  updateCommentList(){
+    this.articleService.getAllComments(this.currentArticle.slug).subscribe(
+      data => {
+        this.commentList = data.comments;
+      },
+      err => {
+        //console.log(err)
+      });
+  }
+  deleteComment(commentId){
+    this.articleService.deleteComment(this.currentArticle.slug,commentId).subscribe(
+      data => {
+        this.updateCommentList();
+      },
+      err => {
+        //console.log(err)
+      });
   }
 }

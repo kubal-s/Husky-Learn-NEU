@@ -1,60 +1,19 @@
-mat-card .article-card{
-    max-width: 800px;
-    margin: 2em auto;
-    text-align: center;
-    }
-    .article-card mat-card-subtitle{
-    outline: none;
-    }
-    .article-card mat-card-content ,.article-card mat-card-header{
+.outer-card{
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
+  }
+  .example-card {
+      width: 900px;
     }
-    .article-card mat-form-field{
-    width: 90%;
+    
+    .example-header-image {
+      // background-image: url('../../../assets/book.jpg');
+      background-size: cover;
     }
-    .article-card form{
-    width: 100%;
-    }
-    mat-card{
-    margin: 2em auto;
-    }
-    mat-card .add-comment{
-    text-align: center;
-    }
-    .add-comment{
-        width: 500px;
-    }
-    .one-comment{
-        width :900px;
-        display: flex;
-        justify-content: space-between;
-    }
-    .editor-btns{
-        display: flex;
-        justify-content: flex-end;
-    }
-    .main-article{
-        display: flex;
-        justify-content: space-between !important;
-        flex-direction: row !important;
-    }
-    .author{
-        padding-left: 20px;
-        border-left: 1px lightgrey solid;
-    }
-    app-add-comment{
-        display: flex;
-    }
-    .comment-author{
-        height: 20px;
-        width: 20px;
-    }
-    .one-comment mat-card-subtitle{
-        margin-bottom: 5px;
-    }
-    .one-comment mat-card-header{
-        display: flex;
+    .comment-body{
+      display: flex;
+      justify-content: space-between;
+      margin: 0px;
+      align-items: center;
+      border-bottom: 1px solid lightgrey;
     }

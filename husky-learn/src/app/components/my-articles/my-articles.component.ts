@@ -11,38 +11,50 @@ export class MyArticlesComponent implements OnInit {
 // username;
 listOfArticles: Array<Article>;
 @Input() username;
-  constructor(private articleService : ArticleService, private route: ActivatedRoute) { 
+  constructor(private articleService : ArticleService, private route: ActivatedRoute, private router: Router) { 
 // this.username="";
 
   }
 
   ngOnInit(): void {
-    if(this.username)
-      {
-        this.articleService.getAllArticlesByUsername(this.username).subscribe(
+    this.listAllArticles();
+  }
+
+  toggleFavorite(slug, isfavorite){
+    if(!isfavorite){
+      this.articleService.favoriteArticle(slug).subscribe(
         data => {
-          this.listOfArticles = data.articles;
-              },
+        // this.favorite = true;
+        this.listAllArticles();
+        },
         err => {
-          // this.errorList = err;
-          // this.error = true;
+          this.router.navigate(['/signin']);
         });
-      }
-    // this.route.paramMap.subscribe(params => {
-    //   this.username = params.get('username')
-    //   if(this.username)
-    //   {
-    //     this.articleService.getAllArticlesByUsername(this.username).subscribe(
-    //     data => {
-    //       this.listOfArticles = data.articles;
-    //           },
-    //     err => {
-    //       // this.errorList = err;
-    //       // this.error = true;
-    //     });
-    //   }
-    //   });
+    }
+    else if(isfavorite){
+      this.articleService.unfavoriteArticle(slug).subscribe(
+        data => {
+        // this.favorite = true;
+        this.listAllArticles();
+        },
+        err => {
+          this.router.navigate(['/signin']);
+        });
+    }
 
-
+  }
+  listAllArticles(){
+    this.articleService.getAllArticles().subscribe(
+      data => {
+  
+      this.listOfArticles = data.articles;
+      
+      },
+      err => {
+  
+      });
+  }
+  viewArticle(article){
+    this.router.navigate(['/article'],{state : {'article':article}});
   }
 }

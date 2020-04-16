@@ -35,6 +35,15 @@ export class ProfileService {
       }),
       catchError(this.errorHandl));
       }
+      getProfiles(username): Observable<any> {
+        return this.apiService.get('/profiles/' + username)
+        .pipe(
+          map((res: Response) => {
+          return res || {}
+          }),
+          catchError(this.errorHandl));
+         
+      }
     errorHandl(error:any) {
     return throwError(error);
     }

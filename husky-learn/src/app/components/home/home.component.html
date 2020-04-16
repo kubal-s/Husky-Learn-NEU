@@ -18,8 +18,13 @@
 
     <mat-card-content class="like-comment">
       <mat-card-subtitle>
-        <button mat-button *ngIf = "!article.favorited" (click)='toggleFavorite(article.slug, article.favorited)'><mat-icon>favorite_border</mat-icon></button>
-        <button mat-button *ngIf = "article.favorited" (click)='toggleFavorite(article.slug, article.favorited)'><mat-icon color="warn">favorite</mat-icon></button>
+        <mat-chip-list>
+          <mat-chip >{{article.favoritesCount}}<mat-icon color="warn">favorite</mat-icon></mat-chip>
+          <mat-chip color="primary" *ngIf = "!article.favorited" selected (click)="toggleFavorite(article.slug, article.favorited)">Add favorite</mat-chip>
+          <mat-chip color="primary" *ngIf = "article.favorited" selected (click)="toggleFavorite(article.slug, article.favorited)">Unfavorite</mat-chip>
+        </mat-chip-list>
+        <!-- <button mat-button *ngIf = "!article.favorited" (click)='toggleFavorite(article.slug, article.favorited)'><mat-icon>favorite_border</mat-icon></button> -->
+        <!-- <button mat-button *ngIf = "article.favorited" (click)='toggleFavorite(article.slug, article.favorited)'><mat-icon color="warn">favorite</mat-icon></button> -->
       </mat-card-subtitle>
       <mat-card-subtitle>
         <!-- <button mat-button type="submit"  (click) = "article.showAdd = !article.showAdd" ><mat-icon>add_comment</mat-icon></button>

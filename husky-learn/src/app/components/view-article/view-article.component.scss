@@ -1,8 +1,12 @@
+.outer-card{
+  display: flex;
+  justify-content: center;
+}
 .example-card {
-    max-width: 400px;
+    width: 900px;
   }
   
   .example-header-image {
-    background-image: url('../../../assets/book.jpg');
+    // background-image: url('../../../assets/book.jpg');
     background-size: cover;
   }

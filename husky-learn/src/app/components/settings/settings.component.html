@@ -4,26 +4,27 @@
       <mat-card-title>Settings</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form [formGroup]="settingsForm">
+    <p><app-format-error [errorList]="errorList" *ngIf="error"></app-format-error></p>
+    <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
       
       <p>
   <mat-form-field class="legacy" >
       <mat-label>Image URL</mat-label>
-      <input matInput>
+      <input matInput formControlName="image">
     </mat-form-field>
   </p>
     
     <p>
   <mat-form-field appearance="legacy">
     <mat-label>Username</mat-label>
-    <input matInput>
+    <input matInput formControlName="username">
   </mat-form-field>
 </p>
 
   <p>
   <mat-form-field appearance="legacy">
     <mat-label>Add Bio</mat-label>
-    <textarea matInput></textarea>
+    <textarea matInput formControlName="bio"></textarea>
   </mat-form-field>
 </p>
   <p>
@@ -41,7 +42,7 @@
   </mat-form-field>
 </p>
 <p>
-  <button mat-stroked-button color="primary">Update Profile</button>  
+  <button mat-stroked-button color="primary" [disabled]="!settingsForm.valid">Update Profile</button>  
 </p>
   <br>
 <button mat-stroked-button color="primary" (click)='logout()'>Log out</button>

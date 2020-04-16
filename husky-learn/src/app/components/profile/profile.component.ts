@@ -18,7 +18,8 @@ showMyArticles;
     this.profileService.getUser().subscribe(
       data => { 
       this.username=data.user.username;
-        this.showMyArticles = true;
+        
+      this.showMyArticles = true;
       },
       err => {
       //console.log(err)

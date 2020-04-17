@@ -44,7 +44,7 @@ listOfArticles: Array<Article>;
 
   }
   listAllArticles(){
-    this.articleService.getAllArticles().subscribe(
+    this.articleService.getAllArticlesByUsername(this.username).subscribe(
       data => {
   
       this.listOfArticles = data.articles;

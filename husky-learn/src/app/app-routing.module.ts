@@ -16,13 +16,13 @@ import { ViewArticleComponent } from './components/view-article/view-article.com
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent ,},
-  { path: 'home', component: HomeComponent ,},
+  {path: '',   redirectTo: '/home', pathMatch: 'full'},
+  { path: 'home', component: HomeComponent },
   { path: "signup", component:SignUpComponent},
   { path: "signin",component:SignInComponent},
   { path: "newarticle",component:NewArticleComponent,canActivate: [AuthGuard]},
   { path: "newarticle/:slug",component:NewArticleComponent,canActivate: [AuthGuard]},
-  { path: "settings",component: SettingsComponent,canActivate: [AuthGuard]},
+  { path: "settings/:username",component: SettingsComponent,canActivate: [AuthGuard]},
   { path: "editor",component:EditArticleComponent,canActivate: [AuthGuard]},
   {path:  "profile", component:ProfileComponent, canActivate: [AuthGuard]},
   {path:"globalfeed", component:GlobalFeedComponent},

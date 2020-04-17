@@ -18,7 +18,7 @@ export class ViewArticleComponent implements OnInit {
     if(history.state.hasOwnProperty('article')){
       this.currentArticle = history.state.article;
       this.updateCommentList();
-      console.log(this.currentArticle)
+      // console.log(this.currentArticle)
     }
     
     else{

@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ArticleService } from '../../services/userservices/article.service'
 import { Router } from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-add-comment',
   templateUrl: './add-comment.component.html',
@@ -16,7 +17,7 @@ export class AddCommentComponent implements OnInit {
 
   @Input() slug;
   @Output() updateCommentList = new EventEmitter<any>();
-  constructor(private articleService: ArticleService,private router: Router) {
+  constructor(private articleService: ArticleService,private router: Router,private _snackBar: MatSnackBar) {
     this.success = false;
     this.error = false;
   }
@@ -34,10 +35,21 @@ export class AddCommentComponent implements OnInit {
         this.error = false;
         this.updateCommentList.emit();
         this.successMessage = "Comment posted successfully"
+        let action ="ok";
+        this.addCommentForm.reset();
+        this._snackBar.open(this.successMessage, action, {
+          duration: 2000,
+        });
+        
       },
       err => {
         this.error = true;
         this.errorList = err;
+        let action ="ok";
+        this.addCommentForm.reset();
+        this._snackBar.open(this.errorList, action, {
+          duration: 2000,
+        });
         this.router.navigate(['/signin']);
       });
   }

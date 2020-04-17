@@ -17,7 +17,10 @@ export class NewArticleComponent implements OnInit {
   errorList;
   currentArticle: any;
   slug = null;
-  constructor(private route: ActivatedRoute,private  articleService: ArticleService, private router: Router) {
+  constructor(private route: ActivatedRoute,
+              private  articleService: ArticleService,
+              private router: Router,
+              private _snackBar: MatSnackBar) {
 
     this.slug = null;
    }
@@ -59,11 +62,19 @@ export class NewArticleComponent implements OnInit {
       this.articleService.update(this.slug,this.articleForm.value).subscribe(
         data => {
             this.successMsg = "Successfully Updated!"
+            let action ="ok";
+            this._snackBar.open(this.successMsg, action, {
+              duration: 2000,
+            });
             this.success = true;
             //this.router.navigate(['/editor'],{state : data});
         },
         err => {
           this.errorList = err;
+          let action ="ok";
+          this._snackBar.open(this.errorList, action, {
+            duration: 2000,
+          });
           this.error = true;
         });
     }
@@ -71,11 +82,19 @@ export class NewArticleComponent implements OnInit {
       this.articleService.save(this.articleForm.value).subscribe(
         data => {
             this.successMsg = "Article successfully created!"
+            let action ="ok";
+            this._snackBar.open(this.successMsg, action, {
+              duration: 2000,
+            });
             this.success = true;
             this.router.navigate(['/editor'],{state : data});
         },
         err => {
           this.errorList = err;
+          let action ="ok";
+          this._snackBar.open(this.errorList, action, {
+            duration: 2000,
+          });
           this.error = true;
         });
     }

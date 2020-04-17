@@ -16,6 +16,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule , HTTP_INTERCEPTORS} from '@angular/common/http';
@@ -77,7 +78,8 @@ import { ViewArticleComponent } from './components/view-article/view-article.com
     HttpClientModule,
     MatDividerModule,
     MatListModule,
-    MatChipsModule
+    MatChipsModule,
+    MatSnackBarModule
   ],
   providers: [
     // {

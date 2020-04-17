@@ -30,7 +30,7 @@
        <!-- <button mat-button type="submit"  (click) = "article.showAdd = !article.showAdd" ><mat-icon>add_comment</mat-icon></button>
        <app-add-comment *ngIf="article.showAdd" [slug]="article.slug"></app-add-comment> -->
        <!-- <button mat-button type="submit"  (click) = "article.showAdd = !article.showAdd" ><mat-icon>add_comment</mat-icon></button> -->
-       <app-add-comment  [slug]="article.slug"></app-add-comment>
+       <button mat-button type="submit" (click)="viewArticle(article)"><mat-icon color="primary">add_comment</mat-icon></button>
      </mat-card-subtitle>
 
    </mat-card-content>

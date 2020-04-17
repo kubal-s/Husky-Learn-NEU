@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Article } from 'src/app/model/Article';
 import { ArticleService } from 'src/app/services/userservices/article.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-favourite-articles',
@@ -9,31 +9,62 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./favourite-articles.component.scss']
 })
 export class FavouriteArticlesComponent implements OnInit {
-  username;
-  listOfArticles: Array<Article>;
-    constructor(private articleService : ArticleService, private route: ActivatedRoute) { 
-  this.username="";
-  
-    }
-  
-    ngOnInit(): void {
-      
-      this.route.paramMap.subscribe(params => {
-        this.username = params.get('username')
-        if(this.username)
-        {
-          this.articleService.getAllArticlesByUsername(this.username).subscribe(
-          data => {
-            this.listOfArticles = data.articles;
-                },
-          err => {
-            // this.errorList = err;
-            // this.error = true;
-          });
-        }
-        });
-  
-  
-    }
+// username;
+listOfArticles: Array<Article>;
+@Input() username;
+  constructor(private articleService : ArticleService, private route: ActivatedRoute, private router: Router) { 
+// this.username="";
+
   }
+
+  ngOnInit(): void {
+    // this.listAllArticles();
+    this.articleService.getAllFavoriteArticles(this.username).subscribe(
+      data => {
+        this.listOfArticles = data.articles;
+      
+      },
+      err => {
+        // this.router.navigate(['/signin']);
+      });
+  }
+
+  toggleFavorite(slug, isfavorite){
+    if(!isfavorite){
+      this.articleService.getAllFavoriteArticles(this.username).subscribe(
+        data => {
+        // this.favorite = true;
+        this.listAllArticles();
+        },
+        err => {
+          this.router.navigate(['/signin']);
+        });
+    }
+    else if(isfavorite){
+      this.articleService.unfavoriteArticle(slug).subscribe(
+        data => {
+        // this.favorite = true;
+        this.listAllArticles();
+        },
+        err => {
+          this.router.navigate(['/signin']);
+        });
+    }
+
+  }
+  listAllArticles(){
+    this.articleService.getAllArticles().subscribe(
+      data => {
+  
+      this.listOfArticles = data.articles;
+      
+      },
+      err => {
+  
+      });
+  }
+  viewArticle(article){
+    this.router.navigate(['/article'],{state : {'article':article}});
+  }
+}
   

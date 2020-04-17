@@ -69,6 +69,14 @@ export class ArticleService {
         }),
         catchError(this.errorHandl));
   }
+  getAllFavoriteArticles(username):Observable<any>{
+    return this.apiService.get('/articles?favorited=' + username)
+    .pipe(
+      map((res: Response) => {
+        return res || {}
+      }),
+      catchError(this.errorHandl));
+  }
   getAllComments(slug): Observable<any> {
     return this.apiService.get('/articles/' + slug + '/comments')
       .pipe(

@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ArticleService } from '../../services/userservices/article.service'
 import { Router } from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { Article } from 'src/app/model/Article';
 @Component({
   selector: 'app-add-comment',
   templateUrl: './add-comment.component.html',
@@ -14,7 +15,7 @@ export class AddCommentComponent implements OnInit {
   success;
   error;
   errorList;
-
+  listOfArticles: Array<Article>;
   @Input() slug;
   @Output() updateCommentList = new EventEmitter<any>();
   constructor(private articleService: ArticleService,private router: Router,private _snackBar: MatSnackBar) {
@@ -26,6 +27,9 @@ export class AddCommentComponent implements OnInit {
     this.addCommentForm = new FormGroup({
       comment: new FormControl('')
     })
+  }
+  viewArticle(article){
+    this.router.navigate(['/article'],{state : {'article':article}});
   }
 
   onSubmit() {
@@ -53,5 +57,6 @@ export class AddCommentComponent implements OnInit {
         this.router.navigate(['/signin']);
       });
   }
+  
 
 }

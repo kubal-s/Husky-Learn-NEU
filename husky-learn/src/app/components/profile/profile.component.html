@@ -1,19 +1,19 @@
-<mat-card>
+<mat-card *ngIf="profile != null">
   <mat-card-content>
       <h4 class="rightdivtext">
-          {{username}}
+          {{profile.username}}
       </h4>
   </mat-card-content>
   <mat-card-content>
       <div class="authorimagecontainer">
-        <div><img mat-card-avatar [src]=""></div>
-          <h5></h5>
+        <div><img mat-card-avatar [src]="profile.image"></div>
+          <h5>{{profile.bio}}</h5>
       </div>
   </mat-card-content>
   <mat-divider></mat-divider>
   <mat-card-content>
     
-    <nav mat-tab-nav-bar mat-align-tabs="end" color="primary">
+    <nav mat-tab-nav-bar mat-align-tabs="center" color="primary" >
             <a mat-tab-link
               (click)="decideArticleTab(1)"
               routerLinkActive #rla="routerLinkActive"
@@ -27,6 +27,7 @@
               Favourite Articles
             </a>
       </nav>
+      <app-favourite-articles *ngIf="username && !showMyArticles" [username]="username"></app-favourite-articles>
       <app-my-articles *ngIf="username && showMyArticles " [username]="username"></app-my-articles>
   </mat-card-content>
      

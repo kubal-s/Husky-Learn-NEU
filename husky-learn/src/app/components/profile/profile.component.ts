@@ -8,14 +8,16 @@ import { Profile } from 'src/app/model/Profile';
 })
 export class ProfileComponent implements OnInit {
   username;
-  profile : Array<Profile>;
+  profile;
   showMyArticles;
   Navbarlinks = [
     { path: 'myarticles', label: 'My Articles' },
     { path: 'favouritearticles', label: 'Favourited Articles' }];
 // @Input() username;
 
-    constructor(private profileService : ProfileService) { }
+    constructor(private profileService : ProfileService) {
+      this.profile=null;
+     }
 
   ngOnInit(): void {
     this.profileService.getUser().subscribe(
@@ -23,8 +25,8 @@ export class ProfileComponent implements OnInit {
       this.username=data.user.username;
       this.showMyArticles = true;
     this.profileService.getProfiles(this.username).subscribe(
-      data => { console.log(data.profile.username)
-      this.profile=data.profiles;
+      data => { console.log(data)
+      this.profile=data.profile;
         
       this.showMyArticles = true;
       },

@@ -6,6 +6,7 @@
       </mat-card-header>
       <mat-card-content>
         <p><app-format-error [errorList]="errorList" *ngIf="error"></app-format-error></p>
+        <!-- <p class="success">{{this.successMsg}}</p> -->
         <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
             <p>
                 <mat-form-field class="legacy">
@@ -24,7 +25,10 @@
               <p>
                 <mat-form-field class="example-full-width">
                     <mat-label>Passage</mat-label>
-                    <textarea matInput  formControlName="body" placeholder="article goes here...." required></textarea>
+                    <textarea matInput
+                     class="passage" 
+                     formControlName="body" 
+                     placeholder="article goes here...." required></textarea>
                   </mat-form-field>
               </p>
               <p>
@@ -35,7 +39,7 @@
                     </mat-form-field>
                 </p>
               <p>
-                <button mat-stroked-button [disabled]="!articleForm.valid">Submit Article</button>
+                <button mat-stroked-button color="primary" [disabled]="!articleForm.valid">Submit Article</button>
               </p>
 
               <!-- <p><app-format-error [errorList]="errorList" *ngIf="error"></app-format-error></p> -->

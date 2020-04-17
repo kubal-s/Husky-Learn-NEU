@@ -15,6 +15,8 @@ import {MatIconModule} from '@angular/material/icon'
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule , HTTP_INTERCEPTORS} from '@angular/common/http';
@@ -32,6 +34,12 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { AuthGuard } from './services/authservices/auth.guard';
 import { ApiService } from './sharedservices/http-request-custom';
 import { EditArticleComponent } from './components/edit-article/edit-article.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { GlobalFeedComponent } from './components/global-feed/global-feed.component';
+import { AddCommentComponent } from './components/add-comment/add-comment.component';
+import { MyArticlesComponent } from './components/my-articles/my-articles.component';
+import { FavouriteArticlesComponent } from './components/favourite-articles/favourite-articles.component';
+import { ViewArticleComponent } from './components/view-article/view-article.component';
 
 
 @NgModule({
@@ -46,7 +54,13 @@ import { EditArticleComponent } from './components/edit-article/edit-article.com
     NewArticleComponent,
     SettingsComponent,
     PageNotFoundComponent,
-    EditArticleComponent
+    EditArticleComponent,
+    ProfileComponent,
+    GlobalFeedComponent,
+    AddCommentComponent,
+    MyArticlesComponent,
+    FavouriteArticlesComponent,
+    ViewArticleComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +77,9 @@ import { EditArticleComponent } from './components/edit-article/edit-article.com
     MatToolbarModule,
     HttpClientModule,
     MatDividerModule,
-    MatListModule
+    MatListModule,
+    MatChipsModule,
+    MatSnackBarModule
   ],
   providers: [
     // {

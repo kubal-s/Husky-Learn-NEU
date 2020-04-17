@@ -34,16 +34,12 @@ export class ApiService {
     }
     return httpOptions;
   }
-
-
-
-
   endpoint:string = apiconfig.base_url;
   private formatErrors(error: any) {
      return Observable.throw(error.json());
   }
 
-  post(path: string, body: Object = {}): Observable<any> { 
+  post(path: string, body: Object = {}): Observable<any> {
     return this.http.post(`${this.endpoint}${path}`, JSON.stringify(body), this.setHeaders())
     .pipe(
         map((res: Response) => {
@@ -62,8 +58,8 @@ export class ApiService {
     )
  }
 //this api needs testing
- put(path: string, body: Object = {}): Observable<any> { 
-  return this.http.post(`${this.endpoint}${path}`, JSON.stringify(body), this.setHeaders())
+ put(path: string, body: Object = {}): Observable<any> {
+  return this.http.put(`${this.endpoint}${path}`, JSON.stringify(body), this.setHeaders())
   .pipe(
       map((res: Response) => {
         return res || {}
@@ -72,7 +68,7 @@ export class ApiService {
 }
 //this api needs testing
 delete(path: string): Observable<any> {
-  return this.http.get(`${this.endpoint}${path}`, this.setHeaders())
+  return this.http.delete(`${this.endpoint}${path}`, this.setHeaders())
   .pipe(
     map((res: Response) => {
       return res || {}

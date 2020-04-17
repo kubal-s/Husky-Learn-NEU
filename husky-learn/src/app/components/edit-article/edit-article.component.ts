@@ -11,40 +11,61 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class EditArticleComponent implements OnInit {
 
 
-  articleForm: any;
   error = false;
   errorList;
   currentArticle = null;
   slug = null;
-  constructor(private  articleService: ArticleService, private router: Router) { 
+  commentList: any;
+  constructor(private articleService: ArticleService, private router: Router) {
     this.currentArticle = null;
-    if(this.router.getCurrentNavigation().extras.hasOwnProperty('state')&&this.router.getCurrentNavigation().extras.state.hasOwnProperty('article')){
+    if (this.router.getCurrentNavigation().extras.hasOwnProperty('state') && this.router.getCurrentNavigation().extras.state.hasOwnProperty('article')) {
       this.currentArticle = this.router.getCurrentNavigation().extras.state.article;
-      console.log(this.currentArticle)
       this.slug = this.currentArticle.slug;
     }
-    
+
     //console.log(this.router.getCurrentNavigation().extras.state)
   }
 
   ngOnInit(): void {
-    //   if(this.currentArticle = !null){
-    //     this.articleForm = new FormGroup({
-    //       title:  new FormControl(this.currentArticle.title),
-    //       description: new FormControl(this.currentArticle.description),
-    //       body: new FormControl(this.currentArticle.body),
-    //       tags:new FormControl(this.currentArticle.tagList)
-
-    //     });
-    //   }
-    //   else{
-    //     this.articleForm = new FormGroup({
-    //       title:  new FormControl(""),
-    //       description: new FormControl(""),
-    //       body: new FormControl(""),
-    //       tags:new FormControl("")
-    //   })
-    // }
+    if (this.slug == null) {
+      this.router.navigate(['/newarticle']);
+    }
+    else {
+      this.articleService.getAllComments(this.slug).subscribe(
+        data => {
+          this.commentList = data.comments;
+        },
+        err => {
+          //console.log(err)
+        });
+    }
+  }
+  updateCommentList() {
+    this.articleService.getAllComments(this.slug).subscribe(
+      data => {
+        this.commentList = data.comments;
+      },
+      err => {
+        //console.log(err)
+      });
   }
 
+  deleteArticle() {
+    this.articleService.deleteArticle(this.slug).subscribe(
+      data => {
+        this.router.navigate(['/newarticle']);
+      },
+      err => {
+        //console.log(err)
+      });
+  }
+  deleteComment(commentId){
+    this.articleService.deleteComment(this.slug,commentId).subscribe(
+      data => {
+        this.updateCommentList();
+      },
+      err => {
+        //console.log(err)
+      });
+  }
 }

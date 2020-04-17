@@ -24,8 +24,10 @@
       <mat-card-subtitle>
         <mat-chip-list>
           <mat-chip >{{article.favoritesCount}}<mat-icon color="warn">favorite</mat-icon></mat-chip>
-          <mat-chip color="primary" *ngIf = "!article.favorited" selected (click)="toggleFavorite(article.slug, article.favorited)">Add favorite</mat-chip>
-          <mat-chip color="accent" *ngIf = "article.favorited" selected (click)="toggleFavorite(article.slug, article.favorited)">Unfavorite</mat-chip>
+          <!-- <mat-chip color="primary" *ngIf = "!article.favorited" selected (click)="toggleFavorite(article.slug, article.favorited)">Add favorite</mat-chip>
+          <mat-chip color="accent" *ngIf = "article.favorited" selected (click)="toggleFavorite(article.slug, article.favorited)">Unfavorite</mat-chip> -->
+            <button class="fav-btn" mat-stroked-button color="primary"*ngIf = "!article.favorited" (click)='toggleFavorite(article.slug, article.favorited)'>Add Favorite</button>
+            <button class="fav-btn" mat-stroked-button color="accent" *ngIf = "article.favorited" (click)='toggleFavorite(article.slug, article.favorited)'>Unfavorite</button>
         </mat-chip-list>
         <!-- <button mat-button *ngIf = "!article.favorited" (click)='toggleFavorite(article.slug, article.favorited)'><mat-icon>favorite_border</mat-icon></button> -->
         <!-- <button mat-button *ngIf = "article.favorited" (click)='toggleFavorite(article.slug, article.favorited)'><mat-icon color="warn">favorite</mat-icon></button> -->

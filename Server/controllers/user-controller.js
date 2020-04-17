@@ -86,7 +86,7 @@ exports.update = (req, res ,next) => {
       if(typeof req.body.user.bio !== 'undefined'){
         user.bio = req.body.user.bio;
       }
-      if(typeof req.body.user.image !== 'undefined'){c
+      if(typeof req.body.user.image !== 'undefined'){
         user.image = req.body.user.image;
       }
       if(typeof req.body.user.password !== 'undefined'){

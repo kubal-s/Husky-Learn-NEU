@@ -293,7 +293,9 @@ exports.getArticles = (req, res, next) =>{
   let query = {};
   let limit = 20; // number of articles to be returned, default 20
   let offset = 0; // number of articles to skip for query, default 0
-
+  console.log("------------------------------------------");
+  console.log(req.query.author)
+  console.log( typeof req.query.author)
   if (typeof req.query.limit !== 'undefined') {
     limit = req.query.limit;
   }
@@ -309,8 +311,8 @@ exports.getArticles = (req, res, next) =>{
 
   // Filter articles by author and favoriter
   Promise.all([
-    req.query.author ? profileService.find({ username: req.query.author }) : null,
-    req.query.favorited ? profileService.find({ username: req.query.favorited }) : null
+    req.query.author ? profileService.find( req.query.author ) : null,
+    req.query.favorited ? profileService.find( req.query.favorited ) : null
   ]).then(function (results) {
     let author = results[0];
     let favoriter = results[1];

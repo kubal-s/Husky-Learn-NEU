@@ -14,7 +14,7 @@ module.exports = (app) => {
     app.route('/user')
         .get(auth.required,userController.get)
         .put(auth.required,userController.update);
-    app.route('/profile/:username')
+    app.route('/profiles/:username')
         .get(auth.optional,profileController.getProfile);
     app.route('/profiles/:username/follow')
         .post(auth.required,profileController.follow)
@@ -22,6 +22,8 @@ module.exports = (app) => {
     app.route('/articles')
         .post(auth.required,articleController.save)
         .get(auth.optional,articleController.getArticles);
+    // app.route('/articles?author=:username')
+        // .get(auth.optional,articleController.getArticles);
     app.route('/articles/feed')
         .get(auth.required,articleController.getFeed)
     app.route('/articles/:slug')
@@ -34,6 +36,8 @@ module.exports = (app) => {
     app.route('/articles/:slug/comments')
         .post(auth.required,articleController.comment)
         .get(auth.optional,articleController.allComment);
+    app.route('/articles/:slug/comments/:id')    
+        .delete(auth.required,articleController.deleteComment);
 
 
 

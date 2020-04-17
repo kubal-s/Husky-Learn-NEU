@@ -1,13 +1,13 @@
 <mat-card *ngIf="profile != null">
   <mat-card-content>
       <h4 class="rightdivtext">
-          {{username}}
+          {{profile.username}}
       </h4>
   </mat-card-content>
   <mat-card-content>
       <div class="authorimagecontainer">
         <div><img mat-card-avatar [src]="profile.image"></div>
-          <h5></h5>
+          <h5>{{profile.bio}}</h5>
       </div>
   </mat-card-content>
   <mat-divider></mat-divider>

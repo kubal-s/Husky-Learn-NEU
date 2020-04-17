@@ -20,9 +20,9 @@ listOfArticles: Array<Article>;
   ngOnInit(): void {
     // this.listAllArticles();
     this.articleService.getAllFavoriteArticles(this.username).subscribe(
-      data => {console.log(data);
-      // this.favorite = true;
-      // this.listAllArticles();
+      data => {
+        this.listOfArticles = data.articles;
+      
       },
       err => {
         // this.router.navigate(['/signin']);

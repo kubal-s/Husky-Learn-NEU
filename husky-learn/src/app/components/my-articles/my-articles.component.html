@@ -25,6 +25,16 @@
          <!-- <mat-chip color="primary" *ngIf = "!article.favorited" selected (click)="toggleFavorite(article.slug, article.favorited)">Add favorite</mat-chip>
          <mat-chip color="accent" *ngIf = "article.favorited" selected (click)="toggleFavorite(article.slug, article.favorited)">Unfavorite</mat-chip> -->
        </mat-chip-list>
+
+       <mat-card-actions>
+        <mat-chip-list>
+          <mat-chip [routerLink]="['/newarticle', slug]"><mat-icon>edit</mat-icon></mat-chip>
+          <mat-chip (click)="deleteArticle(article.slug)"><mat-icon>delete_forever</mat-icon></mat-chip>
+          <!-- <mat-chip color="primary" *ngIf = "!currentArticle.favorited" selected (click)="toggleFavorite(currentArticle.favorited)">Add favorite</mat-chip> -->
+          <!-- <mat-chip color="accent" *ngIf = "currentArticle.favorited" selected (click)="toggleFavorite(currentArticle.favorited)">Unfavorite</mat-chip> -->
+        </mat-chip-list>
+      </mat-card-actions>
+
        <!-- <button mat-button *ngIf = "!article.favorited" (click)='toggleFavorite(article.slug, article.favorited)'><mat-icon>favorite_border</mat-icon></button> -->
        <!-- <button mat-button *ngIf = "article.favorited" (click)='toggleFavorite(article.slug, article.favorited)'><mat-icon color="warn">favorite</mat-icon></button> -->
      </mat-card-subtitle>

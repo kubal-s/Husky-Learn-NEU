@@ -9,7 +9,11 @@
       <mat-card-subtitle>{{article.description}}</mat-card-subtitle>
       <mat-card-content class="author">
         <mat-card-subtitle><img mat-card-avatar [src]="article.author.image"></mat-card-subtitle>
-        <mat-card-subtitle>{{article.author.username}}</mat-card-subtitle>
+        <mat-card-subtitle>
+          <button class = "title-btn"
+          mat-button color="primary" 
+          (click)="viewProfile()">{{article.author.username}}</button>
+        </mat-card-subtitle>
         <mat-card-subtitle>{{article.createdAt| date:'longDate'}}</mat-card-subtitle>
        </mat-card-content>
     </mat-card-header>
@@ -30,8 +34,10 @@
         <!-- <button mat-button type="submit"  (click) = "article.showAdd = !article.showAdd" ><mat-icon>add_comment</mat-icon></button>
         <app-add-comment *ngIf="article.showAdd" [slug]="article.slug"></app-add-comment> -->
         <!-- <button mat-button type="submit"  (click) = "article.showAdd = !article.showAdd" ><mat-icon>add_comment</mat-icon></button> -->
-        <app-add-comment  [slug]="article.slug"></app-add-comment>
+        <!-- <app-add-comment  [slug]="article.slug"></app-add-comment> -->
+        <button mat-button type="submit" (click)="viewArticle(article)"><mat-icon color="primary">add_comment</mat-icon></button>
       </mat-card-subtitle>
+
 
     </mat-card-content>
    </mat-card>

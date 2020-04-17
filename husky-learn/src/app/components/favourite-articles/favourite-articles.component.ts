@@ -18,15 +18,15 @@ listOfArticles: Array<Article>;
   }
 
   ngOnInit(): void {
-    // this.listAllArticles();
-    this.articleService.getAllFavoriteArticles(this.username).subscribe(
-      data => {
-        this.listOfArticles = data.articles;
+    this.listOfAllFavoriteArticles();
+    // this.articleService.getAllFavoriteArticles(this.username).subscribe(
+    //   data => {
+    //     this.listOfArticles = data.articles;
       
-      },
-      err => {
-        // this.router.navigate(['/signin']);
-      });
+    //   },
+    //   err => {
+    //     // this.router.navigate(['/signin']);
+    //   });
   }
 
   toggleFavorite(slug, isfavorite){
@@ -34,7 +34,7 @@ listOfArticles: Array<Article>;
       this.articleService.getAllFavoriteArticles(this.username).subscribe(
         data => {
         // this.favorite = true;
-        this.listAllArticles();
+        this.listOfAllFavoriteArticles();
         },
         err => {
           this.router.navigate(['/signin']);
@@ -44,7 +44,7 @@ listOfArticles: Array<Article>;
       this.articleService.unfavoriteArticle(slug).subscribe(
         data => {
         // this.favorite = true;
-        this.listAllArticles();
+        this.listOfAllFavoriteArticles();
         },
         err => {
           this.router.navigate(['/signin']);
@@ -52,8 +52,8 @@ listOfArticles: Array<Article>;
     }
 
   }
-  listAllArticles(){
-    this.articleService.getAllArticles().subscribe(
+  listOfAllFavoriteArticles(){
+    this.articleService.getAllFavoriteArticles(this.username).subscribe(
       data => {
   
       this.listOfArticles = data.articles;

@@ -19,7 +19,8 @@ export class SettingsComponent implements OnInit {
   username=null;
 
   constructor(private authService:AuthService, private route: ActivatedRoute,private  profileService: ProfileService, private router: Router) { 
-    this.username=null; 
+    this.username=null;
+    this.currentUser=null; 
   }
     
     
@@ -27,6 +28,7 @@ export class SettingsComponent implements OnInit {
       this.route.paramMap.subscribe(params => {
         this.username = params.get('username')
         this.currentUser = history.state;
+        console.log(params);
   
         });
         if(this.currentUser != null){

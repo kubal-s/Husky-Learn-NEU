@@ -1,4 +1,6 @@
-<mat-card *ngIf="profile != null">
+
+<mat-card class="outer-mat-card" *ngIf="profile != null">
+<div class="profile-class">
   <mat-card-content>
       <h4 class="rightdivtext">
           {{profile.username}}
@@ -10,6 +12,7 @@
           <h5>{{profile.bio}}</h5>
       </div>
   </mat-card-content>
+  </div>
   <mat-divider></mat-divider>
   <mat-card-content>
     

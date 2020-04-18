@@ -40,6 +40,7 @@ import { AddCommentComponent } from './components/add-comment/add-comment.compon
 import { MyArticlesComponent } from './components/my-articles/my-articles.component';
 import { FavouriteArticlesComponent } from './components/favourite-articles/favourite-articles.component';
 import { ViewArticleComponent } from './components/view-article/view-article.component';
+import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { ViewArticleComponent } from './components/view-article/view-article.com
     AddCommentComponent,
     MyArticlesComponent,
     FavouriteArticlesComponent,
-    ViewArticleComponent
+    ViewArticleComponent,
+    ViewProfileComponent
   ],
   imports: [
     BrowserModule,

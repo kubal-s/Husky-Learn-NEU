@@ -74,7 +74,7 @@ export class SettingsComponent implements OnInit {
         if(this.username!= null){
           this.profileService.updateUser(this.username,this.settingsForm.value).subscribe(
             data => {
-                
+              this.router.navigate(['/home'],{state : data});
                 //this.router.navigate(['/editor'],{state : data});
             },
             err => {

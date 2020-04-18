@@ -24,7 +24,7 @@ export class ProfileService {
     map((res: Response) => {
     return res || {}
     }),
-    
+
     catchError(this.errorHandl));
     }
     updateUser(user, userDetails):Observable<any>{
@@ -42,11 +42,28 @@ export class ProfileService {
           return res || {}
           }),
           catchError(this.errorHandl));
-         
+
       }
+      followUser(username):Observable<any>{
+        return this.apiService.post('/profiles/' + username + '/follow')
+        .pipe(
+        map((res: Response) => {
+        return res || {}
+        }),
+        catchError(this.errorHandl));
+        }
+        unfollowUser(username):Observable<any>{
+          return this.apiService.delete('/profiles/' + username + '/follow')
+          .pipe(
+          map((res: Response) => {
+          return res || {}
+          }),
+          catchError(this.errorHandl));
+          }
+
     errorHandl(error:any) {
     return throwError(error);
     }
-    
+
 }
 

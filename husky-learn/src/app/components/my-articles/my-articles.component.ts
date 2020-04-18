@@ -10,6 +10,8 @@ import { Article } from 'src/app/model/Article';
 export class MyArticlesComponent implements OnInit {
 // username;
 listOfArticles: Array<Article>;
+
+slug = null;
 @Input() username;
   constructor(private articleService : ArticleService, private route: ActivatedRoute, private router: Router) { 
 // this.username="";
@@ -20,6 +22,17 @@ listOfArticles: Array<Article>;
     this.listAllArticles();
   }
 
+
+  deleteArticle(slug) {
+    this.articleService.deleteArticle(slug).subscribe(
+      data => {
+        this.router.navigate(['/newarticle']);
+      },
+      err => {
+        //console.log(err)
+      });
+  }
+ 
   toggleFavorite(slug, isfavorite){
     if(!isfavorite){
       this.articleService.favoriteArticle(slug).subscribe(

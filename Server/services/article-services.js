@@ -7,8 +7,8 @@ const mongoose = require('mongoose'),
  * @param article
 */
 exports.save = (article) => {
-    const newArticle = new Article(article);
-    return newArticle.save();
+    // const newArticle = new Article(article);
+    return article.save();
 };
 /**
  * Gets the article using slug
@@ -25,7 +25,7 @@ exports.find = (slug) => {
  * its the same as article ID
 */
 exports.delete = (articleId) => {
-    const promise = Article.remove(articleId).exec();
+    const promise = Article.find({ _id: articleId }).remove().exec();
     return promise;
 };
 

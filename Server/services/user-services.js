@@ -7,8 +7,8 @@ const mongoose = require('mongoose'),
  * @param user
 */
 exports.save = (user) => {
-    const newUser = new User(user);
-    return newUser.save();
+    // const newUser = new User(user);
+    return user.save();
 };
 /**
  * Gets the logged in user object. using id

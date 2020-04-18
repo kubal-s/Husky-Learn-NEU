@@ -7,8 +7,8 @@ const mongoose = require('mongoose'),
  * @param comment
 */
 exports.save = (comment) => {
-    const newComment = new Comment(comment);
-    return newComment.save();
+    // const newComment = new Comment(comment);
+    return comment.save();
 };
 
 /**

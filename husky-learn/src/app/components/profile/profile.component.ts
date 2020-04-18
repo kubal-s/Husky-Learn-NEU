@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
       this.username=data.user.username;
       this.showMyArticles = true;
     this.profileService.getProfiles(this.username).subscribe(
-      data => { console.log(data)
+      data => { 
       this.profile=data.profile;
         
       this.showMyArticles = true;

@@ -18,63 +18,55 @@ export class SettingsComponent implements OnInit {
   currentUser: any;
   username=null;
 
-  constructor(private authService:AuthService, private route: ActivatedRoute,private  profileService: ProfileService, private router: Router) { 
+  constructor(private authService:AuthService, private route: ActivatedRoute,private  profileService: ProfileService, private router: Router) {
     this.username=null;
-    this.currentUser=null; 
+    this.currentUser=null;
   }
-    
-    
+
+
     ngOnInit(): void {
-      this.route.paramMap.subscribe(params => {
-        this.username = params.get('username')
+      this.settingsForm = new FormGroup({
+        image: new FormControl(""),
+        username:  new FormControl(""),
+        bio: new FormControl(""),
+        email: new FormControl(""),
+        password:new FormControl("")
+      })
+    
         this.currentUser ={};
           this.profileService.getUser().subscribe(
-            data1 => { 
-            this.currentUser.email=data1.user.email;
+            data1 => {
+              this.currentUser.email=data1.user.email;
+              this.currentUser.username =data1.user.username;
+              this.profileService.getProfiles(this.currentUser.username).subscribe(
+              data => {
+                this.currentUser.username=data.profile.username;
+                this.currentUser.image = data.profile.image;
+                this.currentUser.bio = data.profile.bio;
+                    this.settingsForm = new FormGroup({
+                    image: new FormControl(this.currentUser.image),
+                    username:  new FormControl(this.currentUser.username),
+                    bio: new FormControl(this.currentUser.bio),
+                    email: new FormControl(this.currentUser.email),
+                    password:new FormControl(this.currentUser.password)
+                   });
 
-            this.profileService.getProfiles(this.username).subscribe(
-              data => { 
-              this.currentUser.username=data.profile.username;
-              this.currentUser.image = data.profile.image;
-              this.currentUser.bio = data.profile.bio;
-
-            if(this.currentUser != null){
-              this.settingsForm = new FormGroup({
-                image: new FormControl(this.currentUser.image),
-                username:  new FormControl(this.currentUser.username),
-                bio: new FormControl(this.currentUser.bio),
-                email: new FormControl(this.currentUser.email),
-                password:new FormControl(this.currentUser.password)
-      
-              });
-            }
-            else{
-              this.settingsForm = new FormGroup({
-                image: new FormControl(""),
-                username:  new FormControl(""),
-                bio: new FormControl(""),
-                email: new FormControl(""),
-                password:new FormControl("")
-      
-              
-            })
-            }
               },
               err => {
               });
             },
             err => {
             });
-  
-        });
+
+
 
       }
       onSubmit(){
-        
+
         if(this.username!= null){
           this.profileService.updateUser(this.username,this.settingsForm.value).subscribe(
             data => {
-                
+              this.router.navigate(['/home'],{state : data});
                 //this.router.navigate(['/editor'],{state : data});
             },
             err => {
@@ -85,7 +77,7 @@ export class SettingsComponent implements OnInit {
         else{
           this.profileService.updateUser(this.username,this.settingsForm.value).subscribe(
             data => {
-                
+
                 this.router.navigate(['/home'],{state : data});
             },
             err => {
@@ -93,11 +85,11 @@ export class SettingsComponent implements OnInit {
               this.error = true;
             });
         }
-    
+
       }
-    
-    
-    
+
+
+
 
   logout() {
     this.authService.logout();

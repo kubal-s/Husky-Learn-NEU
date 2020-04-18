@@ -1,5 +1,15 @@
-const router = require('express').Router();
+// const router = require('express').Router();
 
-router.use('/api', require('./api'));
+// router.use('/api', require('./api'));
 
-module.exports = router;
+// module.exports = router;
+
+
+
+'use strict';
+
+const appRoute = require('./../routes/app-routes');
+
+module.exports = (app) => {
+    appRoute(app);
+};

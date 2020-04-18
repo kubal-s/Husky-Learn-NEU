@@ -12,13 +12,13 @@
           <h5>{{profile.bio}}</h5>
       </div>
   </mat-card-content>
-  <mat-card-content class="like-comment">
+  <mat-card-content class="follow-btn">
     <mat-card-subtitle>
       <mat-chip-list>
         <!-- <mat-chip color="primary" *ngIf = "!article.favorited" selected (click)="toggleFavorite(article.slug, article.favorited)">Add favorite</mat-chip>
         <mat-chip color="accent" *ngIf = "article.favorited" selected (click)="toggleFavorite(article.slug, article.favorited)">Unfavorite</mat-chip> -->
-      <button class="fav-btn" mat-stroked-button color="primary"*ngIf = "!profile.following" (click)='toggleFollow(profile.username, profile.following)'>Follow User</button>
-      <button class="fav-btn" mat-stroked-button color="accent" *ngIf = "profile.following" (click)='toggleFollow(profile.username, profile.following)'>UnFollow User</button>
+      <button  mat-stroked-button color="primary"*ngIf = "!profile.following" (click)='toggleFollow(profile.username, profile.following)'>Follow User</button>
+      <button mat-stroked-button color="accent" *ngIf = "profile.following" (click)='toggleFollow(profile.username, profile.following)'>UnFollow User</button>
       </mat-chip-list>
       <!-- <button mat-button *ngIf = "!article.favorited" (click)='toggleFavorite(article.slug, article.favorited)'><mat-icon>favorite_border</mat-icon></button> -->
       <!-- <button mat-button *ngIf = "article.favorited" (click)='toggleFavorite(article.slug, article.favorited)'><mat-icon color="warn">favorite</mat-icon></button> -->

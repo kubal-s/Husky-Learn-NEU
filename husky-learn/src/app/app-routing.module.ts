@@ -13,23 +13,25 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { MyArticlesComponent } from './components/my-articles/my-articles.component';
 import { FavouriteArticlesComponent } from './components/favourite-articles/favourite-articles.component';
 import { ViewArticleComponent } from './components/view-article/view-article.component';
+import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 
 
 const routes: Routes = [
-  {path: '',   redirectTo: '/home', pathMatch: 'full'},
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: "signup", component:SignUpComponent},
-  { path: "signin",component:SignInComponent},
-  { path: "newarticle",component:NewArticleComponent,canActivate: [AuthGuard]},
-  { path: "newarticle/:slug",component:NewArticleComponent,canActivate: [AuthGuard]},
-  { path: "settings/:username",component: SettingsComponent,canActivate: [AuthGuard]},
-  { path: "editor",component:EditArticleComponent,canActivate: [AuthGuard]},
-  {path:  "profile", component:ProfileComponent, canActivate: [AuthGuard]},
-  {path:"globalfeed", component:GlobalFeedComponent},
-  {path:"article",component:ViewArticleComponent},
+  { path: "signup", component: SignUpComponent },
+  { path: "signin", component: SignInComponent },
+  { path: "newarticle", component: NewArticleComponent, canActivate: [AuthGuard] },
+  { path: "newarticle/:slug", component: NewArticleComponent, canActivate: [AuthGuard] },
+  { path: "settings/:username", component: SettingsComponent, canActivate: [AuthGuard] },
+  { path: "editor", component: EditArticleComponent, canActivate: [AuthGuard] },
+  { path: "profile", component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: "globalfeed", component: GlobalFeedComponent },
+  { path: "article", component: ViewArticleComponent },
+  { path: "viewprofile/:username", component: ViewProfileComponent },
   // {path: "myarticles/:username", component:MyArticlesComponent, canActivate:[AuthGuard]},
   // {path: "favouritearticles/:username",  component:FavouriteArticlesComponent, canActivate:[AuthGuard]},
-  { path:'**',component:PageNotFoundComponent}
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

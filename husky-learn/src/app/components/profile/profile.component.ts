@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 import {ProfileService} from '../../services/userservices/profile.service'
 import { Profile } from 'src/app/model/Profile';
@@ -15,19 +16,19 @@ export class ProfileComponent implements OnInit {
     { path: 'favouritearticles', label: 'Favourited Articles' }];
 // @Input() username;
 
-    constructor(private profileService : ProfileService) {
+    constructor(private profileService : ProfileService, private router: Router) {
       this.profile=null;
      }
 
   ngOnInit(): void {
     this.profileService.getUser().subscribe(
-      data => { 
+      data => {
       this.username=data.user.username;
       this.showMyArticles = true;
     this.profileService.getProfiles(this.username).subscribe(
-      data => { 
+      data => {
       this.profile=data.profile;
-        
+
       this.showMyArticles = true;
       },
       err => {
@@ -38,7 +39,42 @@ export class ProfileComponent implements OnInit {
       //console.log(err)
       });
 
-    
+
+      }
+      toggleFollow(username, isfollow){
+        if(!isfollow){
+          this.profileService.followUser(username).subscribe(
+            data => {
+            // this.favorite = true;
+            this.listAllProfiles();
+
+            },
+            err => {
+              this.router.navigate(['/signin']);
+            });
+        }
+        else if(isfollow){
+          this.profileService.unfollowUser(username).subscribe(
+            data => {
+            // this.favorite = true;
+        this.listAllProfiles();
+            },
+            err => {
+              this.router.navigate(['/signin']);
+            });
+        }
+
+      }
+      listAllProfiles(){
+        this.profileService.getProfiles(this.username).subscribe(
+          data => {
+
+          this.profile = data.profile;
+
+          },
+          err => {
+
+          });
       }
       decideArticleTab(num){
         if(num==1)
@@ -46,4 +82,5 @@ export class ProfileComponent implements OnInit {
         else if(num==2)
           this.showMyArticles = false;
       }
+
 }

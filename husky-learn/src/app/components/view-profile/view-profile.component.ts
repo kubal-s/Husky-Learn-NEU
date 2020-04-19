@@ -13,7 +13,7 @@ export class ViewProfileComponent implements OnInit {
   profile;
   showMyArticles;
   Navbarlinks = [
-    { path: 'myarticles', label: 'My Articles' },
+    { path: 'otherprofilearticles', label: 'My Articles' },
     { path: 'favouritearticles', label: 'Favourited Articles' }];
   // @Input() username;
 

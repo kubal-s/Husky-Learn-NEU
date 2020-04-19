@@ -40,7 +40,7 @@
             </a>
         </nav>
         <app-favourite-articles *ngIf="username && !showMyArticles" [username]="username"></app-favourite-articles>
-        <app-my-articles *ngIf="username && showMyArticles " [username]="username"></app-my-articles>
+        <app-other-profile-articles *ngIf="username && showMyArticles " [username]="username"></app-other-profile-articles>
     </mat-card-content>
 
 </mat-card>

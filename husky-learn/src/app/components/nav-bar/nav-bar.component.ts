@@ -23,7 +23,7 @@ export class NavBarComponent implements OnInit {
     LoggedInNavbarlinks = [
       { path: 'home', label: 'Home' },
       { path: 'newarticle', label: 'New Article' },
-      { path: 'settings/'+this.username , label: 'Settings' },
+      { path: 'settings'+this.username , label: 'Settings' },
       { path: 'profile', label: 'Profile' }
       ];
       links;
@@ -43,15 +43,15 @@ export class NavBarComponent implements OnInit {
   
   ngOnInit() {
     this.isLoggedIn$ = this.authService.isLoggedIn;
-    this.profileService.getUser().subscribe(
-      data => {
+    // this.profileService.getUser().subscribe(
+    //   data => {
         
-      this.username=data.user.username;
-      const result = this.LoggedInNavbarlinks.find( ({ label }) => label === 'Settings' );
-      result.path = 'settings/'+this.username;
-      },
-      err => {
-      //console.log(err)
-      });
+    //   this.username=data.user.username;
+    //   const result = this.LoggedInNavbarlinks.find( ({ label }) => label === 'Settings' );
+    //   result.path = 'settings';
+    //   },
+    //   err => {
+    //   //console.log(err)
+    //   });
       }
 }

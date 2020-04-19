@@ -1,4 +1,7 @@
   <nav mat-tab-nav-bar mat-align-tabs="end" color="primary"  *ngIf="isLoggedIn$ | async">
+    <div mat-tab-link class="app-icon">
+      <div class="husky-learn-icon"></div>
+    </div>
     <a mat-tab-link
        *ngFor="let link of LoggedInNavbarlinks"
        [routerLink]="link.path"
@@ -9,6 +12,9 @@
   </nav>
 
   <nav mat-tab-nav-bar mat-align-tabs="end" color="primary" *ngIf="!(isLoggedIn$ | async)">
+    <div mat-tab-link class="app-icon">
+      <div class="husky-learn-icon"></div>
+    </div>
     <a mat-tab-link
        *ngFor="let link of Navbarlinks"
        [routerLink]="link.path"

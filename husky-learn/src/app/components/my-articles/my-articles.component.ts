@@ -26,7 +26,8 @@ slug = null;
   deleteArticle(slug) {
     this.articleService.deleteArticle(slug).subscribe(
       data => {
-        this.router.navigate(['/newarticle']);
+        this.listAllArticles();
+        // this.router.navigate(['/newarticle']);
       },
       err => {
         //console.log(err)

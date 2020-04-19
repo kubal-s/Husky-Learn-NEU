@@ -41,6 +41,7 @@ import { MyArticlesComponent } from './components/my-articles/my-articles.compon
 import { FavouriteArticlesComponent } from './components/favourite-articles/favourite-articles.component';
 import { ViewArticleComponent } from './components/view-article/view-article.component';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
+import { OtherProfileArticlesComponent } from './components/other-profile-articles/other-profile-articles.component';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { ViewProfileComponent } from './components/view-profile/view-profile.com
     MyArticlesComponent,
     FavouriteArticlesComponent,
     ViewArticleComponent,
-    ViewProfileComponent
+    ViewProfileComponent,
+    OtherProfileArticlesComponent
   ],
   imports: [
     BrowserModule,

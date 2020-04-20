@@ -17,7 +17,8 @@ export class SettingsComponent implements OnInit {
   errorList;
   currentUser: any;
   username = null;
-
+  hide= true;
+  email = new FormControl('', [Validators.required, Validators.email]);
   constructor(private authService: AuthService, private route: ActivatedRoute, private profileService: ProfileService, private router: Router) {
     this.username = null;
     this.currentUser = null;
@@ -29,7 +30,7 @@ export class SettingsComponent implements OnInit {
       image: new FormControl(""),
       username: new FormControl(""),
       bio: new FormControl(""),
-      email: new FormControl(""),
+      email: this.email,
       password: new FormControl("")
     })
 
@@ -48,7 +49,7 @@ export class SettingsComponent implements OnInit {
               image: new FormControl(this.currentUser.image),
               username: new FormControl(this.currentUser.username),
               bio: new FormControl(this.currentUser.bio),
-              email: new FormControl(this.currentUser.email),
+              email: new FormControl(this.currentUser.email,[Validators.required, Validators.email]),
               password: new FormControl(this.currentUser.password)
             });
 
@@ -67,7 +68,7 @@ export class SettingsComponent implements OnInit {
     if (this.username != null) {
       this.profileService.updateUser(this.username, this.settingsForm.value).subscribe(
         data => {
-          this.router.navigate(['/home'], { state: data });
+          this.router.navigate(['/profile'], { state: data });
           //this.router.navigate(['/editor'],{state : data});
         },
         err => {
@@ -80,7 +81,7 @@ export class SettingsComponent implements OnInit {
       this.profileService.updateUser(this.username, this.settingsForm.value).subscribe(
         data => {
 
-          this.router.navigate(['/home'], { state: data });
+          this.router.navigate(['/profile'], { state: data });
         },
         err => {
           this.errorList = err;

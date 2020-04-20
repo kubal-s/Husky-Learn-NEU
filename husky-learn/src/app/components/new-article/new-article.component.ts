@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ArticleService } from '../../services/userservices/article.service'
+import { ArticleService } from '../../services/userservices/article.service'
 import { Router, ActivatedRoute } from '@angular/router';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
+// Declaring component for adding new article
 @Component({
   selector: 'app-new-article',
   templateUrl: './new-article.component.html',
@@ -18,13 +19,14 @@ export class NewArticleComponent implements OnInit {
   currentArticle: any;
   slug = null;
   constructor(private route: ActivatedRoute,
-              private  articleService: ArticleService,
-              private router: Router,
-              private _snackBar: MatSnackBar) {
+    private articleService: ArticleService,
+    private router: Router,
+    private _snackBar: MatSnackBar) {
 
     this.slug = null;
-   }
+  }
 
+  //  
   ngOnInit(): void {
 
 
@@ -32,66 +34,71 @@ export class NewArticleComponent implements OnInit {
       this.slug = params.get('slug')
       this.currentArticle = history.state;
 
-      });
-      if(this.currentArticle != null){
-        this.articleForm = new FormGroup({
-          title:  new FormControl(this.currentArticle.title),
-          description: new FormControl(this.currentArticle.description),
-          body: new FormControl(this.currentArticle.body),
-          tags:new FormControl(this.currentArticle.tagList)
+    });
+    if (this.currentArticle != null) {
+      this.articleForm = new FormGroup({
+        title: new FormControl(this.currentArticle.title),
+        description: new FormControl(this.currentArticle.description),
+        body: new FormControl(this.currentArticle.body),
+        tags: new FormControl(this.currentArticle.tagList)
 
-        });
-      }
-      else{
-        this.articleForm = new FormGroup({
-          title:  new FormControl(""),
-          description: new FormControl(""),
-          body: new FormControl(""),
-          tags:new FormControl(null)
+      });
+    }
+    else {
+      this.articleForm = new FormGroup({
+        title: new FormControl(""),
+        description: new FormControl(""),
+        body: new FormControl(""),
+        tags: new FormControl(null)
       })
     }
   }
-  onSubmit(){
+
+  // Create new article on submit
+  onSubmit() {
     let tagList;
-    if(this.articleForm.value.tags!=null){
-      this.articleForm.value.tags = this.articleForm.value.tags+"";
+    if (this.articleForm.value.tags != null) {
+      this.articleForm.value.tags = this.articleForm.value.tags + "";
       tagList = this.articleForm.value.tags.split(',');
     }
+    // Add tags used in article to taglist
     this.articleForm.value.tagList = tagList;
-    if(this.slug!= null){
-      this.articleService.update(this.slug,this.articleForm.value).subscribe(
+    // update existing article
+    if (this.slug != null) {
+      this.articleService.update(this.slug, this.articleForm.value).subscribe(
         data => {
-            this.successMsg = "Successfully Updated!"
-            let action ="ok";
-            this._snackBar.open(this.successMsg, action, {
-              duration: 2000,
-            });
-            this.success = true;
-            //this.router.navigate(['/editor'],{state : data});
+          this.successMsg = "Successfully Updated!"
+          let action = "ok";
+          this._snackBar.open(this.successMsg, action, {
+            duration: 2000,
+          });
+          this.success = true;
+          //this.router.navigate(['/editor'],{state : data});
         },
         err => {
           this.errorList = err;
-          let action ="ok";
+          let action = "ok";
           this._snackBar.open(this.errorList, action, {
             duration: 2000,
           });
           this.error = true;
         });
     }
-    else{
+    // Create new article
+    else {
       this.articleService.save(this.articleForm.value).subscribe(
         data => {
-            this.successMsg = "Article successfully created!"
-            let action ="ok";
-            this._snackBar.open(this.successMsg, action, {
-              duration: 2000,
-            });
-            this.success = true;
-            this.router.navigate(['/editor'],{state : data});
+          this.successMsg = "Article successfully created!"
+          let action = "ok";
+          this._snackBar.open(this.successMsg, action, {
+            duration: 2000,
+          });
+          this.success = true;
+          this.router.navigate(['/editor'], { state: data });
         },
         err => {
           this.errorList = err;
-          let action ="ok";
+          let action = "ok";
           this._snackBar.open(this.errorList, action, {
             duration: 2000,
           });

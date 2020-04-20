@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from 'src/app/services/userservices/profile.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
+// Declaring component to view profile
 @Component({
   selector: 'app-view-profile',
   templateUrl: './view-profile.component.html',
@@ -21,6 +22,7 @@ export class ViewProfileComponent implements OnInit {
     this.profile = null;
   }
 
+  // Load profile of particular username
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.username = params.get('username')
@@ -41,6 +43,8 @@ export class ViewProfileComponent implements OnInit {
 
 
   }
+
+  // Follow a user
   toggleFollow(username, isfollow) {
     if (!isfollow) {
       this.profileService.followUser(username).subscribe(
@@ -53,6 +57,8 @@ export class ViewProfileComponent implements OnInit {
           this.router.navigate(['/signin']);
         });
     }
+
+    // Unfollow a user
     else if (isfollow) {
       this.profileService.unfollowUser(username).subscribe(
         data => {

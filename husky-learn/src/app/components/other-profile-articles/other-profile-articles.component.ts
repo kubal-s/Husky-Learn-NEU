@@ -3,6 +3,7 @@ import { Article } from 'src/app/model/Article';
 import { ArticleService } from 'src/app/services/userservices/article.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
+// Declaring component to view all articles of other profile
 @Component({
   selector: 'app-other-profile-articles',
   templateUrl: './other-profile-articles.component.html',
@@ -12,10 +13,10 @@ export class OtherProfileArticlesComponent implements OnInit {
 
   listOfArticles: Array<Article>;
 
-slug = null;
-@Input() username;
-  constructor(private articleService : ArticleService, private route: ActivatedRoute, private router: Router) { 
-// this.username="";
+  slug = null;
+  @Input() username;
+  constructor(private articleService: ArticleService, private route: ActivatedRoute, private router: Router) {
+    // this.username="";
 
   }
 
@@ -33,23 +34,26 @@ slug = null;
         //console.log(err)
       });
   }
- 
-  toggleFavorite(slug, isfavorite){
-    if(!isfavorite){
+
+  // Add article to favorites
+  toggleFavorite(slug, isfavorite) {
+    if (!isfavorite) {
       this.articleService.favoriteArticle(slug).subscribe(
         data => {
-        // this.favorite = true;
-        this.listAllArticles();
+          // this.favorite = true;
+          this.listAllArticles();
         },
         err => {
           this.router.navigate(['/signin']);
         });
     }
-    else if(isfavorite){
+
+    // Remove article from favorites
+    else if (isfavorite) {
       this.articleService.unfavoriteArticle(slug).subscribe(
         data => {
-        // this.favorite = true;
-        this.listAllArticles();
+          // this.favorite = true;
+          this.listAllArticles();
         },
         err => {
           this.router.navigate(['/signin']);
@@ -57,18 +61,20 @@ slug = null;
     }
 
   }
-  listAllArticles(){
+  // Load list of all articles
+  listAllArticles() {
     this.articleService.getAllArticlesByUsername(this.username).subscribe(
       data => {
-  
-      this.listOfArticles = data.articles;
-      
+
+        this.listOfArticles = data.articles;
+
       },
       err => {
-  
+
       });
   }
-  viewArticle(article){
-    this.router.navigate(['/article'],{state : {'article':article}});
+  // View particular article
+  viewArticle(article) {
+    this.router.navigate(['/article'], { state: { 'article': article } });
   }
 }

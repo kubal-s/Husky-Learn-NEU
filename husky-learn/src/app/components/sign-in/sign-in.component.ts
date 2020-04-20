@@ -4,6 +4,7 @@ import { AuthService } from "../../services/authservices/auth.service";
 import { Router } from '@angular/router';
 import { JwtService } from "../../sharedservices/jwtToken";
 
+// Declaring component for sign-in page
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -17,20 +18,21 @@ export class SignInComponent implements OnInit {
   errorList;
   email = new FormControl('', [Validators.required, Validators.email]);
 
-  constructor(private authService: AuthService,private router: Router,private jwtService:JwtService) {
-    
-   }
+  constructor(private authService: AuthService, private router: Router, private jwtService: JwtService) {
 
+  }
+
+  //  Load sign-in page
   ngOnInit(): void {
     this.signinForm = new FormGroup({
-      email:  this.email,
+      email: this.email,
       username: new FormControl(''),
       password: new FormControl('')
     })
   }
 
-  
 
+  // Check validations for email field 
   getErrorMessage() {
     if (this.email.hasError('required')) {
       return 'You must enter a value';
@@ -38,7 +40,8 @@ export class SignInComponent implements OnInit {
 
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
-  onSubmit(){
+  // Authenticate user and sign-in
+  onSubmit() {
     this.error = false;
     this.authService.signIn(this.signinForm.value).subscribe(
       data => {

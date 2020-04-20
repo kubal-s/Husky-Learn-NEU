@@ -3,6 +3,7 @@ import { ArticleService } from 'src/app/services/userservices/article.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 
+// Declaring edit article component
 @Component({
   selector: 'app-edit-article',
   templateUrl: './edit-article.component.html',
@@ -26,6 +27,7 @@ export class EditArticleComponent implements OnInit {
     //console.log(this.router.getCurrentNavigation().extras.state)
   }
 
+  // Load page of particular article to be edited 
   ngOnInit(): void {
     if (this.slug == null) {
       this.router.navigate(['/newarticle']);
@@ -40,6 +42,8 @@ export class EditArticleComponent implements OnInit {
         });
     }
   }
+
+  // Update comment list of particular article
   updateCommentList() {
     this.articleService.getAllComments(this.slug).subscribe(
       data => {
@@ -50,6 +54,7 @@ export class EditArticleComponent implements OnInit {
       });
   }
 
+  // Delete article using slug 
   deleteArticle() {
     this.articleService.deleteArticle(this.slug).subscribe(
       data => {
@@ -59,8 +64,10 @@ export class EditArticleComponent implements OnInit {
         //console.log(err)
       });
   }
-  deleteComment(commentId){
-    this.articleService.deleteComment(this.slug,commentId).subscribe(
+
+  // Delete comment using commentId and slug of article
+  deleteComment(commentId) {
+    this.articleService.deleteComment(this.slug, commentId).subscribe(
       data => {
         this.updateCommentList();
       },

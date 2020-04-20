@@ -3,17 +3,18 @@ import { Article } from 'src/app/model/Article';
 import { ArticleService } from 'src/app/services/userservices/article.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
+// Declaring favorite articles component
 @Component({
   selector: 'app-favourite-articles',
   templateUrl: './favourite-articles.component.html',
   styleUrls: ['./favourite-articles.component.scss']
 })
 export class FavouriteArticlesComponent implements OnInit {
-// username;
-listOfArticles: Array<Article>;
-@Input() username;
-  constructor(private articleService : ArticleService, private route: ActivatedRoute, private router: Router) { 
-// this.username="";
+  // username;
+  listOfArticles: Array<Article>;
+  @Input() username;
+  constructor(private articleService: ArticleService, private route: ActivatedRoute, private router: Router) {
+    // this.username="";
 
   }
 
@@ -22,29 +23,31 @@ listOfArticles: Array<Article>;
     // this.articleService.getAllFavoriteArticles(this.username).subscribe(
     //   data => {
     //     this.listOfArticles = data.articles;
-      
+
     //   },
     //   err => {
     //     // this.router.navigate(['/signin']);
     //   });
   }
 
-  toggleFavorite(slug, isfavorite){
-    if(!isfavorite){
+  // Add article to favorites 
+  toggleFavorite(slug, isfavorite) {
+    if (!isfavorite) {
       this.articleService.getAllFavoriteArticles(this.username).subscribe(
         data => {
-        // this.favorite = true;
-        this.listOfAllFavoriteArticles();
+          // this.favorite = true;
+          this.listOfAllFavoriteArticles();
         },
         err => {
           this.router.navigate(['/signin']);
         });
     }
-    else if(isfavorite){
+    // Remove from list of favorite articles
+    else if (isfavorite) {
       this.articleService.unfavoriteArticle(slug).subscribe(
         data => {
-        // this.favorite = true;
-        this.listOfAllFavoriteArticles();
+          // this.favorite = true;
+          this.listOfAllFavoriteArticles();
         },
         err => {
           this.router.navigate(['/signin']);
@@ -52,19 +55,20 @@ listOfArticles: Array<Article>;
     }
 
   }
-  listOfAllFavoriteArticles(){
+  // List of all articles favorited by user
+  listOfAllFavoriteArticles() {
     this.articleService.getAllFavoriteArticles(this.username).subscribe(
       data => {
-  
-      this.listOfArticles = data.articles;
-      
+
+        this.listOfArticles = data.articles;
+
       },
       err => {
-  
+
       });
   }
-  viewArticle(article){
-    this.router.navigate(['/article'],{state : {'article':article}});
+  // View particular article
+  viewArticle(article) {
+    this.router.navigate(['/article'], { state: { 'article': article } });
   }
 }
-  

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+// Declaring component for error list
 @Component({
   selector: 'app-format-error',
   templateUrl: './format-error.component.html',
@@ -10,6 +11,7 @@ export class FormatErrorComponent implements OnInit {
   formattedErrors: Array<string> = [];
   constructor() { }
 
+  // format and display error from errorlist
   ngOnInit(): void {
     this.formattedErrors = [];
     if (this.errorList.errors) {

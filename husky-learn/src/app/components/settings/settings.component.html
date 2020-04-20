@@ -38,9 +38,11 @@
     <p>
   <mat-form-field appearance="legacy">
     <mat-label>Password</mat-label>
-    <input matInput formControlName="password" placeholder="******" required>
+    <input matInput formControlName="password" placeholder="******" required type='password' minlength="6">
   </mat-form-field>
 </p>
+
+
 <p>
   <button mat-stroked-button color="primary" [disabled]="!settingsForm.valid">Update Profile</button>  
 </p>

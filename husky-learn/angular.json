@@ -24,7 +24,7 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
-              "src/favicon.ico",
+              "src/husky-learn.png",
               "src/assets"
             ],
             "styles": [
@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "husky-learn"
+  "defaultProject": "husky-learn",
+  "cli": {
+    "analytics": "ade5fa17-e5de-4833-86e7-343440283701"
+  }
 }
